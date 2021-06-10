@@ -10,7 +10,7 @@
     "node-sass": "^6.0.0",
     "postcss": "8.3.0",
     "svelte": "3.38.2",
-    "vis-network": "9.0.4"
+    "vis-network": "^9.0.4"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "2.1.0",

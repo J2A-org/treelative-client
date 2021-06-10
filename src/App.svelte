@@ -4,13 +4,16 @@
   setClient(client)
 
   import Search from "./components/Search.svelte"
-  // import Example from "./components/Example.svelte"
+  import Example from "./components/Example.svelte"
+  import Graph from "./components/Graph.svelte"
+
 </script>
 
 <div class="main">
   <h1>Treelative Client</h1>
-  <!-- <Example /> -->
+  <Example />
   <Search />
+  <Graph />
 </div>
 
 <style lang="scss">
