@@ -18,11 +18,12 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
   }
   h1 {
     margin: 0;
     font-size: 3rem;
+    color: rgb(255, 255, 255);
+    margin: 20px 0px;
   }
 </style>

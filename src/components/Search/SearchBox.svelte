@@ -9,8 +9,8 @@
 
   let searchInput
   export let filteredUsers
-  const handleFilter = (e) => {
-    if (!searchInput) {
+    $: {
+      if (!searchInput) {
       filteredUsers = null
     } else {
       filteredUsers = queryUser.data.users.filter(user => (
@@ -25,7 +25,6 @@
     class='search-box'
     type='text'
     bind:value={searchInput}
-    on:input={handleFilter}
   />
   <SearchResult users={filteredUsers} />
 </div>
