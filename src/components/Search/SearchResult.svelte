@@ -35,6 +35,11 @@
     opacity: 0.9;
     box-shadow: inset 0px 2px 10px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  #container:hover {
+    background: rgb(230, 230, 230);
   }
   #avatar {
     width: 36px;

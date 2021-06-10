@@ -32,10 +32,11 @@
 <style lang="scss">
   .search-box {
     width: 70vw;
-    max-width: 300px;
+    max-width: 290px;
     height: 38px;
     background: #FFFFFF;
     border-radius: 50px;
     padding: 0px 20px;
+    border: 0px;
   }
 </style>
