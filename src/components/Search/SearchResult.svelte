@@ -2,26 +2,23 @@
   export let users
 </script>
 
-<div>
-  {#if users}
-    {#each users as user}
-      <div id='container'>
-        <img
-          id='avatar'
-          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3MMleJTsvxXrWLqg8XEeMcVgRkFu1okrTaQ&usqp=CAU'
-          alt="user-avatar"
-        />
-        <div id='info'>
-          <h1 id='full-name'>{user.fullName}</h1>
-          <div style='display: flex;'>
-            <h1 id='date-of-birth'>21/11/99</h1>
-            <h1 id='current-location'>Italy, GE</h1>
-          </div>
+{#if users}
+  {#each users as user}
+    <div id='container'>
+      <img
+        src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3MMleJTsvxXrWLqg8XEeMcVgRkFu1okrTaQ&usqp=CAU'
+        alt="user-avatar"
+      />
+      <div id='info'>
+        <h1 id='full-name'>{user.fullName}</h1>
+        <div style='display: flex;'>
+          <h1 id='date-of-birth'>21/11/99</h1>
+          <h1 id='current-location'>Italy, GE</h1>
         </div>
       </div>
-    {/each}
-  {/if}
-</div>
+    </div>
+  {/each}
+{/if}
 
 <style lang="scss">
   #container {
@@ -41,7 +38,7 @@
   #container:hover {
     background: rgb(230, 230, 230);
   }
-  #avatar {
+  img {
     width: 36px;
     height: 36px;
     border-radius: 50px;
@@ -59,8 +56,8 @@
     font-size: 18px;
   }
   #date-of-birth, #current-location {
-    font-weight: 300;
     font-size: 10px;
+    font-weight: 300;
     margin: 0px;
   }
   #current-location {

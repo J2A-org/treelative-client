@@ -1,51 +1,110 @@
 <script>
   import * as vis from 'vis-network/standalone/esm/vis-network'
 
-  let container;
-  let network;
+  import { QUERY_USER } from '../graphql/queries/users'
+  import { QUERY_COUPLE } from '../graphql/queries/couples'
+  import { operationStore, query } from '@urql/svelte'
+  
+  const queryUser = operationStore(QUERY_USER)
+  const queryCouple = operationStore(QUERY_COUPLE)
+  
+  query(queryUser)
+  query(queryCouple)
 
-  // export let users = []
-  // export let couples = []
+  let network
+  let container
 
-  // create an array with nodes
-  const nodes = new vis.DataSet([
-    { id: 1, label: "Node 1" },
-    { id: 2, label: "Node 2" },
-    { id: 3, label: "Node 3" },
-    { id: 4, label: "Node 4" },
-    { id: 5, label: "Node 5" },
-  ]);
+  let users = []
+  let couples = []
+  let relations = []
 
-  // create an array with edges
-  const edges = new vis.DataSet([
-    { from: 1, to: 3 },
-    { from: 1, to: 2 },
-    { from: 2, to: 4 },
-    { from: 2, to: 5 },
-    { from: 3, to: 3 },
-  ]);
-
-  // create a network
-  const data = {
-    nodes: nodes,
-    edges: edges,
-  };
-
-  const options = {};
-
-  $: if (container) {
-    network = new vis.Network(container, data, options);
+  for (const user of queryUser.data.users) {
+    users = [
+      ...users,
+      {
+        id: user.id,
+        label: user.shortName,
+        group: 'individual'
+      },
+    ]
   }
+
+  for (const couple of queryCouple.data.users) {
+    couples = [
+      ...couples,
+      {
+        id: couple.id,
+        group: 'couple'
+      }
+    ]
+  }
+
+
+  for (const couple of queryCouple.data.users) {
+    relations = [
+      ...relations,
+      { from: couple.userOne.id, to: couple.id },
+      { from: couple.userTwo.id, to: couple.id }
+    ]
+  }
+
+  // create an array with nodes & edges
+  const nodes = new vis.DataSet([...users, ...couples])
+  const edges = new vis.DataSet([...relations])
+  // create a network
+  const data = { nodes: nodes, edges: edges }
+
+  const options = {
+    groups: {
+      individual: {
+        shape: 'circularImage',
+        image: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
+        color: {
+          border: '#12B0CE',
+          highlight: {
+            border: '#12B0CE',
+          }
+        }
+      },
+      couple: {
+        shape: 'circularImage',
+        size: 10,
+        image: 'https://freeiconshop.com/wp-content/uploads/edd/heart-flat.png',
+        color: {
+          border: 'transparent',
+          highlight: {
+            border: 'transparent',
+          }
+        }
+      }
+    },
+    nodes: {
+      borderWidth: 2,
+      size: 25,
+      font: { color: '#ffffff' }
+    },
+    edges: {
+      hidden: false,
+      arrows: { middle: true},
+      chosen: false,
+      color: '#12B0CE'
+    },
+  }
+
+  $: if (container) network = new vis.Network(container, data, options)
 </script>
 
 
 
 <div bind:this={container}></div>
 
-<style lang="scss">
+<style lang='scss'>
   div {
     width: 600px;
     height: 400px;
     border: 1px solid lightgray;
+    background: url('https://res.cloudinary.com/arun99-dev/image/upload/v1623402658/background_snqado.jpg');
+    background-size: cover;
+    background-position: center center;
   }
 </style>

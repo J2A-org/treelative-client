@@ -10,10 +10,11 @@
 </script>
 
 <div class="main">
-  <h1>Treelative Client</h1>
-  <Example />
-  <Search />
+  <h1>Graph</h1>
+  <!-- <Example /> -->
   <Graph />
+  <h1>Search</h1>
+  <Search />
 </div>
 
 <style lang="scss">
