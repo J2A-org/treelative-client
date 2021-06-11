@@ -18,26 +18,15 @@
   let couples = []
   let relations = []
 
-  for (const user of queryUser.data.users) {
-    users = [
-      ...users,
-      {
-        id: user.id,
-        label: user.shortName,
-        group: 'individual'
-      },
-    ]
-  }
-
-  for (const couple of queryCouple.data.users) {
-    couples = [
-      ...couples,
-      {
-        id: couple.id,
-        group: 'couple'
-      }
-    ]
-  }
+  let nodeUsers = users.map(user => ({
+    ...user,
+    label: user?.shortName || user?.fullName,
+    group: 'individual'
+  }))
+  let nodeCouples = couples.map(user => ({
+    ...user,
+    group: 'couple'
+  }))
 
 
   for (const couple of queryCouple.data.users) {
