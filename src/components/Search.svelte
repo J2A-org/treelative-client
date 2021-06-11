@@ -1,22 +1,15 @@
 <script>
-  import { QUERY_USER } from '../graphql/queries/users'
-  import { operationStore, query } from '@urql/svelte'
-
   import SearchResult from './Search/SearchResult.svelte'
   
-  const queryUser = operationStore(QUERY_USER)
-  query(queryUser)
-
+  export let users
   let searchInput
-  export let filteredUsers
-    $: {
-      if (!searchInput) {
-      filteredUsers = null
-    } else {
-      filteredUsers = queryUser.data.users.filter(user => (
-        user.fullName.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
-      ))
-    }
+  let filteredUsers
+  $: if (!searchInput) {
+    filteredUsers = null
+  } else {
+    filteredUsers = users.filter(user => (
+      user.fullName.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
+    ))
   }
 </script>
 
@@ -29,6 +22,12 @@
 </div>
 
 <style lang="scss">
+  div {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    z-index: 10;
+  }
   input {
     width: 70vw;
     max-width: 260px;
