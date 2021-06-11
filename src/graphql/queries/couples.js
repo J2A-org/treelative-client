@@ -6,6 +6,9 @@ export const QUERY_COUPLE = gql`
       id
       userOne {
         id
+        children {
+          id
+        }
       }
       userTwo {
         id

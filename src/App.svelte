@@ -4,14 +4,12 @@
   setClient(client)
 
   import Search from "./components/Search.svelte"
-  import Example from "./components/Example.svelte"
   import Graph from "./components/Graph.svelte"
 
 </script>
 
 <div class="main">
   <h1>Graph</h1>
-  <!-- <Example /> -->
   <Graph />
   <h1>Search</h1>
   <Search />
