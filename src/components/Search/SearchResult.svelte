@@ -4,7 +4,7 @@
 
 {#if users}
   {#each users as user}
-    <div id='container'>
+    <button>
       <img
         src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3MMleJTsvxXrWLqg8XEeMcVgRkFu1okrTaQ&usqp=CAU'
         alt="user-avatar"
@@ -16,17 +16,17 @@
           <h1 id='current-location'>Italy, GE</h1>
         </div>
       </div>
-    </div>
+    </button>
   {/each}
 {/if}
 
 <style lang="scss">
-  #container {
+  button {
     display: flex;
     align-items: center;
     width: 70vw;
     max-width: 300px;
-    padding: 11px 15px;
+    padding: 10px 15px;
     background: #FFFFFF;
     color: #062C4F;
     opacity: 0.9;
@@ -34,8 +34,10 @@
     border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    border: none;
+    font: inherit;
   }
-  #container:hover {
+  button:hover {
     background: rgb(230, 230, 230);
   }
   img {
@@ -46,14 +48,13 @@
   #info {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    margin-left: 17px;
+    margin-left: 15px;
   }
   #full-name {
-    width: 215px;
     margin: 0px;
     font-weight: bold;
     font-size: 18px;
+    text-align: left;
   }
   #date-of-birth, #current-location {
     font-size: 10px;
