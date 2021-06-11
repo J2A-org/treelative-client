@@ -31,7 +31,7 @@
 <style lang="scss">
   input {
     width: 70vw;
-    max-width: 290px;
+    max-width: 260px;
     height: 38px;
     background: #FFFFFF;
     border-radius: 50px;
