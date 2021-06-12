@@ -16,23 +16,21 @@
     ...user,
     group: 'couple'
   }))
-  let edgeCopules = couples.map(couple => (
-    [{ from: couple.userOne.id, to: couple.id },
-    { from: couple.userTwo.id, to: couple.id }]
-  ))
-  edgeCopules = [].concat.apply([], edgeCopules)
-  let edgeChildren = couples.map(couple => (
-    couple.userOne.children.map(children => (
-      { from: couple.id, to: children.id }
-    ))
-  ))
-  edgeChildren = [].concat.apply([], edgeChildren)
+  let nodeEdges = couples.map(couple => (
+    [
+      { from: couple.userOne.id, to: couple.id },
+      { from: couple.userTwo.id, to: couple.id },
+      ...couple.userOne.children.map(children => (
+        { from: couple.id, to: children.id }
+      ))
+    ]
+  )).flat()
 
   // create an array with nodes & edges
   const nodes = new vis.DataSet([...nodeUsers, ...nodeCouples])
-  const edges = new vis.DataSet([...edgeCopules, ...edgeChildren])
+  const edges = new vis.DataSet([...nodeEdges])
   // create a network
-  const data = { nodes: nodes, edges: edges }
+  const data = { nodes, edges }
 
   const options = {
     groups: {
@@ -71,12 +69,31 @@
     },
   }
 
-  $: if (container) network = new vis.Network(container, data, options)
+  $: if (container) {
+    network = new vis.Network(container, data, options)
+    network.on('selectNode', ({ nodes }) => {
+      const activeNode = data.nodes.get({
+        filter: node => nodes[0] === node.id
+      })[0]
+      // ignore clicks on couple nodes
+      if (activeNode.group === 'individual') {
+        // set the active node id in cache
+        console.log(activeNode) // ADD TO STORE - piraku listen somewhere else
+        // make all other nodes out of focus
+        const nonActiveNodes = data.nodes.get({
+          filter: node => nodes[0] !== node.id
+        })
+        data.nodes.update(nonActiveNodes.map(({ id }) => ({ id, opacity: 0.1 })))
+        // hide all edges
+        network.edgesHandler.options.hidden = true
+      }
+    })
+  }
 </script>
 
 <div bind:this={container} />
 
-<style lang='scss'>
+<style lang="scss">
   div {
     width: 100vw;
     height: 100vh;

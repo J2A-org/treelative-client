@@ -11,18 +11,15 @@
   query(queryUser)
   query(queryCouple)
 
-  import Graph from "./components/Graph.svelte"
-  import Search from "./components/Search.svelte"
+  import Graph from './components/Graph.svelte'
+  import Search from './components/Search.svelte'
 </script>
 
 {#if $queryUser.fetching || $queryCouple.fetching }
   <p>Loading...</p>
-  {:else if $queryUser.error || $queryCouple.fetching}
-    <p>Oh no... {$queryUser.error.message && $queryCouple.fetching}</p>
-    {:else}
-      <Search users={$queryUser.data.users}/>
-      <Graph users={$queryUser.data.users} couples={$queryCouple.data.users}/>
+{:else if $queryUser.error || $queryCouple.fetching}
+  <p>Oh no... {$queryUser.error.message && $queryCouple.fetching}</p>
+{:else}
+  <Search users={$queryUser.data.users}/>
+  <Graph users={$queryUser.data.users} couples={$queryCouple.data.users}/>
 {/if}
-
-<style lang="scss">
-</style>
