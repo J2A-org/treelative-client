@@ -3,16 +3,17 @@
   import { setClient } from '@urql/svelte'
   setClient(client)
 
-  import { QUERY_USER } from './graphql/queries/users'
+  import { QUERY_ALL_USERS } from './graphql/queries/users'
   import { QUERY_COUPLE } from './graphql/queries/couples'
   import { operationStore, query } from '@urql/svelte'
-  const queryUser = operationStore(QUERY_USER)
+  const queryUser = operationStore(QUERY_ALL_USERS)
   const queryCouple = operationStore(QUERY_COUPLE)
   query(queryUser)
   query(queryCouple)
 
   import Graph from './components/Graph.svelte'
   import Search from './components/Search.svelte'
+  import ProfileCard from './components/ProfileCard.svelte'
 </script>
 
 {#if $queryUser.fetching || $queryCouple.fetching }
@@ -20,6 +21,7 @@
 {:else if $queryUser.error || $queryCouple.fetching}
   <p>Oh no... {$queryUser.error.message && $queryCouple.fetching}</p>
 {:else}
+  <ProfileCard />
   <Search users={$queryUser.data.users}/>
   <Graph users={$queryUser.data.users} couples={$queryCouple.data.users}/>
 {/if}
