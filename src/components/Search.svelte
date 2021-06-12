@@ -12,18 +12,18 @@
     ))
   }
 
-  let isOpen = true
+  let isOpen = false
 </script>
 
-<div
-  class={isOpen ? 'open-container': 'close-container'}
->
+<div>
   <details>
     <summary>
-      <div class='trigger'>
+      <div
+        class='trigger'
+        on:click={() => isOpen = true}
+      >
         <svg
-          width='26px'
-          height='26px'
+          width='23px'
           viewBox='0 0 22 22'
           fill='#00223D'
           transition='0.3s ease-in-out'
@@ -33,12 +33,15 @@
           <path d='M8.70053 3.50412C7.86378 3.47894 7.03439 3.66733 6.29063 4.05148C5.54685 4.43565 4.91319 5.00294 4.44939 5.69985C4.16909 6.13859 4.96493 6.52628 5.24374 6.08989C5.95516 4.97632 7.3072 4.26934 8.76827 4.30592C9.50745 4.33196 10.2288 4.54016 10.8681 4.91203C11.5074 5.28388 12.0451 5.80791 12.4332 6.43754C12.7133 6.89927 13.4472 6.47941 13.1688 6.02067C12.2738 4.54568 10.5352 3.54566 8.70053 3.50412Z' />
         </svg>
       </div>
-      <div class='modal-overlay'></div>
+      <div
+        class='overlay'
+        on:click={() => isOpen = false}
+      />
     </summary>
-    <div class='modal'>
-      <svg
-          width='26px'
-          height='26px'
+    {#if isOpen}
+      <div>
+        <svg
+          width='23px'
           viewBox='0 0 22 22'
           fill='#00223D'
           transition='0.3s ease-in-out'
@@ -47,31 +50,31 @@
           <path d='M4.10127 6.78889C3.44151 6.78889 3.44042 7.81421 4.10127 7.81421C4.76101 7.81421 4.76212 6.78889 4.10127 6.78889Z' />
           <path d='M8.70053 3.50412C7.86378 3.47894 7.03439 3.66733 6.29063 4.05148C5.54685 4.43565 4.91319 5.00294 4.44939 5.69985C4.16909 6.13859 4.96493 6.52628 5.24374 6.08989C5.95516 4.97632 7.3072 4.26934 8.76827 4.30592C9.50745 4.33196 10.2288 4.54016 10.8681 4.91203C11.5074 5.28388 12.0451 5.80791 12.4332 6.43754C12.7133 6.89927 13.4472 6.47941 13.1688 6.02067C12.2738 4.54568 10.5352 3.54566 8.70053 3.50412Z' />
         </svg>
-      <input 
-        type='text'
-        class={isOpen ? 'open' : 'close'}
-        bind:value={searchInput}
-      />
-      <SearchResult users={filteredUsers} />
-    </div>
+        <input
+          type='text'
+          bind:value={searchInput}
+        />
+        <SearchResult users={filteredUsers} />
+      </div>
+    {/if}
   </details>
 </div>
 
 <style lang="scss">
   div {
     position: absolute;
-    top: 30px;
-    right: 30px;
+    top: 20px;
+    right: 20px;
     z-index: 10;
   }
   svg {
     position: absolute;
     z-index: 10;
-    right: 6px;
-    top: 6px;
+    right: 7px;
+    top: 7px;
     transition: 0.3s ease-in-out;
   }
-  .open {
+  input {
     width: 260px;
     height: 38px;
     background: #FFFFFF;
@@ -89,7 +92,7 @@
     transition: 0.3s ease-in-out;
   }
 
-  .modal-overlay {
+  .overlay {
     transition: opacity 0.2s ease-out;
     pointer-events: none;
     background: rgba(#0f172a, 0.8);
