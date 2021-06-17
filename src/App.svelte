@@ -6,14 +6,15 @@
   import { QUERY_ALL_USERS } from './graphql/queries/users'
   import { QUERY_COUPLE } from './graphql/queries/couples'
   import { operationStore, query } from '@urql/svelte'
-  const queryUser = operationStore(QUERY_ALL_USERS)
-  const queryCouple = operationStore(QUERY_COUPLE)
-  query(queryUser)
-  query(queryCouple)
 
   import Graph from './components/Graph.svelte'
   import Search from './components/Search.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
+
+  const queryUser = operationStore(QUERY_ALL_USERS)
+  const queryCouple = operationStore(QUERY_COUPLE)
+  query(queryUser)
+  query(queryCouple)
 </script>
 
 {#if $queryUser.fetching || $queryCouple.fetching }

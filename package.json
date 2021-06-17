@@ -1,21 +1,23 @@
 {
   "scripts": {
     "start": "snowpack dev",
-    "build": "snowpack build"
-  },
-  "dependencies": {
-    "@urql/svelte": "1.2.2",
-    "autoprefixer": "10.2.6",
-    "graphql": "15.5.0",
-    "node-sass": "^6.0.0",
-    "postcss": "8.3.0",
-    "svelte": "3.38.2",
-    "vis-network": "^9.0.4"
+    "build": "snowpack build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
     "@snowpack/plugin-dotenv": "2.1.0",
     "@snowpack/plugin-svelte": "3.6.0",
-    "snowpack": "3.5.6",
-    "standard": "16.0.3"
+    "@urql/svelte": "1.2.2",
+    "autoprefixer": "10.2.6",
+    "eslint-config-standard": "16.0.2",
+    "eslint-plugin-svelte3": "3.2.0",
+    "graphql": "15.5.0",
+    "node-sass": "6.0.0",
+    "postcss": "8.3.4",
+    "snowpack": "3.5.9",
+    "standard": "16.0.3",
+    "svelte": "3.38.2",
+    "vis-network": "9.0.4"
   }
 }
