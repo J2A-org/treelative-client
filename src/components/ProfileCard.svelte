@@ -1,16 +1,12 @@
 <script>
   import Modal from './Layout/Modal.svelte'
-  import { activeNodeID, network, networkData } from '../stores.js'
+  import { activeNodeID, network } from '../stores.js'
 
   const onActiveNodeClose = () => {
     // clear the activeNodeID in store
     activeNodeID.update(() => null)
     // unselect all nodes
     $network.unselectAll()
-    // // // show all edges
-    // $network.edgesHandler.options.hidden = false
-    // // un-blur all nodes
-    // $networkData.nodes.update($networkData.nodes.map(({ id }) => ({ id, opacity: 1 })))
   }
 </script>
 
