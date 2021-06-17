@@ -52,6 +52,7 @@
 
 <style>
 	.modal-background {
+		z-index: 1;
 		position: fixed;
 		top: 0;
 		left: 0;
@@ -61,7 +62,7 @@
 	}
 
 	.modal {
-		z-index: 1;
+		z-index: 2;
 		position: absolute;
 		left: 50%;
 		top: 50%;
