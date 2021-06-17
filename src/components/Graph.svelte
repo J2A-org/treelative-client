@@ -1,6 +1,6 @@
 <script>
   import * as vis from 'vis-network/standalone/esm/vis-network'
-  import { activeNodeID } from '../stores/activeNodeID'
+  import { activeNodeID } from '../stores.js'
 
   let network
   let container
@@ -79,7 +79,7 @@
       // ignore clicks on couple nodes
       if (activeNode.group === 'individual') {
         // set the active node id in cache
-        activeNodeID.update(id => { id = activeNode.id })
+        activeNodeID.update(() => activeNode.id)
         // make all other nodes out of focus
         const nonActiveNodes = data.nodes.get({
           filter: node => nodes[0] !== node.id

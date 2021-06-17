@@ -1,6 +1,6 @@
 <script>
   import SearchResult from './Search/SearchResult.svelte'
-  
+
   export let users
   let searchInput
   let filteredUsers
@@ -13,10 +13,6 @@
   }
 
   let isOpen = false
-
-  const setIsOpen = val => {
-    isOpen = val
-  }
 </script>
 
 <div>
@@ -24,7 +20,7 @@
     <summary>
       <div
         class='trigger'
-        on:click={() => setIsOpen(true)}
+        on:click={() => { isOpen = true }}
       >
         <svg
           width='23px'
@@ -39,7 +35,7 @@
       </div>
       <div
         class='overlay'
-        on:click={() => setIsOpen(false)}
+        on:click={() => { isOpen = false }}
       />
     </summary>
     {#if isOpen}

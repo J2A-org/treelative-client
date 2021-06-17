@@ -47,8 +47,7 @@
 	<slot></slot>
 	<hr>
 
-	<!-- svelte-ignore a11y-autofocus -->
-	<button autofocus on:click={close}>close modal</button>
+	<button on:click={close}>close modal</button>
 </div>
 
 <style>
@@ -62,6 +61,7 @@
 	}
 
 	.modal {
+		z-index: 1;
 		position: absolute;
 		left: 50%;
 		top: 50%;
