@@ -8,16 +8,16 @@
   export let users
   export let couples
 
-  let nodeUsers = users.map(user => ({
+  const nodeUsers = users.map(user => ({
     ...user,
     label: user?.shortName || user?.fullName,
     group: 'individual'
   }))
-  let nodeCouples = couples.map(user => ({
+  const nodeCouples = couples.map(user => ({
     ...user,
     group: 'couple'
   }))
-  let nodeEdges = couples.map(couple => (
+  const nodeEdges = couples.map(couple => (
     [
       { from: couple.userOne.id, to: couple.id },
       { from: couple.userTwo.id, to: couple.id },
@@ -41,7 +41,7 @@
         color: {
           border: '#12B0CE',
           highlight: {
-            border: '#12B0CE',
+            border: '#12B0CE'
           }
         }
       },
@@ -52,7 +52,7 @@
         color: {
           border: 'transparent',
           highlight: {
-            border: 'transparent',
+            border: 'transparent'
           }
         }
       }
@@ -64,10 +64,10 @@
     },
     edges: {
       hidden: false,
-      arrows: { middle: true},
+      arrows: { middle: true },
       chosen: false,
       color: '#12B0CE'
-    },
+    }
   }
 
   $: if (container) {
@@ -79,7 +79,7 @@
       // ignore clicks on couple nodes
       if (activeNode.group === 'individual') {
         // set the active node id in cache
-        activeNodeID.update(id => id = activeNode.id)
+        activeNodeID.update(id => { id = activeNode.id })
         // make all other nodes out of focus
         const nonActiveNodes = data.nodes.get({
           filter: node => nodes[0] !== node.id

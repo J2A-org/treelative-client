@@ -1,43 +1,43 @@
 <script>
-	import { createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher, onDestroy } from 'svelte'
 
-	const dispatch = createEventDispatcher();
-	const close = () => dispatch('close');
+	const dispatch = createEventDispatcher()
+	const close = () => dispatch('close')
 
-	let modal;
+	let modal
 
-	const handle_keydown = e => {
-		if (e.key === 'Escape') {
-			close();
-			return;
-		}
+	const handleKeydown = e => {
+    if (e.key === 'Escape') {
+      close()
+      return
+    }
 
-		if (e.key === 'Tab') {
-			// trap focus
-			const nodes = modal.querySelectorAll('*');
-			const tabbable = Array.from(nodes).filter(n => n.tabIndex >= 0);
+    if (e.key === 'Tab') {
+      // trap focus
+      const nodes = modal.querySelectorAll('*')
+      const tabbable = Array.from(nodes).filter(n => n.tabIndex >= 0)
 
-			let index = tabbable.indexOf(document.activeElement);
-			if (index === -1 && e.shiftKey) index = 0;
+      let index = tabbable.indexOf(document.activeElement)
+      if (index === -1 && e.shiftKey) index = 0
 
-			index += tabbable.length + (e.shiftKey ? -1 : 1);
-			index %= tabbable.length;
+      index += tabbable.length + (e.shiftKey ? -1 : 1)
+      index %= tabbable.length
 
-			tabbable[index].focus();
-			e.preventDefault();
-		}
-	};
+      tabbable[index].focus()
+      e.preventDefault()
+    }
+  }
 
-	const previously_focused = typeof document !== 'undefined' && document.activeElement;
+	const previouslyFocused = typeof document !== 'undefined' && document.activeElement
 
-	if (previously_focused) {
-		onDestroy(() => {
-			previously_focused.focus();
-		});
+	if (previouslyFocused) {
+    onDestroy(() => {
+      previouslyFocused.focus()
+    })
 	}
 </script>
 
-<svelte:window on:keydown={handle_keydown}/>
+<svelte:window on:keydown={handleKeydown}/>
 
 <div class="modal-background" on:click={close}></div>
 

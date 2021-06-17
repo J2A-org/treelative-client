@@ -26,7 +26,8 @@ module.exports = {
     }
   ],
   rules: {
-    'no-multiple-empty-lines': ['error', { max: 1, maxBOF: 2, maxEOF: 0 }]
+    'no-multiple-empty-lines': ['error', { max: 1, maxBOF: 2, maxEOF: 0 }],
+    indent: 'off'
   },
   settings: {
     'svelte3/ignore-styles': () => true

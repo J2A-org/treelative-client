@@ -13,6 +13,10 @@
   }
 
   let isOpen = false
+
+  const setIsOpen = val => {
+    isOpen = val
+  }
 </script>
 
 <div>
@@ -20,7 +24,7 @@
     <summary>
       <div
         class='trigger'
-        on:click={() => isOpen = true}
+        on:click={() => setIsOpen(true)}
       >
         <svg
           width='23px'
@@ -35,7 +39,7 @@
       </div>
       <div
         class='overlay'
-        on:click={() => isOpen = false}
+        on:click={() => setIsOpen(false)}
       />
     </summary>
     {#if isOpen}
