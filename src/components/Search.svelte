@@ -60,7 +60,7 @@
   </details>
 </div>
 
-<style lang="scss">
+<style lang='scss'>
   div {
     position: absolute;
     top: 20px;

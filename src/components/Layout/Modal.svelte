@@ -39,44 +39,34 @@
 
 <svelte:window on:keydown={handleKeydown}/>
 
-<div class="modal-background" on:click={close}></div>
+<div class='modal-overlay' on:click={close}></div>
 
-<div class="modal" role="dialog" aria-modal="true" bind:this={modal}>
-	<slot name="header"></slot>
-	<hr>
+<div class='modal' role='dialog' aria-modal='true' bind:this={modal}>
+	<!-- <slot name='header'></slot> -->
+	<!-- <hr> -->
 	<slot></slot>
-	<hr>
-
-	<button on:click={close}>close modal</button>
+	<!-- <hr> -->
+	<!-- <button on:click={close}>close modal</button> -->
 </div>
 
 <style>
-	.modal-background {
-		z-index: 1;
+	.modal-overlay {
+		z-index: 50;
 		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: rgba(0,0,0,0.3);
+		width: 100vw;
+		height: 100vh;
+		background: rgba(0,0,0,0.8);
 	}
 
 	.modal {
-		z-index: 2;
+		z-index: 51;
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		width: calc(100vw - 4em);
-		max-width: 32em;
-		max-height: calc(100vh - 4em);
-		overflow: auto;
 		transform: translate(-50%,-50%);
-		padding: 1em;
-		border-radius: 0.2em;
-		background: white;
 	}
 
-	button {
+	/* button {
 		display: block;
-	}
+	} */
 </style>
