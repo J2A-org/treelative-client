@@ -17,25 +17,41 @@
     $network.unselectAll()
   }
 
-  const authCheck = window.localStorage.getItem('AUTH_SESSION_ID')
+  const queryUser = operationStore(GET_USER, { id: null }, { pause: true })
+  query(queryUser)
 
-  const queryUser = operationStore(GET_USER, { id: $activeNodeID })
-  query($queryUser)
+	const unsubscribe = activeNodeID.subscribe(value => {
+    if (value) {
+      $queryUser.context.pause = false
+      $queryUser.variables.id = value
+    }
+	})
+
+  const onLoginComplete = () => {
+    refresh()
+  }
+
+  function refresh() {
+    $queryUser.context = { requestPolicy: 'cache-and-network' };
+  }
+
 </script>
 
 {#if $activeNodeID}
 	<Modal on:close={onActiveNodeClose}>
     <div style="background-image: url('{bg}');">
-      {#if !authCheck}
-        <Login />
+      {#if !$activeNodeID}
+        <p>Loading</p>
       {:else}
         {#if $queryUser.fetching}
           <p>Loading..</p>
         {:else if $queryUser.error }
-          <p>Oh no... {$queryUser.error.message}</p>
+          <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
+          <Login onComplete={onLoginComplete} />
         {:else}
         <div>
-          {$queryUser.data.users.fullName}
+          {$activeNodeID}
+          {$queryUser?.data?.user?.fullName}
         </div>
         {/if}
         <Logout />

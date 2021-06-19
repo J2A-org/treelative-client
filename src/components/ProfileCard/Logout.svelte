@@ -1,5 +1,8 @@
 <script>
-  const handleSignOut = () => { window.localStorage.removeItem('AUTH_SESSION_ID') }
+  const handleSignOut = () => {
+    window.localStorage.removeItem('AUTH_SESSION_ID')
+    window.location.reload()
+  }
 </script>
 
 <div>

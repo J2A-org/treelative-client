@@ -1,28 +1,31 @@
 <script>
+  import { scale } from 'svelte/transition'
+  import { quintOut } from 'svelte/easing'
+
   import { mutation } from '@urql/svelte'
   import { LOGIN } from '../../graphql/mutations/login'
-  // const login = mutation(LOGIN)
 
-  const login = mutation({
-    query: `
-      mutation ( $username: String!, $password: String!) {
-        login( input: { username: $username password: $password } )
-      }
-    `
-  })
+  const login = mutation({ query: LOGIN })
 
   let usernameRef
   let passwordRef
 
-  const handleSignIn = () => {
-    login({ username: usernameRef.value, password: passwordRef.value})
+  export let onComplete
+
+  const handleSignIn = (e) => {
+    console.log(e)
+    login({ username: usernameRef.value, password: passwordRef.value })
       .then(result => {
-        if (result.error?.message) console.log(result.error.message)
-        else window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
+        if (result.data.login) {
+          window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
+          onComplete()
+        }
+        else console.log(result.error.message)
       })
+      .catch(console.log)
   }
 </script>
-<div>
+<div transition:scale="{{duration: 500, delay: 500, opacity: 0.5, start: 0, easing: quintOut}}">
   <div>
     <h1>Login</h1>
     <form on:submit|preventDefault={handleSignIn}>
@@ -74,11 +77,12 @@
         text-align: center;
         input {
           width: 60%;
-          height: 30px;
+          height: 40px;
           margin-bottom: 30px;
           padding: 0px 15px;
           border: none;
           background: none;
+          outline: none;
           border: 1px solid rgba(0, 0, 0, 0.3);
           border-radius: 5px;
           &:hover { border: 1px solid rgba(0, 0, 0, 0.5); }

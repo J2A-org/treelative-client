@@ -14,15 +14,15 @@
   const queryUser = operationStore(QUERY_ALL_USERS)
   const queryCouple = operationStore(QUERY_COUPLE)
   query(queryUser)
-  query(queryCouple)
+  // query(queryCouple)
 </script>
 
-{#if $queryUser.fetching || $queryCouple.fetching }
+{#if $queryUser.fetching }
   <p>Loading...</p>
-{:else if $queryUser.error || $queryCouple.fetching}
-  <p>Oh no... {$queryUser.error.message && $queryCouple.fetching}</p>
+{:else if $queryUser.error}
+  <p>Oh no... {$queryUser.error.message}</p>
 {:else}
   <ProfileCard />
   <Search users={$queryUser.data.users}/>
-  <Graph users={$queryUser.data.users} couples={$queryCouple.data.users}/>
+  <Graph users={$queryUser.data.users} />
 {/if}

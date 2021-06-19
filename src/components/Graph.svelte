@@ -8,8 +8,8 @@
   import * as vis from 'vis-network/standalone/esm/vis-network'
   import { activeNodeID } from '../stores.js'
 
-  export let users
-  export let couples
+  export let users = []
+  export let couples = []
 
   let container
 
