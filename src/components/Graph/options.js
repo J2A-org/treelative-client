@@ -2,7 +2,7 @@ export default {
   groups: {
     individual: {
       shape: 'circularImage',
-      image: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
+      brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
       color: {
         border: '#12B0CE',
         highlight: {

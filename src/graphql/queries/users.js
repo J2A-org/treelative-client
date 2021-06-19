@@ -6,6 +6,7 @@ export const QUERY_ALL_USERS = gql`
       id
       shortName
       fullName
+      avatar
     }
   }
 `

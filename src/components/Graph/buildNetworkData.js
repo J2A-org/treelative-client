@@ -2,7 +2,8 @@ export default (users, couples) => {
   const nodeUsers = users.map(user => ({
     ...user,
     label: user?.shortName || user?.fullName,
-    group: 'individual'
+    group: 'individual',
+    image: user.avatar
   }))
 
   const nodeCouples = couples.map(user => ({
