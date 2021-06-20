@@ -32,7 +32,7 @@
     }
 	})
   const onLoginComplete = () => refresh()
-  const refresh = () => $queryUser.context = { requestPolicy: 'cache-and-network' }
+  const refresh = () => queryUser.context = { requestPolicy: 'cache-and-network' }
 </script>
 
 {#if $activeNodeID}
@@ -56,7 +56,7 @@
               alt='user-avatar'
               in:fly='{{ delay: 1050, y: -25, duration: 500 }}'
             />
-            <h1 in:fly='{{ delay: 1150, y: -25, duration: 500 }}'>{$queryUser.data.user.fullName}</h1>
+            <h1 in:fly='{{ delay: 1150, y: -25, duration: 500 }}'>{queryUser.data.user.fullName}</h1>
             <Slider />
           </div>
         {/if}
