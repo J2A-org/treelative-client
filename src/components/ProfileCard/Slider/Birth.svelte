@@ -16,9 +16,7 @@
 	})
 </script>
 
-<div
-  in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'
->
+<div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
   <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Birth</h1>
   <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
   <h1 in:fly='{{ delay: 1800, y: -25, duration: 600 }}'>Birth Location</h1>

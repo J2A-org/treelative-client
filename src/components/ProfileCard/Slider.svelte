@@ -16,20 +16,22 @@
 	})
 
   import Death from './Slider/Death.svelte'
-  import Birth from './Slider/Birth.svelte'
+  // import Birth from './Slider/Birth.svelte'
+  import Social from './Slider/Social.svelte'
 </script>
 
 <div>
   <div>
-    <button>Back</button>
-    <button>Next</button>
+    <!-- <button>Back</button>
+    <button>Next</button> -->
   </div>
   <div in:scale='{{ delay: 1200, duration: 500, opacity: 0.5, start: 0 }}'/>
   <div in:scale='{{ delay: 1250, duration: 500, opacity: 0.5, start: 0 }}' id='smaller'/>
   {#if queryUser.data.user.dateOfDeath}
     <Death />
   {:else if queryUser.data.user.dateOfBirth}
-    <Birth />
+    <!-- <Birth /> -->
+    <Social />
   {/if}
 </div>
 
