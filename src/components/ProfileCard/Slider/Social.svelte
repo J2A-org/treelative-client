@@ -22,13 +22,13 @@
       $queryUser.variables.id = value
     }
 	})
-  console.log(queryUser.data.user.socialLinks)
+  // console.log(queryUser.data.user.socialLinks)
 </script>
 
 <div id='container' in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
   {#if $queryUser.data}
     <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Current Location</h1>
-    <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.currentLocation.terms.slice(-2)[0].value}, {queryUser.data.user.currentLocation.terms.slice(-2)[1].value}</h1>
+    <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.currentLocation.terms.slice(-3)[0].value}, {queryUser.data.user.currentLocation.terms.slice(-3)[1].value}, {queryUser.data.user.currentLocation.terms.slice(-3)[2].value}</h1>
     <!-- <iframe
       src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.currentLocation.place_id}&zoom=10'
       loading='lazy'
@@ -41,7 +41,7 @@
       alt='birth-location'
       in:fly='{{ delay: 1800, y: -25, duration: 600 }}'
     />
-    <div in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>
+    <!-- <div in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>
       <img src={facebook} alt='facebook' />
       <img src={instagram} alt='instagram' />
       <img src={twitter} alt='twitter' />
@@ -49,7 +49,7 @@
       <img src={email} alt='email' />
       <img src={website} alt='website' />
       <img src={linkedin} alt='linkedin' />
-    </div>
+    </div> -->
   {/if}
 </div>
 
@@ -80,6 +80,8 @@
       line-height: 8px;
     }
     h1:nth-of-type(2) {
+      width: 70%;
+      text-align: center;
       margin: 0px;
       font-size: 18px;
       line-height: 22px;
@@ -93,15 +95,15 @@
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
       border-radius: 20px;
     }
-    div {
-      margin-top: 15px;
-      display: flex;
-      height: 18px;
-      img { 
-        height: 100%;
-        margin: 0px 9px;
-        cursor: pointer;
-      }
-    }
+    // div {
+    //   margin-top: 15px;
+    //   display: flex;
+    //   height: 18px;
+    //   img { 
+    //     height: 100%;
+    //     margin: 0px 9px;
+    //     cursor: pointer;
+    //   }
+    // }
   }
 </style>
