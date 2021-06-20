@@ -1,4 +1,6 @@
 <script>
+  import { fly, fade } from 'svelte/transition'
+
   import { mutation } from '@urql/svelte'
   import { LOGIN } from '../../graphql/mutations/login'
 
@@ -18,27 +20,38 @@
   }
 </script>
 
-<div>
-  <div>
-    <h1>Login</h1>
+<div out:fade='{{ duration: 500 }}'>
+  <div
+    in:fly='{{ delay: 350, y: 200, duration: 500 }}'
+    out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
+  >
+    <h1 in:fly='{{ delay: 600, y: 25, duration: 750 }}'>Login</h1>
     <form on:submit|preventDefault={handleSignIn}>
       <input
         required
         type='username'
         name='username'
         placeholder='Username'
+        in:fly='{{ delay: 650, y: 25, duration: 750 }}'
+        out:fade='{{ duration: 500 }}'
       />
       <input
         required
         type='password'
         name='password'
         placeholder='Password'
+        in:fly='{{ delay: 700, y: 25, duration: 750 }}'
+        out:fade='{{ duration: 500 }}'
       />
-      <button type='submit'>
+      <button
+        type='submit'
+        in:fly='{{ delay: 750, y: 25, duration: 750 }}'
+        out:fade='{{ duration: 500 }}'
+      >
         Sign In
       </button>
     </form>
-    <button>Forgot Password?</button>
+    <button in:fly='{{ delay: 750, y: 25, duration: 750 }}'>Forgot Password?</button>
   </div>
 </div>
 

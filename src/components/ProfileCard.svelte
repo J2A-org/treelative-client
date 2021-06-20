@@ -1,4 +1,7 @@
 <script>
+  import { quintOut } from 'svelte/easing'
+  import { scale, fly } from 'svelte/transition'
+
   import { GET_USER_1 } from '../graphql/queries/ProfileCard/user1'
   import { operationStore, query } from '@urql/svelte'
 
@@ -27,19 +30,18 @@
     }
 	})
 
-  const onLoginComplete = () => {
-    refresh()
-  }
+  const onLoginComplete = () => refresh()
 
-  function refresh() {
-    $queryUser.context = { requestPolicy: 'cache-and-network' };
-  }
+  const refresh = () => $queryUser.context = { requestPolicy: 'cache-and-network' }
 
 </script>
 
 {#if $activeNodeID}
 	<Modal on:close={onActiveNodeClose}>
-    <div style="background-image: url('{bg}');">
+    <div 
+      style="background-image: url('{bg}');"
+      transition:scale='{{duration: 500, opacity: 0.5, start: 0, easing: quintOut}}'
+    >
       {#if !$activeNodeID}
         <p>Loading</p>
       {:else}
@@ -49,7 +51,7 @@
           <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
           <Login onComplete={onLoginComplete} />
         {:else}
-        <div>
+        <div in:fly='{{ delay: 550, x: 500, opacity: 1, duration: 500 }}'>
           {$activeNodeID}
           {$queryUser?.data?.user?.fullName}
         </div>

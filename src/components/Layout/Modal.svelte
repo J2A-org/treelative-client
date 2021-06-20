@@ -1,4 +1,6 @@
 <script>
+	import { fade } from 'svelte/transition'
+
 	import { createEventDispatcher, onDestroy } from 'svelte'
 
 	const dispatch = createEventDispatcher()
@@ -29,7 +31,7 @@
 </script>
 
 <svelte:window on:keydown={handleKeydown}/>
-<div class='modal-overlay' on:click={close}></div>
+<div transition:fade='{{ duration: 500 }}' class='modal-overlay' on:click={close}></div>
 <div class='modal' bind:this={modal}>
 	<slot></slot>
 </div>
