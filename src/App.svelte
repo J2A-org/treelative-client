@@ -2,9 +2,8 @@
   import client from './graphql/client'
   import { setClient, operationStore, query } from '@urql/svelte'
   setClient(client)
-
+  
   import { GET_NODES_EDGES } from './graphql/queries/nodesAndEdges'
-
   const queryNodesAndEdges = operationStore(GET_NODES_EDGES)
   query(queryNodesAndEdges)
 

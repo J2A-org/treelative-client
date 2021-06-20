@@ -1,5 +1,5 @@
 <script>
-  import { GET_USER } from '../graphql/queries/user'
+  import { GET_USER_1 } from '../graphql/queries/ProfileCard/user1'
   import { operationStore, query } from '@urql/svelte'
 
   import Modal from './Layout/Modal.svelte'
@@ -17,7 +17,7 @@
     $network.unselectAll()
   }
 
-  const queryUser = operationStore(GET_USER, { id: null }, { pause: true })
+  const queryUser = operationStore(GET_USER_1, { id: null }, { pause: true })
   query(queryUser)
 
 	const unsubscribe = activeNodeID.subscribe(value => {

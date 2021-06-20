@@ -1,17 +1,8 @@
 import { gql } from '@urql/svelte'
 
-export const GET_USER = gql`
-  query GET_USER ( $id: String ) {
+export const GET_USER_ = gql`
+  query GET_USER_ ( $id: String ) {
     user: getUser( filter: { id: $id } ) {
-      fullName
-      email
-      phoneNumber
-      avatar
-      birthLocation
-      currentLocation
-      deathLocation
-      dateOfBirth
-      dateOfDeath
       parents {
         id
         avatar
@@ -30,11 +21,6 @@ export const GET_USER = gql`
         }
         dateOfMarriage
         marriageLocation
-      }
-      socialLinks {
-        id
-        type
-        url
       }
     }
   }
