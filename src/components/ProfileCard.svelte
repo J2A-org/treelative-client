@@ -1,4 +1,6 @@
 <script>
+  import { setContext } from 'svelte'
+
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
 
@@ -31,7 +33,6 @@
 	})
   const onLoginComplete = () => refresh()
   const refresh = () => $queryUser.context = { requestPolicy: 'cache-and-network' }
-
 </script>
 
 {#if $activeNodeID}
@@ -49,6 +50,7 @@
           <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
           <Login onComplete={onLoginComplete} />
         {:else}
+        { setContext('user', queryUser.data.user) } <!-- Move into script -->
         <div in:fly='{{ delay: 550, x: 500, opacity: 1, duration: 500 }}'>
           <img
             src={queryUser.data.user.avatar}
