@@ -1,22 +1,33 @@
 <script>
-  import { getContext } from 'svelte'
-  const user = getContext('user')
-
   import { fly, scale } from 'svelte/transition'
-  console.log(import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY)
+
+  import { GET_USER_1 } from '../../../graphql/queries/ProfileCard/user1'
+  import { operationStore, query } from '@urql/svelte'
+
+  import { activeNodeID } from '../../../stores.js'
+
+  const queryUser = operationStore(GET_USER_1, { id: null }, { pause: true })
+  query(queryUser)
+	const unsubscribe = activeNodeID.subscribe(value => {
+    if (value) {
+      $queryUser.context.pause = false
+      $queryUser.variables.id = value
+    }
+	})
 </script>
 
 <div
   in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'
 >
   <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Birth</h1>
-  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{user.dateOfBirth.slice(0, 10)}</h1>
+  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{$queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
   <h1 in:fly='{{ delay: 1800, y: -25, duration: 600 }}'>Birth Location</h1>
-  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{user.birthLocation.terms.slice(-2)[0].value}, {user.birthLocation.terms.slice(-2)[1].value}</h1>
+  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{$queryUser.data.user.birthLocation.terms.slice(-2)[0].value}, {$queryUser.data.user.birthLocation.terms.slice(-2)[1].value}</h1>
   <iframe
-    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
+    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{$queryUser.data.user.birthLocation.place_id}&zoom=10'
     loading='lazy'
     title='current-location'
+    in:fly='{{ delay: 2000, y: -25, duration: 600 }}'
   />
 </div>
 

@@ -1,21 +1,32 @@
 <script>
-  import { getContext } from 'svelte'
-  const user = getContext('user')
-
   import { fly, scale } from 'svelte/transition'
+
+  import { GET_USER_1 } from '../../../graphql/queries/ProfileCard/user1'
+  import { operationStore, query } from '@urql/svelte'
+
+  import { activeNodeID } from '../../../stores.js'
+
+  const queryUser = operationStore(GET_USER_1, { id: null }, { pause: true })
+  query(queryUser)
+	const unsubscribe = activeNodeID.subscribe(value => {
+    if (value) {
+      $queryUser.context.pause = false
+      $queryUser.variables.id = value
+    }
+	})
 
   import tombstone from '../../../images/tombstone.svg'
 </script>
 
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
-  <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Birth</h1>
-  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{user.dateOfBirth.slice(0, 10)}</h1>
+  <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Death</h1>
+  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{$queryUser.data.user.dateOfDeath.slice(0, 10)}</h1>
   <img
     src={tombstone}
     alt='tombstone'
     in:fly='{{ delay: 1800, y: -25, duration: 600 }}'
   />
-  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>Birth Location</h1>
+  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>Death Location</h1>
   <h1 in:fly='{{ delay: 2000, y: -25, duration: 600 }}'>Paris, France</h1>
 </div>
 

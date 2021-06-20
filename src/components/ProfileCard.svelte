@@ -50,16 +50,15 @@
           <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
           <Login onComplete={onLoginComplete} />
         {:else}
-        { setContext('user', queryUser.data.user) } <!-- Move into script -->
-        <div in:fly='{{ delay: 550, x: 500, opacity: 1, duration: 500 }}'>
-          <img
-            src={queryUser.data.user.avatar}
-            alt='user-avatar'
-            in:fly='{{ delay: 1050, y: -25, duration: 500 }}'
-          />
-          <h1 in:fly='{{ delay: 1150, y: -25, duration: 500 }}'>{$queryUser.data.user.fullName}</h1>
-          <Slider />
-        </div>
+          <div in:fly='{{ delay: 550, x: 500, opacity: 1, duration: 500 }}'>
+            <img
+              src={queryUser.data.user.avatar}
+              alt='user-avatar'
+              in:fly='{{ delay: 1050, y: -25, duration: 500 }}'
+            />
+            <h1 in:fly='{{ delay: 1150, y: -25, duration: 500 }}'>{$queryUser.data.user.fullName}</h1>
+            <Slider />
+          </div>
         {/if}
         <Logout />
       {/if}

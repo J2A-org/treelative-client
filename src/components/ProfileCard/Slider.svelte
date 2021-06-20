@@ -1,8 +1,19 @@
 <script>
-  import { getContext } from 'svelte'
-  const user = getContext('user')
-
   import { scale } from 'svelte/transition'
+  
+  import { GET_USER_1 } from '../../graphql/queries/ProfileCard/user1'
+  import { operationStore, query } from '@urql/svelte'
+
+  import { activeNodeID } from '../../stores.js'
+
+  const queryUser = operationStore(GET_USER_1, { id: null }, { pause: true })
+  query(queryUser)
+	const unsubscribe = activeNodeID.subscribe(value => {
+    if (value) {
+      $queryUser.context.pause = false
+      $queryUser.variables.id = value
+    }
+	})
 
   import Death from './Slider/Death.svelte'
   import Birth from './Slider/Birth.svelte'
@@ -11,9 +22,9 @@
 <div>
   <div in:scale='{{ delay: 1200, duration: 500, opacity: 0.5, start: 0 }}'/>
   <div in:scale='{{ delay: 1250, duration: 500, opacity: 0.5, start: 0 }}' id='smaller'/>
-  {#if user.dateOfDeath}
+  {#if queryUser.data.user.dateOfDeath}
     <Death />
-  {:else if user.dateOfBirth}
+  {:else if queryUser.data.user.dateOfBirth}
     <Birth />
   {/if}
 </div>
