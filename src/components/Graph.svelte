@@ -3,22 +3,19 @@
 
   import { network } from '../stores'
   import options from './Graph/options'
-  import buildNetworkData from './Graph/buildNetworkData'
 
   import * as vis from 'vis-network/standalone/esm/vis-network'
   import { activeNodeID } from '../stores.js'
 
-  export let users = []
-  export let couples = []
+  export let nodesAndEdges
 
   let container
 
   onMount(() => {
-    const data = buildNetworkData(users, couples)
     // set network in store
-    network.update(() => new vis.Network(container, data, options))
+    network.update(() => new vis.Network(container, nodesAndEdges, options))
     $network.on('selectNode', ({ nodes }) => {
-      const activeNode = data.nodes.filter(node => nodes[0] === node.id)[0]
+      const activeNode = nodesAndEdges.nodes.filter(node => nodes[0] === node.id)[0]
       // ignore clicks on couple nodes
       if (activeNode.group === 'individual') {
         // set the active node ID in store

@@ -1,28 +1,24 @@
 <script>
   import client from './graphql/client'
-  import { setClient } from '@urql/svelte'
+  import { setClient, operationStore, query } from '@urql/svelte'
   setClient(client)
 
-  import { QUERY_ALL_USERS } from './graphql/queries/users'
-  import { QUERY_COUPLE } from './graphql/queries/couples'
-  import { operationStore, query } from '@urql/svelte'
+  import { GET_NODES_EDGES } from './graphql/queries/nodesAndEdges'
+
+  const queryNodesAndEdges = operationStore(GET_NODES_EDGES)
+  query(queryNodesAndEdges)
 
   import Graph from './components/Graph.svelte'
-  import Search from './components/Search.svelte'
+  // import Search from './components/Search.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
-
-  const queryUser = operationStore(QUERY_ALL_USERS)
-  const queryCouple = operationStore(QUERY_COUPLE)
-  query(queryUser)
-  // query(queryCouple)
 </script>
 
-{#if $queryUser.fetching }
+{#if $queryNodesAndEdges.fetching }
   <p>Loading...</p>
-{:else if $queryUser.error}
-  <p>Oh no... {$queryUser.error.message}</p>
+{:else if $queryNodesAndEdges.error}
+  <p>Oh no... {$queryNodesAndEdges.error.message}</p>
 {:else}
   <ProfileCard />
-  <Search users={$queryUser.data.users}/>
-  <Graph users={$queryUser.data.users} />
+  <!-- <Search users={$queryNodesAndEdges.data.users}/> -->
+  <Graph nodesAndEdges={$queryNodesAndEdges.data.getNetworkData} />
 {/if}
