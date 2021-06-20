@@ -1,31 +1,24 @@
 <script>
-  import { scale } from 'svelte/transition'
-  import { quintOut } from 'svelte/easing'
-
   import { mutation } from '@urql/svelte'
   import { LOGIN } from '../../graphql/mutations/login'
 
   const login = mutation({ query: LOGIN })
 
-  let usernameRef
-  let passwordRef
-
   export let onComplete
 
   const handleSignIn = (e) => {
-    console.log(e)
-    login({ username: usernameRef.value, password: passwordRef.value })
+    login({ username: e.target[0].value, password: e.target[1].value })
       .then(result => {
         if (result.data.login) {
           window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
           onComplete()
-        }
-        else console.log(result.error.message)
+        } else console.log(result.error.message)
       })
       .catch(console.log)
   }
 </script>
-<div transition:scale="{{duration: 500, delay: 500, opacity: 0.5, start: 0, easing: quintOut}}">
+
+<div>
   <div>
     <h1>Login</h1>
     <form on:submit|preventDefault={handleSignIn}>
@@ -34,14 +27,12 @@
         type='username'
         name='username'
         placeholder='Username'
-        bind:this={usernameRef}
       />
       <input
         required
         type='password'
         name='password'
         placeholder='Password'
-        bind:this={passwordRef}
       />
       <button type='submit'>
         Sign In
