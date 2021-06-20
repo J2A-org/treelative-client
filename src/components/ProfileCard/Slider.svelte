@@ -5,13 +5,16 @@
   import { scale } from 'svelte/transition'
 
   import Death from './Slider/Death.svelte'
+  import Birth from './Slider/Birth.svelte'
 </script>
 
 <div>
   <div in:scale='{{ delay: 1200, duration: 500, opacity: 0.5, start: 0 }}'/>
   <div in:scale='{{ delay: 1250, duration: 500, opacity: 0.5, start: 0 }}' id='smaller'/>
   {#if user.dateOfDeath}
-    <Death/>
+    <Death />
+  {:else if user.dateOfBirth}
+    <Birth />
   {/if}
 </div>
 

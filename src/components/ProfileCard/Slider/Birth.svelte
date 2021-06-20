@@ -3,20 +3,20 @@
   const user = getContext('user')
 
   import { fly, scale } from 'svelte/transition'
-
-  import tombstone from '../../../images/tombstone.svg'
 </script>
 
-<div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
+<div
+  in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'
+>
   <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Birth</h1>
   <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{user.dateOfBirth.slice(0, 10)}</h1>
+  <h1 in:fly='{{ delay: 1800, y: -25, duration: 600 }}'>Birth Location</h1>
+  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{user.birthLocation.terms.slice(-2)[0].value}, {user.birthLocation.terms.slice(-2)[1].value}</h1>
   <img
-    src={tombstone}
-    alt='tombstone'
-    in:fly='{{ delay: 1800, y: -25, duration: 600 }}'
+    src='https://i.stack.imgur.com/613d9.png'
+    alt='birth-location'
+    in:fly='{{ delay: 2000, y: -25, duration: 600 }}'
   />
-  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>Birth Location</h1>
-  <h1 in:fly='{{ delay: 2000, y: -25, duration: 600 }}'>Paris, France</h1>
 </div>
 
 <style lang='scss'>
@@ -36,25 +36,28 @@
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.20);
     border-radius: 20px;
     color: #26114D;
-    h1:first-child, h1:nth-child(4) {
+    user-select: none;
+    cursor: move;
+    h1:first-child, h1:nth-child(3) {
       margin-bottom: 0px;
       opacity: 1;
       font-weight: 100;
       font-size: 7px;
       line-height: 8px;
     }
-    h1:nth-child(4) { margin-top: 15px; }
-    h1:nth-child(2), h1:nth-child(5) {
+    h1:nth-child(3) { margin-top: 15px; }
+    h1:nth-child(2), h1:nth-child(4) {
       margin: 0px;
       font-size: 18px;
       line-height: 22px;
       color: #26114D;
     }
     img {
-      width: 128px;
-      height: 128px;
+      width: 227px;
+      height: 152px;
       margin-top: 15px;
-      filter: drop-shadow(0px 3px 5px rgba(0, 0, 0, 0.25));
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
     }
   }
 </style>
