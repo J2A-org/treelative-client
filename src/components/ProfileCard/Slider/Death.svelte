@@ -20,7 +20,7 @@
 
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
   <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Death</h1>
-  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{$queryUser.data.user.dateOfDeath.slice(0, 10)}</h1>
+  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10)}</h1>
   <img
     src={tombstone}
     alt='tombstone'

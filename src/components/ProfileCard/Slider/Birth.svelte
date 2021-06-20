@@ -20,11 +20,11 @@
   in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'
 >
   <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Birth</h1>
-  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{$queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
+  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
   <h1 in:fly='{{ delay: 1800, y: -25, duration: 600 }}'>Birth Location</h1>
-  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{$queryUser.data.user.birthLocation.terms.slice(-2)[0].value}, {$queryUser.data.user.birthLocation.terms.slice(-2)[1].value}</h1>
+  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{queryUser.data.user.birthLocation.terms.slice(-2)[0].value}, {queryUser.data.user.birthLocation.terms.slice(-2)[1].value}</h1>
   <iframe
-    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{$queryUser.data.user.birthLocation.place_id}&zoom=10'
+    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.birthLocation.place_id}&zoom=10'
     loading='lazy'
     title='current-location'
     in:fly='{{ delay: 2000, y: -25, duration: 600 }}'
