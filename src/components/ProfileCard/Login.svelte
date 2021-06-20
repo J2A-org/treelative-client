@@ -33,7 +33,6 @@
         name='username'
         placeholder='Username'
         in:fly='{{ delay: 650, y: 25, duration: 750 }}'
-        out:fade='{{ duration: 500 }}'
       />
       <input
         required
@@ -41,12 +40,10 @@
         name='password'
         placeholder='Password'
         in:fly='{{ delay: 700, y: 25, duration: 750 }}'
-        out:fade='{{ duration: 500 }}'
       />
       <button
         type='submit'
         in:fly='{{ delay: 750, y: 25, duration: 750 }}'
-        out:fade='{{ duration: 500 }}'
       >
         Sign In
       </button>
