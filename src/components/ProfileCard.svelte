@@ -1,6 +1,4 @@
 <script>
-  import { setContext } from 'svelte'
-
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
 

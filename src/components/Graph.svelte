@@ -27,7 +27,7 @@
 
 <div bind:this={container} />
 
-<style lang="scss">
+<style lang='scss'>
   div {
     width: 100vw;
     height: 100vh;

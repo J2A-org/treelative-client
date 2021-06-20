@@ -20,6 +20,10 @@
 </script>
 
 <div>
+  <div>
+    <button>Back</button>
+    <button>Next</button>
+  </div>
   <div in:scale='{{ delay: 1200, duration: 500, opacity: 0.5, start: 0 }}'/>
   <div in:scale='{{ delay: 1250, duration: 500, opacity: 0.5, start: 0 }}' id='smaller'/>
   {#if queryUser.data.user.dateOfDeath}
@@ -31,7 +35,13 @@
 
 <style lang='scss'>
   div {
-    div {
+    div:first-child {
+      width: 270px;
+      display: flex;
+      justify-content: space-between;
+      margin-top: -70px;
+    }
+    div:nth-child(2), div:nth-child(3) {
       width: 296px;
       height: 284px;
       position: absolute;
