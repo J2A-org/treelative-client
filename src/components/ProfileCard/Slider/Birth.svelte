@@ -3,7 +3,7 @@
   const user = getContext('user')
 
   import { fly, scale } from 'svelte/transition'
-  console.log(import.meta.env.SNOWPACK_GOOGLE_LOCATION_API_KEY)
+  console.log(import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY)
 </script>
 
 <div
@@ -14,7 +14,7 @@
   <h1 in:fly='{{ delay: 1800, y: -25, duration: 600 }}'>Birth Location</h1>
   <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{user.birthLocation.terms.slice(-2)[0].value}, {user.birthLocation.terms.slice(-2)[1].value}</h1>
   <iframe
-    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
+    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
     loading='lazy'
     title='current-location'
   />
