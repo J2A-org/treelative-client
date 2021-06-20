@@ -5,12 +5,8 @@
 	const close = () => dispatch('close')
 
 	let modal
-
 	const handleKeydown = e => {
-    if (e.key === 'Escape') {
-      close()
-      return
-    }
+    if (e.key === 'Escape') close()
 
     if (e.key === 'Tab') {
       // trap focus
@@ -29,24 +25,13 @@
   }
 
 	const previouslyFocused = typeof document !== 'undefined' && document.activeElement
-
-	if (previouslyFocused) {
-    onDestroy(() => {
-      previouslyFocused.focus()
-    })
-	}
+	if (previouslyFocused) onDestroy(() => previouslyFocused.focus())
 </script>
 
 <svelte:window on:keydown={handleKeydown}/>
-
 <div class='modal-overlay' on:click={close}></div>
-
-<div class='modal' role='dialog' aria-modal='true' bind:this={modal}>
-	<!-- <slot name='header'></slot> -->
-	<!-- <hr> -->
+<div class='modal' bind:this={modal}>
 	<slot></slot>
-	<!-- <hr> -->
-	<!-- <button on:click={close}>close modal</button> -->
 </div>
 
 <style>
@@ -57,7 +42,6 @@
 		height: 100vh;
 		background: rgba(0,0,0,0.8);
 	}
-
 	.modal {
 		z-index: 51;
 		position: absolute;
@@ -65,8 +49,4 @@
 		top: 50%;
 		transform: translate(-50%,-50%);
 	}
-
-	/* button {
-		display: block;
-	} */
 </style>
