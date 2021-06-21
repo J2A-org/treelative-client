@@ -76,7 +76,7 @@
     overflow: hidden;
     div {
       width: 330px;
-      height: 418px;
+      height: 422px;
       display: flex;
       flex-direction: column;
       align-items: center;

@@ -8,7 +8,7 @@
   import { activeNodeID } from '../../../stores.js'
 
   let queryUser
-  $: {z
+  $: {
     if ($activeNodeID) {
       queryUser = operationStore(CURRENT, { id: $activeNodeID })
       query(queryUser)
@@ -43,13 +43,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    margin-top: 28px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
     background: rgba(255, 255, 255, 0.20);
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.20);
     border-radius: 20px;
     color: #26114D;
     user-select: none;

@@ -19,5 +19,8 @@
     "standard": "16.0.3",
     "svelte": "3.38.2",
     "vis-network": "9.0.4"
+  },
+  "dependencies": {
+    "svelte-carousel": "^1.0.7"
   }
 }

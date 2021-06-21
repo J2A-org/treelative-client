@@ -7,6 +7,8 @@
 
   import { activeNodeID } from '../../stores.js'
 
+  import Carousel from 'svelte-carousel'
+
   import Death from './Slider/Death.svelte'
   import Birth from './Slider/Birth.svelte'
   import Current from './Slider/Current.svelte'
@@ -22,16 +24,19 @@
 
 <div>
   <div>
-    <button>Back</button>
-    <button>Next</button>
+    <!-- <button>Back</button>
+    <button>Next</button> -->
   </div>
   <div in:scale='{{ ...animation }}'/>
   <div in:scale='{{ ...animation, delay: animation.delay + 50 }}' id='smaller'/>
-  {#if queryUser.data.user.dateOfDeath} <Death />
-  {:else if queryUser.data.user.dateOfBirth && queryUser.data.user.birthLocation} <Birth />
-  {:else if queryUser.data.user.currentLocation}  <Current />
-  {/if}
+  <!-- {#if queryUser.data.user.dateOfBirth && queryUser.data.user.birthLocation} <Birth /> {/if}
+  {#if queryUser.data.user.currentLocation} <Current /> {/if} -->
 </div>
+<Carousel>
+  {#if queryUser.data.user.dateOfDeath} <Death /> {/if}
+  <Birth />
+  <Current />
+</Carousel>
 
 <style lang='scss'>
   div {
@@ -42,7 +47,7 @@
       margin-top: -70px;
     }
     div:nth-child(2), div:nth-child(3) {
-      width: 296px;
+      width: 300px;
       height: 284px;
       position: absolute;
       margin-top: 28px;
@@ -54,7 +59,7 @@
       border-radius: 20px;
     }
     #smaller {
-      width: 278px;
+      width: 285px;
     }
   }
 </style>
