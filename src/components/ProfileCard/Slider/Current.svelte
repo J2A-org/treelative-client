@@ -16,7 +16,7 @@
   }
 </script>
 
-<div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
+<div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>
   {#if $queryUser.data}
     <h1 in:fly='{{ ...animation }}'>Current Location</h1>
     <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.currentLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>

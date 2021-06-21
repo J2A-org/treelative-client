@@ -9,11 +9,12 @@
 
   import Graph from './components/Graph.svelte'
   // import Search from './components/Search.svelte'
+  import Loading from './components/Loading.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
 </script>
 
 {#if $queryNodesAndEdges.fetching }
-  <p>Loading...</p>
+  <Loading />
 {:else if $queryNodesAndEdges.error}
   <p>Oh no... {$queryNodesAndEdges.error.message}</p>
 {:else}

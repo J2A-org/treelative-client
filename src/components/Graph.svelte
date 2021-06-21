@@ -1,4 +1,7 @@
 <script>
+  import { fade } from 'svelte/transition'
+  let animation = { delay: 500, duration: 1000 }
+
   import { onMount } from 'svelte'
 
   import { network } from '../stores'
@@ -25,14 +28,11 @@
   })
 </script>
 
-<div bind:this={container} />
+<div transition:fade='{{ ...animation }}' bind:this={container} />
 
 <style lang='scss'>
   div {
-    width: 100vw;
-    height: 100vh;
-    background: url('bg.jpg');
-    background-size: cover;
-    background-position: center center;
+    width: 100%;
+    height: 100%;
   }
 </style>

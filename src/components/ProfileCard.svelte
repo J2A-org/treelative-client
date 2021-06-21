@@ -39,7 +39,7 @@
 	<Modal on:close={onActiveNodeClose}>
     <div 
       style="background-image: url('{bg}');"
-      transition:scale='{{ duration: 500, opacity: 0.5, start: 0, easing: quintOut }}'
+      transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
     >
       {#if !$activeNodeID}
         <p>Loading</p>
@@ -50,7 +50,7 @@
           <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
           <Login onComplete={onLoginComplete} />
         {:else}
-          <div in:fly='{{ delay: 550, x: 500, opacity: 1, duration: 500 }}'>
+          <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
             <img
               src={queryUser.data.user.avatar}
               alt='user-avatar'

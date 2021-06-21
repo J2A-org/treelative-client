@@ -21,7 +21,7 @@
   }
 </script>
 
-<div transition:fade='{{ delay: 500, duration: 500 }}'>
+<div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
   <div
     in:fly='{{ delay: 350, y: 200, duration: 500 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
