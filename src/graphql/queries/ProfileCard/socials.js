@@ -1,8 +1,8 @@
 import { gql } from '@urql/svelte'
 
-export const GET_USER_2 = gql`
-  query GET_USER_2 ( $id: String ) {
-    user: getUser( filter: { id: $id } ) {
+export const SOCIALS = gql`
+  query SOCIALS ( $id: String ) {
+    user: getUser( filter: { id: $id } ) { 
       email
       phoneNumber
       socialLinks {
@@ -10,7 +10,6 @@ export const GET_USER_2 = gql`
         type
         url
       }
-      currentLocation
     }
   }
 `

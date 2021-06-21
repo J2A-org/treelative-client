@@ -1,21 +1,20 @@
 <script>
   import { fly, scale } from 'svelte/transition'
 
-  import { GET_USER_1 } from '../../../graphql/queries/ProfileCard/user1'
+  import { BIRTH_AND_DEATH } from '../../../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
 
   import { activeNodeID } from '../../../stores.js'
 
-  const queryUser = operationStore(GET_USER_1, { id: null }, { pause: true })
-  query(queryUser)
-	const unsubscribe = activeNodeID.subscribe(value => {
-    if (value) {
-      $queryUser.context.pause = false
-      $queryUser.variables.id = value
-    }
-	})
-
   import tombstone from '../../../images/tombstone.svg'
+
+  let queryUser
+  $: {
+    if ($activeNodeID) {
+      queryUser = operationStore(BIRTH_AND_DEATH, { id: $activeNodeID })
+      query(queryUser)
+    }
+  }
 </script>
 
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>

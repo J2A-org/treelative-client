@@ -2,7 +2,7 @@
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
 
-  import { GET_USER_1 } from '../graphql/queries/ProfileCard/user1'
+  import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
 
   import Modal from './Layout/Modal.svelte'
@@ -21,14 +21,14 @@
     $network.unselectAll()
   }
 
-  const queryUser = operationStore(GET_USER_1, { id: null }, { pause: true })
-  query(queryUser)
-	const unsubscribe = activeNodeID.subscribe(value => {
-    if (value) {
-      $queryUser.context.pause = false
-      $queryUser.variables.id = value
+  let queryUser
+  $: {
+    if ($activeNodeID) {
+      queryUser = operationStore(BIRTH_AND_DEATH, { id: $activeNodeID })
+      query(queryUser)
     }
-	})
+  }
+
   const onLoginComplete = () => refresh()
   const refresh = () => queryUser.context = { requestPolicy: 'cache-and-network' }
 </script>

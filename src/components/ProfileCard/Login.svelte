@@ -1,8 +1,8 @@
 <script>
   import { fly, fade } from 'svelte/transition'
 
-  import { mutation } from '@urql/svelte'
   import { LOGIN } from '../../graphql/mutations/login'
+  import { mutation } from '@urql/svelte'
 
   const login = mutation({ query: LOGIN })
 

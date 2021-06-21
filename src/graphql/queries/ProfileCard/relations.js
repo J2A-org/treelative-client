@@ -1,7 +1,7 @@
 import { gql } from '@urql/svelte'
 
-export const GET_USER_3 = gql`
-  query GET_USER_3 ( $id: String ) {
+export const RELATIONS = gql`
+  query RELATIONS ( $id: String ) {
     user: getUser( filter: { id: $id } ) {
       parents {
         id
