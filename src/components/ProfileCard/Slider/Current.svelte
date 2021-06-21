@@ -1,5 +1,6 @@
 <script>
   import { fly, scale } from 'svelte/transition'
+  let animation = { delay: 1600, y: -25, duration: 600 }
 
   import { CURRENT } from '../../../graphql/queries/ProfileCard/current'
   import { operationStore, query } from '@urql/svelte'
@@ -18,18 +19,18 @@
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
   {#if $queryUser.data}
     <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Current Location</h1>
-    <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{[0, 1, 2].map(idx => queryUser.data.user.currentLocation.terms.slice(-3)[idx].value).join(', ')}</h1>
+    <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{[0, 1, 2].map(idx => queryUser.data.user.currentLocation.terms.slice(-3)[idx].value).join(', ')}</h1>
     <!-- <iframe
       src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.currentLocation.place_id}&zoom=10'
       loading='lazy'
       title='current-location'
-      in:fly='{{ delay: 1800, y: -25, duration: 600 }}'
+      in:fly='{{ ...animation, delay: animation.delay + 200 }}'
     /> -->
     <img
       id='map'
       src='https://i.stack.imgur.com/613d9.png'
       alt='birth-location'
-      in:fly='{{ delay: 1800, y: -25, duration: 600 }}'
+      in:fly='{{ ...animation, delay: animation.delay + 200 }}'
     />
   {/if}
 </div>

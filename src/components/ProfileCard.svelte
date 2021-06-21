@@ -1,6 +1,7 @@
 <script>
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
+  let animation = { delay: 600, y: 25, duration: 750 }
 
   import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
@@ -52,9 +53,9 @@
             <img
               src={queryUser.data.user.avatar}
               alt='user-avatar'
-              in:fly='{{ delay: 1050, y: -25, duration: 500 }}'
+              in:fly='{{ ...animation }}'
             />
-            <h1 in:fly='{{ delay: 1150, y: -25, duration: 500 }}'>{queryUser.data.user.fullName}</h1>
+            <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.fullName}</h1>
             <Slider />
           </div>
         {/if}

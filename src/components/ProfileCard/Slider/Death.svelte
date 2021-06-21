@@ -1,5 +1,6 @@
 <script>
   import { fly, scale } from 'svelte/transition'
+  let animation = { delay: 1600, y: -25, duration: 600 }
 
   import { BIRTH_AND_DEATH } from '../../../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
@@ -18,15 +19,15 @@
 </script>
 
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
-  <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Death</h1>
-  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10)}</h1>
+  <h1 in:fly='{{ ...animation }}'>Date Of Death</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10)}</h1>
   <img
     src={tombstone}
     alt='tombstone'
-    in:fly='{{ delay: 1800, y: -25, duration: 600 }}'
+    in:fly='{{ ...animation, delay: animation.delay + 200 }}'
   />
-  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>Death Location</h1>
-  <h1 in:fly='{{ delay: 2000, y: -25, duration: 600 }}'>Paris, France</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>Death Location</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 400 }}'>Paris, France</h1>
 </div>
 
 <style lang='scss'>

@@ -1,5 +1,6 @@
 <script>
   import { fly, scale } from 'svelte/transition'
+  let animation = { delay: 1600, y: -25, duration: 600 }
 
   import { BIRTH_AND_DEATH } from '../../../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
@@ -16,20 +17,20 @@
 </script>
 
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
-  <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Date Of Birth</h1>
-  <h1 in:fly='{{ delay: 1700, y: -25, duration: 600 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
-  <h1 in:fly='{{ delay: 1800, y: -25, duration: 600 }}'>Birth Location</h1>
-  <h1 in:fly='{{ delay: 1900, y: -25, duration: 600 }}'>{[0, 1].map(idx => queryUser.data.user.birthLocation.terms.slice(-2)[idx].value).join(', ')}</h1>
+  <h1 in:fly='{{ ...animation }}'>Date Of Birth</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 200 }}'>Birth Location</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{[0, 1].map(idx => queryUser.data.user.birthLocation.terms.slice(-2)[idx].value).join(', ')}</h1>
   <!-- <iframe
     src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.birthLocation.place_id}&zoom=10'
     loading='lazy'
     title='current-location'
-    in:fly='{{ delay: 2000, y: -25, duration: 600 }}'
+    in:fly='{{ ...animation, delay: animation.delay + 400 }}'
   /> -->
   <img
     src='https://i.stack.imgur.com/613d9.png'
     alt='birth-location'
-    in:fly='{{ delay: 2000, y: -25, duration: 600 }}'
+    in:fly='{{ ...animation, delay: animation.delay + 400 }}'
   />
 </div>
 

@@ -1,5 +1,6 @@
 <script>
   import { scale } from 'svelte/transition'
+  let animation = { delay: 1200, duration: 500, opacity: 0.5, start: 0 }
   
   import { BIRTH_AND_DEATH } from '../../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
@@ -24,10 +25,9 @@
     <button>Back</button>
     <button>Next</button>
   </div>
-  <div in:scale='{{ delay: 1200, duration: 500, opacity: 0.5, start: 0 }}'/>
-  <div in:scale='{{ delay: 1250, duration: 500, opacity: 0.5, start: 0 }}' id='smaller'/>
-  {#if queryUser.data.user.dateOfDeath}
-    <Death />
+  <div in:scale='{{ ...animation }}'/>
+  <div in:scale='{{ ...animation, delay: animation.delay + 50 }}' id='smaller'/>
+  {#if queryUser.data.user.dateOfDeath} <Death />
   {:else if queryUser.data.user.dateOfBirth && queryUser.data.user.birthLocation} <Birth />
   {:else if queryUser.data.user.currentLocation}  <Current />
   {/if}
