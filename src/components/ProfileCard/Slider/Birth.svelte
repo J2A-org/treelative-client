@@ -20,7 +20,7 @@
   <h1 in:fly='{{ ...animation }}'>Date Of Birth</h1>
   <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
   <h1 in:fly='{{ ...animation, delay: animation.delay + 200 }}'>Birth Location</h1>
-  <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{[0, 1].map(idx => queryUser.data.user.birthLocation.terms.slice(-2)[idx].value).join(', ')}</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{queryUser.data.user.birthLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>
   <!-- <iframe
     src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.birthLocation.place_id}&zoom=10'
     loading='lazy'
@@ -63,6 +63,9 @@
     h1:nth-child(3) { margin-top: 15px; }
     h1:nth-child(2), h1:nth-child(4) {
       margin: 0px;
+      width: 85%;
+      max-height: 44px;
+      text-align: center;
       font-size: 18px;
       line-height: 22px;
       color: #26114D;

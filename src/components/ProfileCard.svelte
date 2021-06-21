@@ -1,7 +1,7 @@
 <script>
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
-  let animation = { delay: 600, y: 25, duration: 750 }
+  let animation = { delay: 1050, y: -25, duration: 500 }
 
   import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'

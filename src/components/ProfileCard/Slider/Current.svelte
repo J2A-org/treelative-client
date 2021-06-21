@@ -8,7 +8,7 @@
   import { activeNodeID } from '../../../stores.js'
 
   let queryUser
-  $: {
+  $: {z
     if ($activeNodeID) {
       queryUser = operationStore(CURRENT, { id: $activeNodeID })
       query(queryUser)
@@ -18,8 +18,8 @@
 
 <div in:scale='{{ delay: 1300, duration: 500, opacity: 0.5, start: 0 }}'>
   {#if $queryUser.data}
-    <h1 in:fly='{{ delay: 1600, y: -25, duration: 600 }}'>Current Location</h1>
-    <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{[0, 1, 2].map(idx => queryUser.data.user.currentLocation.terms.slice(-3)[idx].value).join(', ')}</h1>
+    <h1 in:fly='{{ ...animation }}'>Current Location</h1>
+    <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.currentLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>
     <!-- <iframe
       src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.currentLocation.place_id}&zoom=10'
       loading='lazy'
@@ -62,7 +62,8 @@
       line-height: 8px;
     }
     h1:nth-of-type(2) {
-      width: 70%;
+      width: 80%;
+      max-height: 44px;
       text-align: center;
       margin: 0px;
       font-size: 18px;
