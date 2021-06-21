@@ -6,9 +6,10 @@
   import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
 
+  import Loading from './Loading.svelte'
   import Modal from './Layout/Modal.svelte'
   import Login from './ProfileCard/Login.svelte'
-  import Logout from './ProfileCard/Logout.svelte'
+  // import Logout from './ProfileCard/Logout.svelte'
   import Slider from './ProfileCard/Slider.svelte'
 
   import { activeNodeID, network } from '../stores.js'
@@ -44,7 +45,7 @@
         <p>Loading</p>
       {:else}
         {#if $queryUser.fetching}
-          <p>Loading..</p>
+         <Loading />
         {:else if $queryUser.error }
           <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
           <Login onComplete={onLoginComplete} />
@@ -59,7 +60,7 @@
             <Slider />
           </div>
         {/if}
-        <Logout />
+        <!-- <Logout /> -->
       {/if}
     </div>
 	</Modal>

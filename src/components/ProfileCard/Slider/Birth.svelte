@@ -71,8 +71,8 @@
       color: #26114D;
     }
     img {
-      width: 227px;
-      height: 152px;
+      width: 225px;
+      height: 135px;
       margin-top: 15px;
       border: none;
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
