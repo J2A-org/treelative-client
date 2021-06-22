@@ -1,6 +1,6 @@
 <script>
   import { scale } from 'svelte/transition'
-  let animation = { delay: 1200, duration: 500, opacity: 0.5, start: 0 }
+  let a = { delay: 1200, duration: 500, opacity: 0.5, start: 0 }
   
   import { operationStore, query } from '@urql/svelte'
 
@@ -23,8 +23,8 @@
 </script>
 
 <div>
-  <div in:scale='{{ ...animation }}'/>
-  <div in:scale='{{ ...animation, delay: animation.delay + 50 }}' id='smaller'/>
+  <div in:scale='{{ ...a }}'/>
+  <div in:scale='{{ ...a, delay: a.delay + 50 }}' id='smaller'/>
 </div>
 <Carousel>
   {#if queryUser.data.user.dateOfDeath} <Death /> {/if}

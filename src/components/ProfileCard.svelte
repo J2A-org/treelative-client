@@ -1,7 +1,7 @@
 <script>
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
-  let animation = { delay: 1050, y: -25, duration: 500 }
+  let a = { delay: 1050, y: -25, duration: 500 }
 
   import { operationStore, query } from '@urql/svelte'
 
@@ -40,7 +40,7 @@
     <div>
       <div 
         style="background-image: url('{bg}');"
-        transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
+        transition:scale='{{ duration: a.duration, opacity: 0.5, start: 0, easing: quintOut }}'
       >
         {#if !$activeNodeID}
           <p>Loading</p>
@@ -51,13 +51,13 @@
             <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
             <Login onComplete={onLoginComplete} />
           {:else}
-            <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
+            <div in:fly='{{ delay: a.delay - 500, x: 500, opacity: 1, duration: a.duration }}'>
               <img
                 src={queryUser.data.user.avatar}
                 alt='user-avatar'
-                in:fly='{{ ...animation }}'
+                in:fly='{{ ...a }}'
               />
-              <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.fullName}</h1>
+              <h1 in:fly='{{ ...a, delay: a.delay + 100 }}'>{queryUser.data.user.fullName}</h1>
               <Slider />
             </div>
           {/if}

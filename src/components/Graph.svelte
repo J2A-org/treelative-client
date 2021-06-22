@@ -2,7 +2,7 @@
   export let nodesAndEdges
 
   import { fade } from 'svelte/transition'
-  let animation = { delay: 500, duration: 1000 }
+  let a = { delay: 500, duration: 1000 }
 
   import { onMount } from 'svelte'
 
@@ -25,7 +25,7 @@
   })
 </script>
 
-<div transition:fade='{{ ...animation }}' bind:this={container} />
+<div transition:fade='{{ ...a }}' bind:this={container} />
 
 <style lang='scss'>
   div { width: 100%; height: 100%; }

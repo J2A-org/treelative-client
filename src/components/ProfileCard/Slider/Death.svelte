@@ -1,6 +1,6 @@
 <script>
   import { fly, scale } from 'svelte/transition'
-  let animation = { delay: 1600, y: -25, duration: 600 }
+  let a = { delay: 1600, y: -25, duration: 600 }
 
   import { operationStore, query } from '@urql/svelte'
 
@@ -19,16 +19,16 @@
   }
 </script>
 
-<div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>
-  <h1 in:fly='{{ ...animation }}'>Date Of Death</h1>
-  <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10).replaceAll('-', '/')}</h1>
+<div in:scale='{{ delay: a.delay - 300, duration: a.duration - 100, opacity: 0.5, start: 0 }}'>
+  <h1 in:fly='{{ ...a }}'>Date Of Death</h1>
+  <h1 in:fly='{{ ...a, delay: a.delay + 100 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10).replaceAll('-', '/')}</h1>
   <img
     src={tombstone}
     alt='tombstone'
-    in:fly='{{ ...animation, delay: animation.delay + 200 }}'
+    in:fly='{{ ...a, delay: a.delay + 200 }}'
   />
-  <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>Death Location</h1>
-  <h1 in:fly='{{ ...animation, delay: animation.delay + 400 }}'>Paris, France</h1>
+  <h1 in:fly='{{ ...a, delay: a.delay + 300 }}'>Death Location</h1>
+  <h1 in:fly='{{ ...a, delay: a.delay + 400 }}'>Paris, France</h1>
 </div>
 
 <style lang='scss'>

@@ -2,7 +2,7 @@
   export let users
 
   import { fly } from 'svelte/transition'
-  const animation = { delay: 60, duration: 500 }
+  const a = { delay: 60, duration: 500 }
 
   import { createEventDispatcher } from 'svelte'
 
@@ -21,8 +21,8 @@
   {#if users}
     {#each users as user, idx}
       <button
-        in:fly='{{ delay: animation.delay * idx, y: -10, duration: animation.duration + 300 }}'
-        out:fly='{{ delay: animation.delay * idx, x: 500, opacity: 1, duration: animation.duration }}'
+        in:fly='{{ delay: a.delay * idx, y: -10, duration: a.duration + 300 }}'
+        out:fly='{{ delay: a.delay * idx, x: 500, opacity: 1, duration: a.duration }}'
         on:click={() => close(user.id)}
       >
         <img src={user.image} alt='user-avatar' />
