@@ -2,10 +2,10 @@
   import { fly, scale } from 'svelte/transition'
   let animation = { delay: 1600, y: -25, duration: 600 }
 
-  import { BIRTH_AND_DEATH } from '../../../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
 
   import { activeNodeID } from '../../../stores.js'
+  import { BIRTH_AND_DEATH } from '../../../graphql/queries/ProfileCard/birthAndDeath'
 
   let queryUser
   $: {

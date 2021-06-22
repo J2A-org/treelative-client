@@ -6,9 +6,9 @@
 </script>
 
 <div>
-    <button on:click={handleSignOut}>
-      Logout
-    </button>
+  <button on:click={handleSignOut}>
+    Logout
+  </button>
 </div>
 
 <style lang='scss'>

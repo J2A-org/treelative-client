@@ -1,6 +1,12 @@
 <script>
+  export let users
+
   import { fly } from 'svelte/transition'
+  const animation = { delay: 60, duration: 500 }
+
   import { createEventDispatcher } from 'svelte'
+
+  import { activeNodeID } from '../../stores'
 
 	const dispatch = createEventDispatcher()
 	const close = async (id) => {
@@ -8,9 +14,6 @@
     dispatch('close')
   }
 
-  import { activeNodeID } from '../../stores'
-
-  export let users
   $: if (users) users = users.slice(0, 10)
 </script>
 
@@ -18,14 +21,11 @@
   {#if users}
     {#each users as user, idx}
       <button
-        in:fly='{{ delay: idx * 60, y: -10, duration: 800 }}'
-        out:fly='{{ delay: idx * 60, x: 500, opacity: 1, duration: 500 }}'
+        in:fly='{{ delay: animation.delay * idx, y: -10, duration: animation.duration + 300 }}'
+        out:fly='{{ delay: animation.delay * idx, x: 500, opacity: 1, duration: animation.duration }}'
         on:click={() => close(user.id)}
       >
-        <img
-          src={user.image}
-          alt='user-avatar'
-        />
+        <img src={user.image} alt='user-avatar' />
         <div>
           <h1>{user.label}</h1>
           <div>

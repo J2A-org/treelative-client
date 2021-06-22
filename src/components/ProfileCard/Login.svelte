@@ -1,13 +1,14 @@
 <script>
+  export let onComplete
+
   import { fly, fade } from 'svelte/transition'
   let animation = { delay: 600, y: 25, duration: 750 }
 
-  import { LOGIN } from '../../graphql/mutations/login'
   import { mutation } from '@urql/svelte'
 
-  const login = mutation({ query: LOGIN })
+  import { LOGIN } from '../../graphql/mutations/login'
 
-  export let onComplete
+  const login = mutation({ query: LOGIN })
 
   const handleSignIn = (e) => {
     login({ username: e.target[0].value, password: e.target[1].value })

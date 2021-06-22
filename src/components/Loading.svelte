@@ -17,9 +17,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    img {
-      width: 400px;
-      object-fit: contain;
-    }
+    img { width: 400px; object-fit: contain; }
   }
 </style>

@@ -2,10 +2,10 @@
   import { scale } from 'svelte/transition'
   let animation = { delay: 1200, duration: 500, opacity: 0.5, start: 0 }
   
-  import { BIRTH_AND_DEATH } from '../../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
 
   import { activeNodeID } from '../../stores.js'
+  import { BIRTH_AND_DEATH } from '../../graphql/queries/ProfileCard/birthAndDeath'
 
   import Carousel from 'svelte-carousel'
 
@@ -23,14 +23,8 @@
 </script>
 
 <div>
-  <div>
-    <!-- <button>Back</button>
-    <button>Next</button> -->
-  </div>
   <div in:scale='{{ ...animation }}'/>
   <div in:scale='{{ ...animation, delay: animation.delay + 50 }}' id='smaller'/>
-  <!-- {#if queryUser.data.user.dateOfBirth && queryUser.data.user.birthLocation} <Birth /> {/if}
-  {#if queryUser.data.user.currentLocation} <Current /> {/if} -->
 </div>
 <Carousel>
   {#if queryUser.data.user.dateOfDeath} <Death /> {/if}
@@ -46,7 +40,7 @@
       justify-content: space-between;
       margin-top: -70px;
     }
-    div:nth-child(2), div:nth-child(3) {
+    div:first-child, div:nth-child(2) {
       width: 300px;
       height: 284px;
       position: absolute;
@@ -58,8 +52,6 @@
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.20);
       border-radius: 20px;
     }
-    #smaller {
-      width: 285px;
-    }
+    #smaller { width: 285px; }
   }
 </style>

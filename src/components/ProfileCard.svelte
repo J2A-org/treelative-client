@@ -3,16 +3,16 @@
   import { scale, fly } from 'svelte/transition'
   let animation = { delay: 1050, y: -25, duration: 500 }
 
-  import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
   import { operationStore, query } from '@urql/svelte'
+
+  import { activeNodeID, network } from '../stores.js'
+  import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
 
   import Loading from './Loading.svelte'
   import Modal from './Layout/Modal.svelte'
   import Login from './ProfileCard/Login.svelte'
   // import Logout from './ProfileCard/Logout.svelte'
   import Slider from './ProfileCard/Slider.svelte'
-
-  import { activeNodeID, network } from '../stores.js'
   
   import bg from '../images/profilecardBg.jpg'
 

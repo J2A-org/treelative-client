@@ -2,10 +2,11 @@
   import { fly, scale } from 'svelte/transition'
   let animation = { delay: 1600, y: -25, duration: 600 }
 
-  import { CURRENT } from '../../../graphql/queries/ProfileCard/current'
   import { operationStore, query } from '@urql/svelte'
 
   import { activeNodeID } from '../../../stores.js'
+  import { CURRENT } from '../../../graphql/queries/ProfileCard/current'
+
 
   let queryUser
   $: {
@@ -56,7 +57,7 @@
       line-height: 8px;
     }
     h1:nth-of-type(2) {
-      width: 80%;
+      width: 85%;
       text-align: center;
       margin: 0px;
       font-size: 18px;

@@ -1,31 +1,33 @@
 <script>
-  import { fade } from 'svelte/transition'
+  export let nodes
+  
   import { tweened } from 'svelte/motion'
-  const value = tweened(0, { duration: 100 })
+  import { fade } from 'svelte/transition'
+  const tween = tweened(0, { duration: 100 })
 
   import Modal from './Layout/Modal.svelte'
   import SearchResult from './Search/SearchResult.svelte'
 
   import search from '../images/search.svg'
 
-  export let nodes
-
   let searchInput
   let filteredUsers
-  $: if (!searchInput) {
-    filteredUsers = null
-  } else {
-    filteredUsers = nodes.filter(user => user.group === 'individual')
-    filteredUsers = filteredUsers.filter(user => user.label.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1)
+  $: {
+    if (!searchInput) filteredUsers = null
+    else {
+      filteredUsers = nodes.filter(user => user.group === 'individual')
+      filteredUsers = filteredUsers.filter(user => user.label.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1)
+    }
   }
 
   let isOpen = false
   const handleOpen = () => {
     isOpen = !isOpen
-    value.set(260)
+    tween.set(260)
   }
+
   const handleClose = async () => {
-    await value.set(0)
+    await tween.set(0)
     isOpen = !isOpen
   }
 </script>
@@ -41,7 +43,7 @@
         <input
           type='text'
           bind:value={searchInput}
-          style='width: {$value}px;'
+          style='width: {$tween}px;'
           autofocus
         />
         <SearchResult users={filteredUsers} on:close={handleClose}/>
