@@ -19,7 +19,7 @@
 
   <div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>
     <h1 in:fly='{{ ...animation }}'>Date Of Birth</h1>
-    <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10)}</h1>
+    <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}</h1>
     <h1 in:fly='{{ ...animation, delay: animation.delay + 200 }}'>Birth Location</h1>
     <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{queryUser.data.user.birthLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>
     <!-- <iframe
@@ -60,7 +60,6 @@
     h1:nth-child(2), h1:nth-child(4) {
       margin: 0px;
       width: 85%;
-      max-height: 44px;
       text-align: center;
       font-size: 18px;
       line-height: 22px;

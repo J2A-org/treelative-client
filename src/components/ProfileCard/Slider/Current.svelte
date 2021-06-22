@@ -57,7 +57,6 @@
     }
     h1:nth-of-type(2) {
       width: 80%;
-      max-height: 44px;
       text-align: center;
       margin: 0px;
       font-size: 18px;

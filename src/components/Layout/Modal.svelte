@@ -32,7 +32,7 @@
 
 <svelte:window on:keydown={handleKeydown}/>
 <div transition:fade='{{ duration: 500 }}' class='modal-overlay' on:click={close}></div>
-<div class='modal' bind:this={modal}>
+<div bind:this={modal}>
 	<slot></slot>
 </div>
 
@@ -43,12 +43,5 @@
 		width: 100vw;
 		height: 100vh;
 		background: rgba(0,0,0,0.8);
-	}
-	.modal {
-		z-index: 51;
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%,-50%);
 	}
 </style>

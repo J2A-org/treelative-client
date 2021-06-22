@@ -23,7 +23,7 @@
 
 <div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
   <div
-    in:fly='{{ delay: 350, y: 200, duration: 500 }}'
+    in:fly='{{ delay: animation - 250, y: animation + 125, duration: animation + 250 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
   >
     <h1 in:fly='{{ ...animation }}'>Login</h1>

@@ -20,7 +20,7 @@
 
 <div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>
   <h1 in:fly='{{ ...animation }}'>Date Of Death</h1>
-  <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10)}</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.dateOfDeath.slice(0, 10).replaceAll('-', '/')}</h1>
   <img
     src={tombstone}
     alt='tombstone'

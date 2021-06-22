@@ -1,116 +1,94 @@
 <script>
+  import { fade } from 'svelte/transition'
+  import { tweened } from 'svelte/motion'
+  const value = tweened(0, { duration: 100 })
+
+  import Modal from './Layout/Modal.svelte'
   import SearchResult from './Search/SearchResult.svelte'
 
-  export let users
+  import search from '../images/search.svg'
+
+  export let nodes
+
   let searchInput
   let filteredUsers
   $: if (!searchInput) {
     filteredUsers = null
   } else {
-    filteredUsers = users.filter(user => (
-      user.fullName.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1
-    ))
+    filteredUsers = nodes.filter(user => user.group === 'individual')
+    filteredUsers = filteredUsers.filter(user => user.label.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1)
   }
 
   let isOpen = false
+  const handleOpen = () => {
+    isOpen = !isOpen
+    value.set(260)
+  }
+  const handleClose = async () => {
+    await value.set(0)
+    isOpen = !isOpen
+  }
 </script>
 
-<div>
-  <details>
-    <summary>
-      <div
-        class='trigger'
-        on:click={() => { isOpen = true }}
-      >
-        <svg
-          width='23px'
-          viewBox='0 0 22 22'
-          fill='#00223D'
-          transition='0.3s ease-in-out'
-        >
-          <path d='M14.3601 2.73485C13.278 1.60905 11.8971 0.815467 10.3797 0.447379C8.86217 0.0792899 7.27113 0.151987 5.79353 0.656927C4.31592 1.16187 3.01314 2.07807 2.03828 3.29786C1.06341 4.51768 0.456962 5.99038 0.290202 7.54296C0.123442 9.09552 0.403297 10.6634 1.09688 12.0624C1.79046 13.4614 2.86896 14.6334 4.20561 15.4406C5.54229 16.2479 7.08159 16.6568 8.64264 16.6194C10.2037 16.5819 11.7216 16.0997 13.0181 15.2294L18.9478 21.3973C19.0212 21.4735 19.1218 21.5176 19.2277 21.5197C19.3335 21.5217 19.4359 21.4818 19.5122 21.4083L20.9899 19.9876C21.0662 19.9143 21.1103 19.8136 21.1124 19.7078C21.1145 19.6019 21.0743 19.4996 21.001 19.4233L15.0713 13.2554C16.2081 11.6979 16.76 9.78966 16.6299 7.86573C16.4999 5.94182 15.6962 4.12522 14.3601 2.73485ZM12.5132 12.6494C11.6766 13.4536 10.6204 13.9918 9.47806 14.1957C8.33568 14.3997 7.15849 14.2603 6.09535 13.7952C5.03218 13.3301 4.13081 12.5602 3.50522 11.5829C2.87965 10.6055 2.55792 9.46456 2.58077 8.30437C2.6036 7.14416 2.96996 6.01677 3.63353 5.06478C4.29708 4.1128 5.22805 3.37896 6.30867 2.95606C7.3893 2.53316 8.57107 2.44022 9.70451 2.68896C10.838 2.93769 11.8722 3.51695 12.6765 4.35349C13.7549 5.47526 14.3436 6.97949 14.313 8.53528C14.2823 10.0911 13.635 11.571 12.5132 12.6494Z' />
-          <path d='M4.10127 6.78889C3.44151 6.78889 3.44042 7.81421 4.10127 7.81421C4.76101 7.81421 4.76212 6.78889 4.10127 6.78889Z' />
-          <path d='M8.70053 3.50412C7.86378 3.47894 7.03439 3.66733 6.29063 4.05148C5.54685 4.43565 4.91319 5.00294 4.44939 5.69985C4.16909 6.13859 4.96493 6.52628 5.24374 6.08989C5.95516 4.97632 7.3072 4.26934 8.76827 4.30592C9.50745 4.33196 10.2288 4.54016 10.8681 4.91203C11.5074 5.28388 12.0451 5.80791 12.4332 6.43754C12.7133 6.89927 13.4472 6.47941 13.1688 6.02067C12.2738 4.54568 10.5352 3.54566 8.70053 3.50412Z' />
-        </svg>
-      </div>
-      <div
-        class='overlay'
-        on:click={() => { isOpen = false }}
-      />
-    </summary>
-    {#if isOpen}
+<button on:click={handleOpen}>
+  <img src={search} alt='search'/>
+</button>
+{#if isOpen}
+  <Modal on:close={handleClose}>
+    <div transition:fade='{{ duration: 500 }}'>
       <div>
-        <svg
-          width='23px'
-          viewBox='0 0 22 22'
-          fill='#00223D'
-          transition='0.3s ease-in-out'
-        >
-          <path d='M14.3601 2.73485C13.278 1.60905 11.8971 0.815467 10.3797 0.447379C8.86217 0.0792899 7.27113 0.151987 5.79353 0.656927C4.31592 1.16187 3.01314 2.07807 2.03828 3.29786C1.06341 4.51768 0.456962 5.99038 0.290202 7.54296C0.123442 9.09552 0.403297 10.6634 1.09688 12.0624C1.79046 13.4614 2.86896 14.6334 4.20561 15.4406C5.54229 16.2479 7.08159 16.6568 8.64264 16.6194C10.2037 16.5819 11.7216 16.0997 13.0181 15.2294L18.9478 21.3973C19.0212 21.4735 19.1218 21.5176 19.2277 21.5197C19.3335 21.5217 19.4359 21.4818 19.5122 21.4083L20.9899 19.9876C21.0662 19.9143 21.1103 19.8136 21.1124 19.7078C21.1145 19.6019 21.0743 19.4996 21.001 19.4233L15.0713 13.2554C16.2081 11.6979 16.76 9.78966 16.6299 7.86573C16.4999 5.94182 15.6962 4.12522 14.3601 2.73485ZM12.5132 12.6494C11.6766 13.4536 10.6204 13.9918 9.47806 14.1957C8.33568 14.3997 7.15849 14.2603 6.09535 13.7952C5.03218 13.3301 4.13081 12.5602 3.50522 11.5829C2.87965 10.6055 2.55792 9.46456 2.58077 8.30437C2.6036 7.14416 2.96996 6.01677 3.63353 5.06478C4.29708 4.1128 5.22805 3.37896 6.30867 2.95606C7.3893 2.53316 8.57107 2.44022 9.70451 2.68896C10.838 2.93769 11.8722 3.51695 12.6765 4.35349C13.7549 5.47526 14.3436 6.97949 14.313 8.53528C14.2823 10.0911 13.635 11.571 12.5132 12.6494Z' />
-          <path d='M4.10127 6.78889C3.44151 6.78889 3.44042 7.81421 4.10127 7.81421C4.76101 7.81421 4.76212 6.78889 4.10127 6.78889Z' />
-          <path d='M8.70053 3.50412C7.86378 3.47894 7.03439 3.66733 6.29063 4.05148C5.54685 4.43565 4.91319 5.00294 4.44939 5.69985C4.16909 6.13859 4.96493 6.52628 5.24374 6.08989C5.95516 4.97632 7.3072 4.26934 8.76827 4.30592C9.50745 4.33196 10.2288 4.54016 10.8681 4.91203C11.5074 5.28388 12.0451 5.80791 12.4332 6.43754C12.7133 6.89927 13.4472 6.47941 13.1688 6.02067C12.2738 4.54568 10.5352 3.54566 8.70053 3.50412Z' />
-        </svg>
+        <img src={search} alt='search'/>
         <input
           type='text'
           bind:value={searchInput}
+          style='width: {$value}px;'
+          autofocus
         />
-        <SearchResult users={filteredUsers} />
+        <SearchResult users={filteredUsers} on:close={handleClose}/>
       </div>
-    {/if}
-  </details>
-</div>
+    </div>
+  </Modal>
+{/if}
 
 <style lang='scss'>
-  div {
+  button {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
-  }
-  svg {
-    position: absolute;
-    z-index: 10;
-    right: 7px;
-    top: 7px;
-    transition: 0.3s ease-in-out;
-  }
-  input {
-    width: 260px;
+    z-index: 1;
+		right: 40px;
+		top: 40px;
+    width: 40px;
     height: 38px;
+    border-radius: 50%;
+    border: 0px;
     background: #FFFFFF;
-    border-radius: 50px;
-    padding: 0px 20px;
-    border: 0px;
-    transition: 0.3s ease-in-out;
-  }
-  .trigger {
-    width: 38px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.55);
-    border-radius: 50px;
-    border: 0px;
-    transition: 0.3s ease-in-out;
-  }
-
-  .overlay {
-    transition: opacity 0.2s ease-out;
-    pointer-events: none;
-    background: rgba(#0f172a, 0.8);
-    position: fixed;
-    opacity: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    top: 0;
-
-    details[open] & {
-      pointer-events: all;
-      opacity: 0.5;
+    img {
+      position: absolute;
+      right: 8px;
+      top: 8px;
     }
   }
-  details {
-    summary {
-      list-style: none;
+  div {
+		position: absolute;
+		right: 20px;
+		top: 20px;
+    z-index: 51;
+    div {
+      img {
+        position: absolute;
+        z-index: 2;
+        right: 8px;
+        top: 8px;
+      }
+      input {
+        position: absolute;
+        right: 0px;
+		    top: 0px;
+        height: 38px;
+        background: #FFFFFF;
+        border-radius: 50px;
+        padding: 0px 20px;
+        border: 0px;
+      }
     }
   }
 </style>

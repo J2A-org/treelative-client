@@ -37,67 +37,75 @@
 
 {#if $activeNodeID}
 	<Modal on:close={onActiveNodeClose}>
-    <div 
-      style="background-image: url('{bg}');"
-      transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
-    >
-      {#if !$activeNodeID}
-        <p>Loading</p>
-      {:else}
-        {#if $queryUser.fetching}
-         <Loading />
-        {:else if $queryUser.error }
-          <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
-          <Login onComplete={onLoginComplete} />
+    <div>
+      <div 
+        style="background-image: url('{bg}');"
+        transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
+      >
+        {#if !$activeNodeID}
+          <p>Loading</p>
         {:else}
-          <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
-            <img
-              src={queryUser.data.user.avatar}
-              alt='user-avatar'
-              in:fly='{{ ...animation }}'
-            />
-            <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.fullName}</h1>
-            <Slider />
-          </div>
+          {#if $queryUser.fetching}
+           <Loading />
+          {:else if $queryUser.error }
+            <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
+            <Login onComplete={onLoginComplete} />
+          {:else}
+            <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
+              <img
+                src={queryUser.data.user.avatar}
+                alt='user-avatar'
+                in:fly='{{ ...animation }}'
+              />
+              <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{queryUser.data.user.fullName}</h1>
+              <Slider />
+            </div>
+          {/if}
+          <!-- <Logout /> -->
         {/if}
-        <!-- <Logout /> -->
-      {/if}
+      </div>
     </div>
 	</Modal>
 {/if}
 
 <style lang='scss'>
-  div {
-    width: 400px;
-    height: 550px;
-    background-size: 100% auto;
-    border-radius: 20px;
-    position: relative;
-    overflow: hidden;
+  div{
+    z-index: 51;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -25%);
     div {
-      width: 330px;
-      height: 422px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: absolute;
-      left: 35px;
-      top: 94px;
-      background: rgba(255, 255, 255, 0.6);
+      width: 400px;
+      height: 550px;
+      background-size: 100% auto;
       border-radius: 20px;
-      overflow: visible;
-      img {
-        width: 94px;
-        margin-top: -56px;
-        border-radius: 50%;
-        border: 5px solid #FFFFFF;
-        filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
-      }
-      h1 {
-        margin-top: 8px;
-        font-size: 22px;
-        font-weight: 100;
-        color: #26114D;
+      position: relative;
+      overflow: hidden;
+      div {
+        width: 330px;
+        height: 422px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: absolute;
+        transform: translate(-50%, -43%);
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 20px;
+        overflow: visible;
+        img {
+          width: 94px;
+          margin-top: -56px;
+          border-radius: 50%;
+          border: 5px solid #FFFFFF;
+          filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
+        }
+        h1 {
+          margin-top: 8px;
+          font-size: 22px;
+          font-weight: 100;
+          color: #26114D;
+        }
       }
     }
   }

@@ -8,7 +8,7 @@
   query(queryNodesAndEdges)
 
   import Graph from './components/Graph.svelte'
-  // import Search from './components/Search.svelte'
+  import Search from './components/Search.svelte'
   import Loading from './components/Loading.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
 </script>
@@ -19,6 +19,6 @@
   <p>Oh no... {$queryNodesAndEdges.error.message}</p>
 {:else}
   <ProfileCard />
-  <!-- <Search users={$queryNodesAndEdges.data.users}/> -->
+  <Search nodes={$queryNodesAndEdges.data.getNetworkData.nodes}/>
   <Graph nodesAndEdges={$queryNodesAndEdges.data.getNetworkData} />
 {/if}
