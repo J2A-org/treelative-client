@@ -36,9 +36,9 @@
 	<slot></slot>
 </div>
 
-<style>
+<style lang='scss'>
 	.modal-overlay {
-		z-index: 50;
+		z-index: 51;
 		position: fixed;
 		width: 100vw;
 		height: 100vh;

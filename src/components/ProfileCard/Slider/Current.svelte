@@ -1,39 +1,27 @@
 <script>
+  import { getContext } from 'svelte'
+  
   import { fly, scale } from 'svelte/transition'
-  let a = { delay: 1600, y: -25, duration: 600 }
+  const animation = { delay: 1600, y: -25, duration: 600 }
 
-  import { operationStore, query } from '@urql/svelte'
-
-  import { activeNodeID } from '../../../stores.js'
-  import { CURRENT } from '../../../graphql/queries/ProfileCard/current'
-
-
-  let queryUser
-  $: {
-    if ($activeNodeID) {
-      queryUser = operationStore(CURRENT, { id: $activeNodeID })
-      query(queryUser)
-    }
-  }
+  const user = getContext('user')
 </script>
 
-<div in:scale='{{ delay: a.delay - 300, duration: a.duration - 100, opacity: 0.5, start: 0 }}'>
-  {#if $queryUser.data}
-    <h1 in:fly='{{ ...a }}'>Current Location</h1>
-    <h1 in:fly='{{ ...a, delay: a.delay + 100 }}'>{queryUser.data.user.currentLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>
-    <!-- <iframe
-      src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{queryUser.data.user.currentLocation.place_id}&zoom=10'
-      loading='lazy'
-      title='current-location'
-      in:fly='{{ ...a, delay: a.delay + 200 }}'
-    /> -->
-    <img
-      id='map'
-      src='https://i.stack.imgur.com/613d9.png'
-      alt='birth-location'
-      in:fly='{{ ...a, delay: a.delay + 200 }}'
-    />
-  {/if}
+<div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>
+  <h1 in:fly='{{ ...animation }}'>Current Location</h1>
+  <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.currentLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>
+  <!-- <iframe
+    src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.currentLocation.place_id}&zoom=10'
+    loading='lazy'
+    title='current-location'
+    in:fly='{{ ...animation, delay: animation.delay + 200 }}'
+  /> -->
+  <img
+    id='map'
+    src='https://i.stack.imgur.com/613d9.png'
+    alt='birth-location'
+    in:fly='{{ ...animation, delay: animation.delay + 200 }}'
+  />
 </div>
 
 <style lang='scss'>

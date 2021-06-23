@@ -1,20 +1,20 @@
 <script>
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
-  let a = { delay: 1050, y: -25, duration: 500 }
 
   import { operationStore, query } from '@urql/svelte'
 
   import { activeNodeID, network } from '../stores.js'
-  import { BIRTH_AND_DEATH } from '../graphql/queries/ProfileCard/birthAndDeath'
+  import { GET_USER } from '../graphql/queries/user'
 
   import Loading from './Loading.svelte'
   import Modal from './Layout/Modal.svelte'
   import Login from './ProfileCard/Login.svelte'
-  // import Logout from './ProfileCard/Logout.svelte'
   import Slider from './ProfileCard/Slider.svelte'
   
   import bg from '../images/profilecardBg.jpg'
+
+  const animation = { delay: 1050, y: -25, duration: 500 }
 
   const onActiveNodeClose = () => {
     // clear the activeNodeID in store
@@ -26,13 +26,14 @@
   let queryUser
   $: {
     if ($activeNodeID) {
-      queryUser = operationStore(BIRTH_AND_DEATH, { id: $activeNodeID })
+      queryUser = operationStore(GET_USER, { id: $activeNodeID })
       query(queryUser)
     }
   }
 
-  const onLoginComplete = () => refresh()
-  const refresh = () => queryUser.context = { requestPolicy: 'cache-and-network' }
+  const refresh = () => {
+    queryUser.context = { requestPolicy: 'cache-and-network' }
+  }
 </script>
 
 {#if $activeNodeID}
@@ -40,7 +41,7 @@
     <div>
       <div 
         style="background-image: url('{bg}');"
-        transition:scale='{{ duration: a.duration, opacity: 0.5, start: 0, easing: quintOut }}'
+        transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
       >
         {#if !$activeNodeID}
           <p>Loading</p>
@@ -49,19 +50,21 @@
            <Loading />
           {:else if $queryUser.error }
             <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
-            <Login onComplete={onLoginComplete} />
+            <!-- SHOW ERROR MODAL-->
+            <Login onComplete={refresh} />
           {:else}
-            <div in:fly='{{ delay: a.delay - 500, x: 500, opacity: 1, duration: a.duration }}'>
+            <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
               <img
                 src={queryUser.data.user.avatar}
                 alt='user-avatar'
-                in:fly='{{ ...a }}'
+                in:fly='{animation}'
               />
-              <h1 in:fly='{{ ...a, delay: a.delay + 100 }}'>{queryUser.data.user.fullName}</h1>
-              <Slider />
+              <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
+                {queryUser.data.user.fullName}
+              </h1>
+              <Slider user={queryUser.data.user} />
             </div>
           {/if}
-          <!-- <Logout /> -->
         {/if}
       </div>
     </div>
@@ -69,7 +72,7 @@
 {/if}
 
 <style lang='scss'>
-  div{
+  div {
     z-index: 51;
 		position: absolute;
 		left: 50%;
