@@ -1,11 +1,9 @@
 <script>
   import { fade } from 'svelte/transition'
-
-  import loading from '../images/loading.gif'
 </script>
 
 <div out:fade='{{ duration: 500 }}'>
-  <img src={loading} alt='loading' />
+  <img src='images/loading.gif' alt='loading' />
 </div>
 
 <style lang='scss'>

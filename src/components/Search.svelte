@@ -8,8 +8,6 @@
   import Modal from './Layout/Modal.svelte'
   import SearchResult from './Search/SearchResult.svelte'
 
-  import search from '../images/search.svg'
-
   let searchInput
   let filteredUsers
   $: {
@@ -33,13 +31,13 @@
 </script>
 
 <button on:click={handleOpen}>
-  <img src={search} alt='search'/>
+  <img src='images/search.svg' alt='search'/>
 </button>
 {#if isOpen}
   <Modal on:close={handleClose}>
     <div transition:fade='{{ duration: 500 }}'>
       <div>
-        <img src={search} alt='search'/>
+        <img src='images/search.svg' alt='search'/>
         <input
           type='text'
           bind:value={searchInput}

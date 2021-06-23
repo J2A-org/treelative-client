@@ -4,7 +4,7 @@
   import { setContext } from 'svelte'
   import { scale } from 'svelte/transition'
 
-  import Carousel from 'svelte-carousel'
+  // import Carousel from 'svelte-carousel'
 
   import Death from './Slider/Death.svelte'
   import Birth from './Slider/Birth.svelte'
@@ -20,11 +20,11 @@
   <div in:scale={{ ...animation, delay: animation.delay + 500 }} />
 </div>
 
-<Carousel>
+<!-- <Carousel>
   {#if user.dateOfDeath} <Death /> {/if}
   <Birth />
   <Current />
-</Carousel>
+</Carousel> -->
 
 <style lang='scss'>
   div {

@@ -12,8 +12,6 @@
   import Login from './ProfileCard/Login.svelte'
   import Slider from './ProfileCard/Slider.svelte'
   
-  import bg from '../images/profilecardBg.jpg'
-
   const animation = { delay: 1050, y: -25, duration: 500 }
 
   const onActiveNodeClose = () => {
@@ -40,7 +38,7 @@
 	<Modal on:close={onActiveNodeClose}>
     <div>
       <div 
-        style="background-image: url('{bg}');"
+        style="background-image: url('images/profilecardBg.jpg');"
         transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
       >
         {#if !$activeNodeID}

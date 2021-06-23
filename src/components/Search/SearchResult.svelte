@@ -8,8 +8,8 @@
 
   import { activeNodeID } from '../../stores'
 
-	const dispatch = createEventDispatcher()
-	const close = async (id) => {
+  const dispatch = createEventDispatcher()
+  const close = async (id) => {
     await activeNodeID.update(() => id)
     dispatch('close')
   }

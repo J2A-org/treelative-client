@@ -2,8 +2,6 @@
   import { getContext } from 'svelte'
   import { fly, scale } from 'svelte/transition'
 
-  import tombstone from '../../../images/tombstone.svg'
-
   const animation = { delay: 1600, y: -25, duration: 600 }
 
   const user = getContext('user')
@@ -13,7 +11,7 @@
   <h1 in:fly='{{ ...animation }}'>Date Of Death</h1>
   <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfDeath.slice(0, 10).replaceAll('-', '/')}</h1>
   <img
-    src={tombstone}
+    src='images/tombstone.svg'
     alt='tombstone'
     in:fly='{{ ...animation, delay: animation.delay + 200 }}'
   />

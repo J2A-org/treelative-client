@@ -4,7 +4,7 @@ export default {
     src: { url: '/dist' }
   },
   plugins: [
-    ['@snowpack/plugin-svelte', { hmrOptions: { preserveLocalState: true } }],
+    '@snowpack/plugin-svelte',
     '@snowpack/plugin-dotenv'
   ],
   routes: [
