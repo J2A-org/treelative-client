@@ -63,6 +63,7 @@
     border-radius: 50%;
     border: 0px;
     background: #FFFFFF;
+    opacity: 0.5;
     img {
       position: absolute;
       right: 8px;

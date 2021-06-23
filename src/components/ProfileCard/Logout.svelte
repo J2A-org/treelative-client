@@ -25,7 +25,7 @@
     border-radius: 20px;
     background: linear-gradient(-45deg, #3F2349, #F12A2D);
     background-size: 150% 150%;
-    a: gradient 2s ease infinite;
+    animation: gradient 2s ease infinite;
   }
   @keyframes gradient {
     0% { background-position: 0% 50%; }
