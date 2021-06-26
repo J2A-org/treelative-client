@@ -9,6 +9,14 @@
   import * as vis from 'vis-network/standalone/esm/vis-network'
 
   const options = {
+    // layout: {
+    //   // randomSeed: 1,
+    //   improvedLayout: true,
+    //   hierarchical: {
+    //     direction: 'UD',        // UD, DU, LR, RL
+    //     sortMethod: 'hubsize'   // hubsize, directed
+    //   }
+    // },
     groups: {
       individual: {
         shape: 'circularImage',
