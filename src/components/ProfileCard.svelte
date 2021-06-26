@@ -82,7 +82,7 @@
       background-size: 100% auto;
       border-radius: 20px;
       position: relative;
-      overflow: hidden;
+      // overflow: hidden;
       div {
         width: 330px;
         height: 422px;

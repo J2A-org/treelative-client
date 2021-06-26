@@ -26,20 +26,14 @@
 
 <style lang='scss'>
   div {
-    width: 260px;
-    height: 284px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.20);
-    border-radius: 20px;
-    color: #26114D;
-    user-select: none;
-    cursor: move;
     h1:first-of-type {
       margin-bottom: 0px;
-      opacity: 1;
       font-weight: 100;
       font-size: 7px;
       line-height: 8px;
@@ -50,7 +44,6 @@
       margin: 0px;
       font-size: 18px;
       line-height: 22px;
-      color: #26114D;
     }
     #map {
       width: 225px;
