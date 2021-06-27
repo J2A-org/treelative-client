@@ -78,7 +78,7 @@
     // set activeNodeID on user node click
     $network.on('selectNode', ({ nodes }) => {
       const activeNode = nodesAndEdges.nodes.find(node => nodes[0] === node.id)
-      if (activeNode.group === 'individual') activeNodeID.update(() => activeNode.id)
+      if (activeNode.group !== 'couple') activeNodeID.update(() => activeNode.id)
     })
     // limit the zoom
     const MIN_ZOOM = 0.3
