@@ -17,6 +17,10 @@
     //     sortMethod: 'hubsize'   // hubsize, directed
     //   }
     // },
+    interaction: {
+      zoomSpeed: 0.3,
+      keyboard: true
+    },
     groups: {
       individual: {
         shape: 'circularImage',
@@ -58,9 +62,30 @@
   onMount(() => {
     // set network in store
     network.update(() => new vis.Network(container, nodesAndEdges, options))
+    // set activeNodeID on user node click
     $network.on('selectNode', ({ nodes }) => {
       const activeNode = nodesAndEdges.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group === 'individual') activeNodeID.update(() => activeNode.id)
+    })
+    // limit the zoom
+    const MIN_ZOOM = 0.3
+    const MAX_ZOOM = 2.0
+    let lastZoomPosition = { x: 0, y: 0 }
+    $network.on('zoom', () => {
+      const scale = $network.getScale()
+      if (scale <= MIN_ZOOM) {
+        $network.moveTo({
+          position: lastZoomPosition,
+          scale: MIN_ZOOM
+        })
+      } else if (scale >= MAX_ZOOM) {
+        $network.moveTo({
+          position: lastZoomPosition,
+          scale: MAX_ZOOM
+        })
+      } else {
+        lastZoomPosition = $network.getViewPosition()
+      }
     })
   })
 </script>
