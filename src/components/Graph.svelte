@@ -48,7 +48,7 @@
       admin: {
         shape: 'circularImage',
         brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
-        borderWidth: 30,
+        borderWidth: 5,
         color: {
           border: '#DABC00',
           highlight: {
