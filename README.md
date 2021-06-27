@@ -11,25 +11,33 @@
 - Serve the `/dist` directory
 
 ## TODO:
-- mobile context menu
+ARUN - mobile context menu
  - search - move search inside context
  - Insights:
     - stats - info - total users and total family count
     - ..etc
- - view settings:
-    - controls - ZOOM in out
-               - reset - FIT SCREEN
-    - hierarchical layout
- - paly around with vis JS clusters
-- use stabilizationProgress event to show a loading GIF
-- style edges differently for child-couple vs couple-partner
-- investigate mobile zoom lag
-- optimize canvas for mobile
-- add hook to detect mobile vs desktop - set in store
-- Fix death
-- Add fallback avatar with initials ! - create svg paths for alphabets
-- Disable dragging of nodes
-- SHOW EVERYTHING INSIDE CONTEXT MENU
-- HANDLE ALL ERRORS
+ - settings:
+    - controls
+      - ZOOM in out
+      - reset - FIT SCREEN
+      - hierarchical layout
+JANA - play around with vis JS clusters
+ARUN - use stabilizationProgress event to show a loading GIF
+ARUN - style edges differently for child-couple vs couple-partner
+ARUN - Slider - for N/A stuff, keep layout but add placeholders
+ARUN - Break full name
+JANA/ARUN - investigate mobile zoom lag
+JANA - optimize canvas for mobile
+JANA - add hook to detect mobile vs desktop - set in store
+ARUN - Fix death
+ARUN - Add fallback avatar with initials ! - create svg paths for alphabets
+ARUN - Disable dragging of nodes
+ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
+ARUN - HANDLE ALL ERRORS
   - Login
-  - network requests
+  - network requests-
+- Add reusable IMAGE component with fallback support
+JANA - Add firebase integration
+ARUN - Add crow for Admins
+ARUN - If logged in, but not authorized - show contact Admins UI
+JANA - Detect pixel density
