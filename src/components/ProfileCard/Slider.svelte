@@ -67,12 +67,11 @@
   {#if user.dateOfDeath} <div><Death/></div> {/if}
   <div><Birth/></div>
   <div><Current/></div>
-  <div><Birth/></div>
   <!-- <div><Relations/></div> -->
   <!-- <div><Social/></div> -->
 
 </div>
-<button on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap} />
+<button id='touch' on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}/>
 
 <style lang='scss'>
   div {
@@ -109,5 +108,6 @@
     border-radius: 20px;
     background: none;
     border: 0px;
+    transform: translateY(42px);
   }
 </style>
