@@ -134,8 +134,6 @@
   @media only screen and (max-width: 500px) {
     div {
       div {
-        height: 100vh;
-        border-radius: 0px;
         max-width: 500px;
       }
     }
