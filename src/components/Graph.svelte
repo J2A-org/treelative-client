@@ -13,14 +13,17 @@
     //   // randomSeed: 1,
     //   improvedLayout: true,
     //   hierarchical: {
-    //     direction: 'UD',        // UD, DU, LR, RL
-    //     sortMethod: 'hubsize'   // hubsize, directed
+    //     direction: 'UD',
+    //     sortMethod: 'directed',
+    //     shakeTowards: 'roots',
+    //     parentCentralization: true
     //   }
     // },
     interaction: {
       zoomSpeed: 0.3,
       keyboard: true
     },
+
     groups: {
       individual: {
         shape: 'circularImage',
@@ -46,7 +49,7 @@
     },
     nodes: {
       borderWidth: 2,
-      size: 25,
+      size: 35,
       font: { color: '#ffffff' }
     },
     edges: {
