@@ -13,7 +13,8 @@
   onMount(() => [...stack.children].reverse().forEach(i => stack.append(i)))
   const swap = async (e, direction) => {
     e.target.disabled = true
-    const card = [...stack.children].slice(-1).pop()
+    // get the last card
+    const card = [...stack.children].pop()
     if (direction === 'left') {
       card.style = 'transform: rotate(-10deg) translateX(-420px) translateY(-150px); transition: 0.4s ease-in-out;'
     } else {
@@ -27,6 +28,9 @@
     }, 200)
     await new Promise(resolve => setTimeout(resolve, 330))
     e.target.disabled = false
+    card.setAttribute('ontouchstart', handleTouchStart)
+    card.setAttribute('ontouchmove', handleTouchMove)
+    card.setAttribute('onclick', swap)
   }
 
   let xDown = null
@@ -65,13 +69,13 @@
 
 <div bind:this={stack}>
   {#if user.dateOfDeath} <div><Death/></div> {/if}
-  <div><Birth/></div>
-  <div><Current/></div>
+  <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Birth/></div>
+  <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Current/></div>
   <!-- <div><Relations/></div> -->
   <!-- <div><Social/></div> -->
 
 </div>
-<button id='touch' on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}/>
+<!-- <button id='touch' on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}/> -->
 
 <style lang='scss'>
   div {

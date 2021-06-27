@@ -29,7 +29,7 @@
   <div>
     {#each querySearchUsers.data.users as user, idx}
       <button
-
+        in:fly='{{ delay: animation.delay * 0, y: -10, duration: animation.duration + 300 }}'
         on:click={() => close(user.id)}
       >
         <img src={fallbackAvatar || user.avatar} alt='user-avatar' on:error={setFallbackAvatar} />
@@ -48,7 +48,6 @@
     {#if (querySearchUsers.data.users.length === 0)}
       <button
         in:fly='{{ delay: animation.delay, y: -10, duration: animation.duration + 300 }}'
-        out:fly='{{ delay: animation.delay, x: 500, opacity: 1, duration: animation.duration }}'
       >
         No results
       </button>
