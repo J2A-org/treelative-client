@@ -10,20 +10,23 @@
 
   <div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>
     <h1 in:fly='{animation}'>Date Of Birth</h1>
-    <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}</h1>
+    {#if !user.dateOfBirth}
+      <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>Unavailable</h1>
+    {:else}
+      <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}</h1>
+    {/if}
     <h1 in:fly='{{ ...animation, delay: animation.delay + 200 }}'>Birth Location</h1>
-    <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{user.birthLocation.terms.slice(-3).map(({ value }) => value).join(', ')}</h1>
-    <!-- <iframe
-      src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
-      loading='lazy'
-      title='current-location'
-      in:fly='{{ ...animation, delay: animation.delay + 400 }}'
-    /> -->
-    <img
-      src='https://i.stack.imgur.com/613d9.png'
-      alt='birth-location'
-      in:fly='{{ ...animation, delay: animation.delay + 400 }}'
-    />
+    {#if !user.birthLocation}
+      <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>Unavailable</h1>
+    {:else}
+      <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{user.birthLocation.terms.slice(-3).map(({ value }) => value).join(', ')}</h1>
+      <iframe
+        src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
+        loading='lazy'
+        title='current-location'
+        in:fly='{{ ...animation, delay: animation.delay + 400 }}'
+      />
+    {/if}
   </div>
 
 
@@ -49,7 +52,7 @@
       font-size: 18px;
       line-height: 22px;
     }
-    img {
+    iframe {
       width: 225px;
       height: 135px;
       margin-top: 15px;

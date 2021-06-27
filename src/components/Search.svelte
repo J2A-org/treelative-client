@@ -110,8 +110,6 @@
     }
     div {
       right: 10px;
-      // position: sticky;
-      // margin-top: 20px;
     }
   }
 </style>

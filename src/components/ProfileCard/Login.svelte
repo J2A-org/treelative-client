@@ -2,7 +2,7 @@
   export let onComplete
 
   import { fly, fade } from 'svelte/transition'
-  let a = { delay: 600, y: 25, duration: 750 }
+  const animation = { delay: 600, y: 25, duration: 750 }
 
   import { mutation } from '@urql/svelte'
 
@@ -22,35 +22,35 @@
   }
 </script>
 
-<div transition:fade='{{ delay: a.delay - 100, duration: a.duration - 250 }}'>
+<div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
   <div
-    in:fly='{{ delay: a - 250, y: a + 125, duration: a + 250 }}'
+    in:fly='{{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
   >
-    <h1 in:fly='{{ ...a }}'>Login</h1>
+    <h1 in:fly='{animation}'>Login</h1>
     <form on:submit|preventDefault={handleSignIn}>
       <input
         required
         type='username'
         name='username'
         placeholder='Username'
-        in:fly='{{ ...a, delay: a.delay + 50 }}'
+        in:fly='{{ ...animation, delay: animation.delay + 50 }}'
       />
       <input
         required
         type='password'
         name='password'
         placeholder='Password'
-        in:fly='{{ ...a, delay: a.delay + 100 }}'
+        in:fly='{{ ...animation, delay: animation.delay + 100 }}'
       />
       <button
         type='submit'
-        in:fly='{{ ...a, delay: a.delay + 150 }}'
+        in:fly='{{ ...animation, delay: animation.delay + 150 }}'
       >
         Sign In
       </button>
     </form>
-    <button in:fly='{{ ...a, delay: a.delay + 15 }}'>Forgot Password?</button>
+    <button in:fly='{{ ...animation, delay: animation.delay + 15 }}'>Forgot Password?</button>
   </div>
 </div>
 

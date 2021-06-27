@@ -1,7 +1,7 @@
 <script>
   export let user
 
-  import { setContext } from 'svelte'
+  import { setContext, onMount } from 'svelte'
 
   import Death from './Slider/Death.svelte'
   import Birth from './Slider/Birth.svelte'
@@ -10,6 +10,7 @@
   setContext('user', user)
 
   let stack
+  onMount(() => [...stack.children].reverse().forEach(i => stack.append(i)))
   const next = async (e) => {
     e.target.disabled = true
     const card = [...stack.children].slice(-1).pop()

@@ -37,10 +37,7 @@
 {#if $activeNodeID}
 	<Modal on:close={onActiveNodeClose}>
     <div>
-      <div
-        style="background-image: url('images/profilecardBg.jpg');"
-        transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'
-      >
+      <div transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'>
         {#if !$activeNodeID}
           <p>Loading</p>
         {:else}
@@ -51,10 +48,16 @@
             <!-- SHOW ERROR MODAL-->
             <Login onComplete={refresh} />
           {:else}
+            <img
+              src='images/close.svg'
+              alt='close-button'
+              class='close-btn'
+              on:click={onActiveNodeClose}
+            />
             <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
               <img
                 src={queryUser.data.user.avatar}
-                alt='user-avatar'
+                alt='avatar'
                 in:fly='{animation}'
               />
               <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
@@ -77,12 +80,21 @@
 		top: 50%;
 		transform: translate(-50%, -25%);
     div {
-      width: 400px;
+      width: 100vw;
       height: 550px;
+      max-width: 400px;
       background-size: 100% auto;
       border-radius: 20px;
       position: relative;
       overflow: hidden;
+      background-size: cover;
+      background-position: bottom center;
+      background: url('images/profilecardBg.jpg');
+      .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 25px;
+      }
       div {
         width: 330px;
         height: 422px;
@@ -109,6 +121,15 @@
           color: #26114D;
           text-align: center;
         }
+      }
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    div {
+      div {
+        height: 100vh;
+        border-radius: 0px;
+        max-width: 500px;
       }
     }
   }
