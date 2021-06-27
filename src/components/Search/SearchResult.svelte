@@ -2,7 +2,7 @@
   export let querySearchUsers
 
   import { fly } from 'svelte/transition'
-  const a = { delay: 60, duration: 500 }
+  const animation = { delay: 60, duration: 500 }
 
   import { createEventDispatcher } from 'svelte'
 
@@ -15,7 +15,7 @@
   }
 
   // TODO: Make resuable Image component to handle fallback
-  let fallbackAvatar = ''
+  let fallbackAvatar = 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg'
   const setFallbackAvatar = () => {
     fallbackAvatar = 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg'
   }
@@ -29,20 +29,24 @@
   <div>
     {#each querySearchUsers.data.users as user, idx (user.id)}
       <button
-        in:fly='{{ delay: a.delay * idx, y: -10, duration: a.duration + 300 }}'
-        out:fly='{{ delay: a.delay * idx, x: 500, opacity: 1, duration: a.duration }}'
+        in:fly='{{ delay: animation.delay * idx, y: -10, duration: animation.duration + 300 }}'
+        out:fly='{{ delay: animation.delay * idx, x: 500, opacity: 1, duration: animation.duration }}'
         on:click={() => close(user.id)}
       >
         <img src={fallbackAvatar || user.avatar} alt='user-avatar' on:error={setFallbackAvatar} />
         <div>
           <h1>{user.fullName}</h1>
           <div>
-            <h1>{user?.currentLocation?.terms.slice(-3).map(({ value }) => value).join(', ')}</h1>
+            {#if !user.currentLocation}
+              <h1>Unavailable</h1>
+            {:else}
+              <h1>{user.currentLocation.terms.slice(-2).map(({ value }) => value).join(', ')}</h1>
+            {/if}
           </div>
         </div>
       </button>
     {/each}
-    <p>No matching search results ....</p>
+    <p>No matching search results...</p>
   </div>
 {/if}
 

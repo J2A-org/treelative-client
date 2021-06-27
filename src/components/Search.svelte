@@ -23,7 +23,6 @@
     isOpen = true
     tween.set(240)
   }
-
   const handleClose = async (e) => {
     await tween.set(0)
     isOpen = false
@@ -49,7 +48,7 @@
           style='width: {$tween}px;'
         />
         {#if querySearchUsers}
-          <SearchResult querySearchUsers={querySearchUsers} on:close={handleClose}/>
+          <SearchResult querySearchUsers={$querySearchUsers} on:close={handleClose}/>
         {/if}
       </div>
     </div>
