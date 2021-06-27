@@ -14,13 +14,13 @@
   const next = async (e) => {
     e.target.disabled = true
     const card = [...stack.children].slice(-1).pop()
-    card.style = 'transform: rotate(10deg) translateX(160px) translateY(-50px); transition: 0.4s ease-in-out;'
+    card.style = 'transform: rotate(10deg) translateX(160px) translateY(-150px); transition: 0.4s ease-in-out;'
     await new Promise(resolve => setTimeout(resolve, 400))
     card.style = 'transform: translateX(-130px) translateY(0px) scale(0.8); z-index: -1; transition: 0.4s; ease-in-out'
     setTimeout(() => {
       card.style = ''
       stack.prepend(card)
-    }, 330)
+    }, 200)
     await new Promise(resolve => setTimeout(resolve, 330))
     e.target.disabled = false
   }
@@ -30,6 +30,7 @@
   {#if user.dateOfDeath} <div><Death/></div> {/if}
   <div><Birth/></div>
   <div><Current/></div>
+  <div><Birth/></div>
   <!-- <div><Relations/></div> -->
   <!-- <div><Social/></div> -->
 
@@ -44,20 +45,21 @@
       height: 284px;
       position: absolute;
       left: 50%;
+      bottom: 25px;
       display: grid;
       transition: transform 200ms;
       background-image: url('/images/sliderBg.jpg');
       border-radius: 20px;
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.30);
+      box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.20);
     }
     div:nth-last-child(n + 4) {
-      transform: translate(-50%);
+      transform: translate(-50%, -15px);
     }
     div:nth-last-child(3) {
-      transform: translate(-55%);
+      transform: translate(-50%, -30px);
     }
     div:nth-last-child(2) {
-      transform: translate(-45%);
+      transform: translate(-50%, -15px);
     }
     div:nth-last-child(1) {
       transform: translate(-50%);

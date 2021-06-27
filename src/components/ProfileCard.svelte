@@ -81,7 +81,7 @@
 		transform: translate(-50%, -25%);
     div {
       width: 100vw;
-      height: 550px;
+      height: 600px;
       max-width: 400px;
       background-size: 100% auto;
       border-radius: 20px;
@@ -94,10 +94,11 @@
         position: absolute;
         top: 25px;
         right: 25px;
+        cursor: pointer;
       }
       div {
         width: 330px;
-        height: 422px;
+        height: 450px;
         display: flex;
         flex-direction: column;
         align-items: center;
