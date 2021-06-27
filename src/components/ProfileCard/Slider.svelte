@@ -53,7 +53,7 @@
       box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.20);
     }
     div:nth-last-child(n + 4) {
-      transform: translate(-50%, -15px);
+      transform: translate(-50%, -15px) scale(0.8);
     }
     div:nth-last-child(3) {
       transform: translate(-50%, -30px);
