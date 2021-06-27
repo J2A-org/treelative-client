@@ -32,6 +32,11 @@
   const refresh = () => {
     queryUser.context = { requestPolicy: 'cache-and-network' }
   }
+
+  let fallbackAvatar = ''
+  const setFallbackAvatar = () => {
+    fallbackAvatar = 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg'
+  }
 </script>
 
 {#if $activeNodeID}
@@ -56,9 +61,10 @@
             />
             <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
               <img
-                src={queryUser.data.user.avatar}
+                src={fallbackAvatar || queryUser.data.user.avatar}
                 alt='avatar'
                 in:fly='{animation}'
+                on:error={setFallbackAvatar}
               />
               <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
                 {queryUser.data.user.fullName}
