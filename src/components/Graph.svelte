@@ -23,13 +23,34 @@
       // zoomSpeed: 0.3,
       keyboard: true
     },
-
+    nodes: {
+      borderWidth: 2,
+      size: 25,
+      font: { color: '#ffffff' }
+    },
+    edges: {
+      hidden: false,
+      arrows: { middle: true },
+      chosen: false,
+      color: '#12B0CE'
+    },
     groups: {
       individual: {
         shape: 'circularImage',
         brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
         color: {
           border: '#12B0CE',
+          highlight: {
+            border: '#12B0CE'
+          }
+        }
+      },
+      admin: {
+        shape: 'circularImage',
+        brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
+        borderWidth: 5,
+        color: {
+          border: '#DABC00',
           highlight: {
             border: '#12B0CE'
           }
@@ -46,17 +67,6 @@
           }
         }
       }
-    },
-    nodes: {
-      borderWidth: 2,
-      size: 25,
-      font: { color: '#ffffff' }
-    },
-    edges: {
-      hidden: false,
-      arrows: { middle: true },
-      chosen: false,
-      color: '#12B0CE'
     }
   }
 
