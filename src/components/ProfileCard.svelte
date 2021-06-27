@@ -96,6 +96,7 @@
         overflow: visible;
         img {
           width: 94px;
+          height: 94px;
           margin-top: -56px;
           border-radius: 50%;
           border: 5px solid #FFFFFF;

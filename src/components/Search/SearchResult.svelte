@@ -14,7 +14,7 @@
     dispatch('close')
   }
 
-  $: if (users) users = users.slice(0, 10)
+  $: if (users) users = users.slice(0, 5)
 </script>
 
 <div>
@@ -44,8 +44,7 @@
     button {
       display: flex;
       align-items: center;
-      width: 70vw;
-      max-width: 300px;
+      width: 280px;
       padding: 10px 15px;
       background: #FFFFFF;
       color: #062C4F;

@@ -20,7 +20,7 @@
     //   }
     // },
     interaction: {
-      zoomSpeed: 0.3,
+      // zoomSpeed: 0.3,
       keyboard: true
     },
 
@@ -49,7 +49,7 @@
     },
     nodes: {
       borderWidth: 2,
-      size: 35,
+      size: 25,
       font: { color: '#ffffff' }
     },
     edges: {

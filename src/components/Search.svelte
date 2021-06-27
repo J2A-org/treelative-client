@@ -20,13 +20,13 @@
 
   let isOpen = false
   const handleOpen = () => {
-    isOpen = !isOpen
-    tween.set(260)
+    isOpen = true
+    tween.set(240)
   }
 
-  const handleClose = async () => {
+  const handleClose = async (e) => {
     await tween.set(0)
-    isOpen = !isOpen
+    isOpen = false
   }
 </script>
 
@@ -37,7 +37,11 @@
   <Modal on:close={handleClose}>
     <div transition:fade='{{ duration: 500 }}'>
       <div>
-        <img src='images/search.svg' alt='search'/>
+        <img
+          src='images/search.svg'
+          alt='search'
+          on:click={handleClose}
+        />
         <input
           type='text'
           bind:value={searchInput}
@@ -61,11 +65,17 @@
     border-radius: 50%;
     border: 0px;
     background: #FFFFFF;
-    opacity: 0.5;
+    opacity: 0.3;
+    transition: opacity 0.1s ease-in-out;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.8;
+    }
     img {
       position: absolute;
-      right: 8px;
-      top: 8px;
+      right: 0px;
+      top: 0px;
+      padding: 8px;
     }
   }
   div {
@@ -77,8 +87,10 @@
       img {
         position: absolute;
         z-index: 2;
-        right: 8px;
-        top: 8px;
+        right: 0px;
+        top: 0px;
+        padding: 8px;
+        cursor: pointer;
       }
       input {
         position: absolute;
@@ -90,6 +102,16 @@
         padding: 0px 20px;
         border: 0px;
       }
+    }
+  }
+  @media only screen and (max-width: 500px) {
+    button {
+      right: 20px;
+    }
+    div {
+      right: 10px;
+      // position: sticky;
+      // margin-top: 20px;
     }
   }
 </style>
