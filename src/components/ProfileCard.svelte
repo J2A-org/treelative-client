@@ -15,6 +15,8 @@
   const animation = { delay: 1050, y: -25, duration: 500 }
 
   const onActiveNodeClose = () => {
+    // reset fallbackAvatar
+    fallbackAvatar = ''
     // clear the activeNodeID in store
     activeNodeID.update(() => null)
     // unselect all nodes
@@ -35,7 +37,7 @@
 
   let fallbackAvatar = ''
   const setFallbackAvatar = () => {
-    fallbackAvatar = 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg'
+    fallbackAvatar = `https://ui-avatars.com/api/?name=${queryUser.data.user.fullName}&background=random&rounded=true&font-size=0.5&bold=true`
   }
 </script>
 
@@ -54,6 +56,7 @@
             <Login onComplete={refresh} />
           {:else}
             <img
+              id={queryUser.id}
               src='/images/close.svg'
               alt='close-button'
               class='close-btn'

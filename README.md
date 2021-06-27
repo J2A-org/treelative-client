@@ -11,7 +11,7 @@
 - Serve the `/dist` directory
 
 ## TODO:
-ARUN - mobile context menu
+ARUN - gobal context menu
  - search - move search inside context
  - Insights:
     - stats - info - total users and total family count
@@ -21,6 +21,7 @@ ARUN - mobile context menu
       - ZOOM in out
       - reset - FIT SCREEN
       - hierarchical layout
+ - somewhere credits to u and me..
 JANA - play around with vis JS clusters
 ARUN - use stabilizationProgress event to show a loading GIF
 ARUN - style edges differently for child-couple vs couple-partner
@@ -30,7 +31,6 @@ JANA/ARUN - investigate mobile zoom lag
 JANA - optimize canvas for mobile
 JANA - add hook to detect mobile vs desktop - set in store
 ARUN - Fix death
-ARUN - Add fallback avatar with initials ! - create svg paths for alphabets
 ARUN - Disable dragging of nodes
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
 ARUN - HANDLE ALL ERRORS
