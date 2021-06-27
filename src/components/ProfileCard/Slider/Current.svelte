@@ -5,7 +5,6 @@
   const animation = { delay: 1600, y: -25, duration: 600 }
 
   const user = getContext('user')
-  console.log(user)
 </script>
 
 <div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>

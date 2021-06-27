@@ -16,7 +16,11 @@
     in:fly='{{ ...animation, delay: animation.delay + 200 }}'
   />
   <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>Death Location</h1>
-  <h1 in:fly='{{ ...animation, delay: animation.delay + 400 }}'>Paris, France</h1>
+  {#if !user.deathLocation}
+    <h1 in:fly='{{ ...animation, delay: animation.delay + 400 }}'>Unavailable</h1>
+  {:else}
+    <h1 in:fly='{{ ...animation, delay: animation.delay + 400 }}'>{user.deathLocation.terms.slice(-3).map(({ value }) => value).join(', ')}</h1>
+  {/if}
 </div>
 
 <style lang='scss'>
