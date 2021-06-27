@@ -2,7 +2,7 @@
   import client from './graphql/client'
   import { setClient, operationStore, query } from '@urql/svelte'
   setClient(client)
-  
+
   import { GET_NODES_EDGES } from './graphql/queries/nodesAndEdges'
   const queryNodesAndEdges = operationStore(GET_NODES_EDGES)
   query(queryNodesAndEdges)
@@ -19,6 +19,6 @@
   <p>Oh no... {$queryNodesAndEdges.error.message}</p>
 {:else}
   <ProfileCard />
-  <Search nodes={$queryNodesAndEdges.data.getNetworkData.nodes}/>
+  <Search />
   <Graph nodesAndEdges={$queryNodesAndEdges.data.getNetworkData} />
 {/if}

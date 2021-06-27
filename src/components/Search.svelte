@@ -1,20 +1,20 @@
 <script>
-  export let nodes
-  
   import { tweened } from 'svelte/motion'
   import { fade } from 'svelte/transition'
   const tween = tweened(0, { duration: 100 })
+
+  import { operationStore, query } from '@urql/svelte'
+  import { SEARCH_USERS } from '../graphql/queries/user'
 
   import Modal from './Layout/Modal.svelte'
   import SearchResult from './Search/SearchResult.svelte'
 
   let searchInput
-  let filteredUsers
+  let querySearchUsers
   $: {
-    if (!searchInput) filteredUsers = null
-    else {
-      filteredUsers = nodes.filter(user => user.group === 'individual')
-      filteredUsers = filteredUsers.filter(user => user.label.toLowerCase().indexOf(searchInput.toLowerCase()) !== -1)
+    if (searchInput) {
+      querySearchUsers = operationStore(SEARCH_USERS, { search: searchInput })
+      query(querySearchUsers)
     }
   }
 
@@ -43,12 +43,14 @@
           on:click={handleClose}
         />
         <input
+          autofocus
           type='text'
           bind:value={searchInput}
           style='width: {$tween}px;'
-          autofocus
         />
-        <SearchResult users={filteredUsers} on:close={handleClose}/>
+        {#if querySearchUsers}
+          <SearchResult querySearchUsers={querySearchUsers} on:close={handleClose}/>
+        {/if}
       </div>
     </div>
   </Modal>
