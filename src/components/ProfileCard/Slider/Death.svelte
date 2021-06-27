@@ -11,7 +11,7 @@
   <h1 in:fly='{{ ...animation }}'>Date Of Death</h1>
   <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfDeath.slice(0, 10).replaceAll('-', '/')}</h1>
   <img
-    src='images/tombstone.svg'
+    src='/images/tombstone.svg'
     alt='tombstone'
     in:fly='{{ ...animation, delay: animation.delay + 200 }}'
   />

@@ -46,7 +46,7 @@
       left: 50%;
       display: grid;
       transition: transform 200ms;
-      background-image: url('images/sliderBg.jpg');
+      background-image: url('/images/sliderBg.jpg');
       border-radius: 20px;
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.30);
     }

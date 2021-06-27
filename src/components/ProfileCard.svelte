@@ -49,7 +49,7 @@
             <Login onComplete={refresh} />
           {:else}
             <img
-              src='images/close.svg'
+              src='/images/close.svg'
               alt='close-button'
               class='close-btn'
               on:click={onActiveNodeClose}
@@ -89,7 +89,7 @@
       overflow: hidden;
       background-size: cover;
       background-position: bottom center;
-      background: url('images/profilecardBg.jpg');
+      background: url('/images/profilecardBg.jpg');
       .close-btn {
         position: absolute;
         top: 25px;

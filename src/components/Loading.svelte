@@ -3,7 +3,7 @@
 </script>
 
 <div out:fade='{{ duration: 500 }}'>
-  <img src='images/loading.gif' alt='loading' />
+  <img src='/images/loading.gif' alt='loading' />
 </div>
 
 <style lang='scss'>

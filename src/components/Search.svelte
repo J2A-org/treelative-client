@@ -31,14 +31,14 @@
 </script>
 
 <button on:click={handleOpen}>
-  <img src='images/search.svg' alt='search'/>
+  <img src='/images/search.svg' alt='search'/>
 </button>
 {#if isOpen}
   <Modal on:close={handleClose}>
     <div transition:fade='{{ duration: 500 }}'>
       <div>
         <img
-          src='images/search.svg'
+          src='/images/search.svg'
           alt='search'
           on:click={handleClose}
         />
