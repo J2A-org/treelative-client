@@ -3,6 +3,7 @@ import { gql } from '@urql/svelte'
 export const GET_USER = gql`
   query GET_USER ( $id: String ) {
     user: getUser( filter: { id: $id } ) {
+      role
       avatar
       fullName
       # death

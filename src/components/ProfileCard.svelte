@@ -50,7 +50,7 @@
         {:else}
           {#if $queryUser.fetching}
            <Loading />
-          {:else if $queryUser.error }
+          {:else if $queryUser.error}
             <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
             <!-- SHOW ERROR MODAL-->
             <Login onComplete={refresh} />
@@ -66,9 +66,18 @@
               <img
                 src={fallbackAvatar || queryUser.data.user.avatar}
                 alt='avatar'
+                style='border: {queryUser.data.user.role === 'ADMIN' ? '5px solid #FFE503' : '5px solid #FFFFFF'};'
                 in:fly='{animation}'
                 on:error={setFallbackAvatar}
               />
+              {#if queryUser.data.user.role === 'ADMIN'}
+                <img
+                  src='/images/adminCrown.png'
+                  alt='crown'
+                  class='admin-crown'
+                  in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
+                />
+              {/if}
               <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
                 {queryUser.data.user.fullName}
               </h1>
@@ -116,13 +125,19 @@
         background: rgba(255, 255, 255, 0.6);
         border-radius: 20px;
         overflow: visible;
-        img {
+        img:first-child {
           width: 94px;
           height: 94px;
           margin-top: -56px;
           border-radius: 50%;
           border: 5px solid #FFFFFF;
           filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
+        }
+        .admin-crown {
+          width: 120px;
+          object-fit: contain;
+          position:absolute;
+          top: -103px;
         }
         h1 {
           width: 50%;

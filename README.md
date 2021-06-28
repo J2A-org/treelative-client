@@ -26,7 +26,7 @@ ARUN - global context menu
 ARUN - style edges differently for child-couple vs couple-partner
 ARUN - Slider - for N/A stuff, keep layout but add placeholders
 ARUN - If logged in, but not authorized - show contact Admins UI
-ARUN - Break full name
+<!-- ARUN - Break full name -->
 ARUN - Disable dragging of nodes
 ARUN - Fix death
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
@@ -41,3 +41,5 @@ JANA - optimize canvas for mobile
 JANA - Add firebase integration
 JANA - play around with vis JS clusters
 JANA - Detect pixel density
+
+ARUN- Optimize all images before launch
