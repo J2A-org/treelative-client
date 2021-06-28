@@ -1,16 +1,18 @@
 <script>
   export let onComplete
 
-  import { fly, fade } from 'svelte/transition'
-  const animation = { delay: 600, y: 25, duration: 750 }
-
   import { mutation } from '@urql/svelte'
-
+  import { fly, fade } from 'svelte/transition'
+  
   import { LOGIN } from '../../graphql/mutations/login'
+  
+  const animation = { delay: 600, y: 25, duration: 750 }
 
   const login = mutation({ query: LOGIN })
 
+  let errorMessage
   const handleSignIn = (e) => {
+    errorMessage = null
     login({ username: e.target[0].value, password: e.target[1].value })
       .then(result => {
         if (result.data.login) {
@@ -18,7 +20,7 @@
           onComplete()
         } else console.log(result.error.message)
       })
-      .catch(console.log)
+      .catch(err => { errorMessage = err })
   }
 </script>
 
@@ -28,6 +30,11 @@
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
   >
     <h1 in:fly='{animation}'>Login</h1>
+    {#if errorMessage}
+      <h5 transition:fade='{{ duration: animation.duration - 250 }}'>
+        Sorry, the username and password you entered did not match our records. <br> Please try again or <button>contact us</button>.
+      </h5>
+    {/if}
     <form on:submit|preventDefault={handleSignIn}>
       <input
         required
@@ -50,7 +57,6 @@
         Sign In
       </button>
     </form>
-    <button in:fly='{{ ...animation, delay: animation.delay + 15 }}'>Forgot Password?</button>
   </div>
 </div>
 
@@ -73,15 +79,38 @@
       border-radius: 20px;
       h1 {
         font-size: 30px;
-        margin: 40px 0px;
+        margin-top: 40px;
+        margin-bottom: 20px;
         color: #26114D;
+      }
+      h5, button {
+        margin: 0px;
+        padding: 15px;
+        text-align: center;
+        background: rgba(255, 0, 0, 0.5);
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 400;
+        button {
+          border: none;
+          background: none;
+          padding: 0;
+          text-decoration: underline;
+          cursor: pointer;
+          &:hover {
+            text-decoration: none;
+          }
+        }
       }
       form {
         text-align: center;
+        input:first-child {
+          margin-top: 20px;
+        }
         input {
           width: 60%;
           height: 40px;
-          margin-bottom: 30px;
+          margin-bottom: 20px;
           padding: 0px 15px;
           border: none;
           background: none;
@@ -102,26 +131,27 @@
           width: 70%;
           font-size: 16px;
           color: white;
-          padding: 10px 0px;
-          margin-top: 10px;
+          padding: 15px 0px;
+          margin-top: 20px;
           border: 0px;
           cursor: pointer;
           border-radius: 20px;
           background: linear-gradient(-45deg, #3F2349, #F12A2D);
           background-size: 150% 150%;
           animation: gradient 5s ease infinite;
+          margin-bottom: 40px;
         }
       }
-      & > button {
-        font-size: 14px;
-        background: none;
-        margin: 10px 0px;
-        margin-bottom: 20px;
-        color: #26114D;
-        border: 0px;
-        cursor: pointer;
-        &:hover { text-decoration: underline; }
-      }
+      // & > button {
+      //   font-size: 14px;
+      //   background: none;
+      //   margin: 10px 0px;
+      //   margin-bottom: 20px;
+      //   color: #26114D;
+      //   border: 0px;
+      //   cursor: pointer;
+      //   &:hover { text-decoration: underline; }
+      // }
     }
     @keyframes gradient {
       0% { background-position: 0% 50%; }

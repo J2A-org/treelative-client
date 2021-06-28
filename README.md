@@ -30,7 +30,7 @@ ARUN - If logged in, but not authorized - show contact Admins UI
 <!-- ARUN - Break full name -->
 <!-- ARUN - Disable dragging of nodes -->
 <!-- ARUN - Fix death -->
-ARUN - HANDLE ALL ERRORS
+<!-- ARUN - HANDLE ALL ERRORS -->
 <!-- ARUN - Add crow for Admins -->
 JANA/ARUN - investigate mobile zoom lag
 JANA - add hook to detect mobile vs desktop - set in store
@@ -41,5 +41,6 @@ JANA - optimize canvas for mobile
 JANA - Add firebase integration
 JANA - play around with vis JS clusters
 JANA - Detect pixel density
+JANA - No auth need to view admin profile cards
 
 ARUN- Optimize all images before launch
