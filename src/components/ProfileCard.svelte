@@ -58,9 +58,7 @@
           {#if $queryUser.fetching}
            <Loading />
           {:else if $queryUser.error}
-            <!-- <p>Oh no... {$queryUser?.error?.message}</p> -->
-            <!-- SHOW ERROR MODAL-->
-            <Login onComplete={refresh} />
+            <Login on:complete={refresh} />
           {:else}
             <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
               <img

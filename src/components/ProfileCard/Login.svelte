@@ -1,30 +1,41 @@
 <script>
-  export let onComplete
-
   import { mutation } from '@urql/svelte'
   import { fly, fade } from 'svelte/transition'
+  import { createEventDispatcher } from 'svelte'
   
   import { LOGIN } from '../../graphql/mutations/login'
+
+  import Loading from '../Loading.svelte'
   
   const animation = { delay: 600, y: 25, duration: 750 }
 
   const login = mutation({ query: LOGIN })
 
+  const dispatch = createEventDispatcher()
+  const onComplete = () => dispatch('complete')
+
+  let isLoading = false
   let errorMessage
-  const handleSignIn = (e) => {
-    errorMessage = null
+  const handleSignIn = async (e) => {
+    isLoading = await true
+    errorMessage = await null
     login({ username: e.target[0].value, password: e.target[1].value })
-      .then(result => {
+      .then(async result => {
         if (result.data.login) {
           window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
           onComplete()
+          isLoading = await false
         } else console.log(result.error.message)
       })
-      .catch(err => { errorMessage = err })
+      .catch(async err => {
+        errorMessage = err
+        isLoading = await false
+      })
   }
 </script>
 
 <div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
+  {#if isLoading} <Loading /> {/if}
   <div
     in:fly='{{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
@@ -142,16 +153,6 @@
           margin-bottom: 40px;
         }
       }
-      // & > button {
-      //   font-size: 14px;
-      //   background: none;
-      //   margin: 10px 0px;
-      //   margin-bottom: 20px;
-      //   color: #26114D;
-      //   border: 0px;
-      //   cursor: pointer;
-      //   &:hover { text-decoration: underline; }
-      // }
     }
     @keyframes gradient {
       0% { background-position: 0% 50%; }
