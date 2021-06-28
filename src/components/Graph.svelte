@@ -79,9 +79,10 @@
     // get the node coordinates
     // const { x: nodeX, y: nodeY } = $network.getPositions(['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f'])['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f']
     // zoom on Graph mount
-    $network.on('stabilized', async () => {
-      await stabilized.set(true)
-      await $network.moveTo({
+    $network.on('stabilized', () => {
+      stabilized.set(true)
+      $network.focus('187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f')
+      $network.moveTo({
         // position: { x: nodeX, y: nodeY },
         scale: 0.8,
         animation: {

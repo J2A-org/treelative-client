@@ -24,15 +24,10 @@ ARUN - global context menu
  - somewhere credits to u and me..
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
 ARUN - If logged in, but not authorized - show contact Admins UI // First need to implement firebase
-<!-- ARUN - use stabilizationProgress event to show a loading GIF -->
-<!-- ARUN - style edges differently for child-couple vs couple-partner -->
-<!-- ARUN - Slider - for N/A stuff, keep layout but add placeholders -->
-<!-- ARUN - Break full name -->
-<!-- ARUN - Disable dragging of nodes -->
-<!-- ARUN - Fix death -->
+ARUN - BUTTON - cursor, on hover: focus -
 <!-- ARUN - HANDLE ALL ERRORS -->
-<!-- ARUN - Add crow for Admins -->
-JANA/ARUN - investigate mobile zoom lag
+ - handle firebase no account error !
+ARUN - Mount profile card on demand
 JANA - add hook to detect mobile vs desktop - set in store
 JANA - optimize canvas for mobile
   - Login
@@ -44,6 +39,6 @@ JANA - Detect pixel density
 JANA - No auth need to view admin profile cards
 JANA - Add remove avatar in Admin UI
 JANA - get node position of logged in user
-JANA - make parents stay separated from children
+JANA - investigate parents stay separated from children
 
 ARUN- Optimize all images before launch
