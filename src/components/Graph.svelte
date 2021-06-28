@@ -50,9 +50,9 @@
         brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
         borderWidth: 5,
         color: {
-          border: '#DABC00',
+          border: '#FFE503',
           highlight: {
-            border: '#12B0CE'
+            border: '#FFE503'
           }
         }
       },
