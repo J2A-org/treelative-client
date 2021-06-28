@@ -79,6 +79,11 @@
       await $network.moveTo({ scale: 0.8 })
       stabilized.set(true)
     })
+    // diasable node drag
+    const clearSelection = function () {
+      $network.unselectAll()
+    }
+    $network.on('dragStart', clearSelection)
     // set activeNodeID on user node click
     $network.on('selectNode', ({ nodes }) => {
       const activeNode = nodesAndEdges.nodes.find(node => nodes[0] === node.id)
