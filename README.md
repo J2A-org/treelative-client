@@ -11,7 +11,7 @@
 - Serve the `/dist` directory
 
 ## TODO:
-ARUN - gobal context menu
+ARUN - global context menu
  - search - move search inside context
  - Insights:
     - stats - info - total users and total family count

@@ -1,24 +1,32 @@
 <script>
-  import client from './graphql/client'
   import { setClient, operationStore, query } from '@urql/svelte'
-  setClient(client)
-
+  
+  import { stabilized } from './stores'
   import { GET_NODES_EDGES } from './graphql/queries/nodesAndEdges'
-  const queryNodesAndEdges = operationStore(GET_NODES_EDGES)
-  query(queryNodesAndEdges)
-
+  
   import Graph from './components/Graph.svelte'
   import Search from './components/Search.svelte'
   import Loading from './components/Loading.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
+  
+  import client from './graphql/client'
+
+  setClient(client)
+  
+  const queryNodesAndEdges = operationStore(GET_NODES_EDGES)
+  query(queryNodesAndEdges)
 </script>
 
-{#if $queryNodesAndEdges.fetching }
+{#if $queryNodesAndEdges.fetching}
   <Loading />
 {:else if $queryNodesAndEdges.error}
   <p>Oh no... {$queryNodesAndEdges.error.message}</p>
 {:else}
-  <ProfileCard />
-  <Search />
+  {#if !$stabilized}
+    <Loading/>
+  {:else}
+    <ProfileCard />
+    <Search />
+  {/if}
   <Graph nodesAndEdges={$queryNodesAndEdges.data.getNetworkData} />
 {/if}

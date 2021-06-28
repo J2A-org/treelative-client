@@ -4,7 +4,7 @@
   import { fade } from 'svelte/transition'
   import { onMount } from 'svelte'
 
-  import { network, activeNodeID } from '../stores'
+  import { network, activeNodeID, stabilized } from '../stores'
 
   import * as vis from 'vis-network/standalone/esm/vis-network'
 
@@ -75,6 +75,9 @@
   onMount(() => {
     // set network in store
     network.update(() => new vis.Network(container, nodesAndEdges, options))
+    $network.on('stabilized', () => {
+      stabilized.set(true)
+    })
     // set activeNodeID on user node click
     $network.on('selectNode', ({ nodes }) => {
       const activeNode = nodesAndEdges.nodes.find(node => nodes[0] === node.id)
