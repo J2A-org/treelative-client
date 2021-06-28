@@ -22,7 +22,7 @@ ARUN - global context menu
       - reset - FIT SCREEN
       - hierarchical layout
  - somewhere credits to u and me..
-ARUN - use stabilizationProgress event to show a loading GIF
+<!-- ARUN - use stabilizationProgress event to show a loading GIF -->
 ARUN - style edges differently for child-couple vs couple-partner
 ARUN - Slider - for N/A stuff, keep layout but add placeholders
 ARUN - If logged in, but not authorized - show contact Admins UI

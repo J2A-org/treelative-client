@@ -125,6 +125,7 @@
           filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
         }
         h1 {
+          width: 50%;
           margin-top: 8px;
           font-size: 22px;
           font-weight: 100;
