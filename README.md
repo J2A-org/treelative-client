@@ -22,22 +22,22 @@ ARUN - gobal context menu
       - reset - FIT SCREEN
       - hierarchical layout
  - somewhere credits to u and me..
-JANA - play around with vis JS clusters
 ARUN - use stabilizationProgress event to show a loading GIF
 ARUN - style edges differently for child-couple vs couple-partner
 ARUN - Slider - for N/A stuff, keep layout but add placeholders
+ARUN - If logged in, but not authorized - show contact Admins UI
 ARUN - Break full name
-JANA/ARUN - investigate mobile zoom lag
-JANA - optimize canvas for mobile
-JANA - add hook to detect mobile vs desktop - set in store
-ARUN - Fix death
 ARUN - Disable dragging of nodes
+ARUN - Fix death
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
 ARUN - HANDLE ALL ERRORS
+ARUN - Add crow for Admins
+JANA/ARUN - investigate mobile zoom lag
+JANA - add hook to detect mobile vs desktop - set in store
+JANA - optimize canvas for mobile
   - Login
   - network requests-
 - Add reusable IMAGE component with fallback support
 JANA - Add firebase integration
-ARUN - Add crow for Admins
-ARUN - If logged in, but not authorized - show contact Admins UI
+JANA - play around with vis JS clusters
 JANA - Detect pixel density
