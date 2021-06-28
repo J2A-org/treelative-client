@@ -31,8 +31,11 @@
     }
   }
 
-  const refresh = () => {
-    queryUser.context = { requestPolicy: 'cache-and-network' }
+  let isLoading = false
+  const refresh = async () => {
+    isLoading = await true
+    queryUser.context = await { requestPolicy: 'cache-and-network' }
+    isLoading = await false
   }
 
   let fallbackAvatar = ''
@@ -53,12 +56,12 @@
           on:click={onActiveNodeClose}
         />
         {#if !$activeNodeID}
-          <p>Loading</p>
+          <Loading />
         {:else}
           {#if $queryUser.fetching}
            <Loading />
           {:else if $queryUser.error}
-            <Login on:complete={refresh} />
+            <Login authenticating={isLoading} on:complete={refresh} />
           {:else}
             <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
               <img

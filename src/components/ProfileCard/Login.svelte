@@ -1,4 +1,6 @@
 <script>
+  export let authenticating
+
   import { mutation } from '@urql/svelte'
   import { fly, fade } from 'svelte/transition'
   import { createEventDispatcher } from 'svelte'
@@ -24,7 +26,6 @@
         if (result.data.login) {
           window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
           onComplete()
-          isLoading = await false
         } else console.log(result.error.message)
       })
       .catch(async err => {
@@ -35,7 +36,7 @@
 </script>
 
 <div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
-  {#if isLoading} <Loading /> {/if}
+  {#if isLoading || authenticating} <Loading /> {/if}
   <div
     in:fly='{{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
