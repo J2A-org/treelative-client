@@ -36,7 +36,6 @@
     groups: {
       individual: {
         shape: 'circularImage',
-        brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
         color: {
           border: '#12B0CE',
           highlight: {
@@ -46,12 +45,14 @@
       },
       admin: {
         shape: 'circularImage',
-        brokenImage: 'https://www.rogowaylaw.com/wp-content/uploads/Blank-Employee.jpg',
-        borderWidth: 5,
+        borderWidth: 0,
+        size: 52,
+        font: { size: 0 },
         color: {
-          border: '#FFE503',
+          background: 'transparent',
+          border: 'transparent',
           highlight: {
-            border: '#FFE503'
+            border: 'transparent'
           }
         }
       },
