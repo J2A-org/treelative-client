@@ -2,7 +2,7 @@
   import { fade } from 'svelte/transition'
 </script>
 
-<div out:fade='{{ duration: 500 }}'>
+<div in:fade='{{ duration: 500 }}' out:fade='{{ duration: 500 }}'>
   <img src='/images/loading.gif' alt='loading' />
 </div>
 
