@@ -23,10 +23,10 @@ ARUN - global context menu
       - hierarchical layout
  - somewhere credits to u and me..
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
+ARUN - If logged in, but not authorized - show contact Admins UI // First need to implement firebase
 <!-- ARUN - use stabilizationProgress event to show a loading GIF -->
 <!-- ARUN - style edges differently for child-couple vs couple-partner -->
 <!-- ARUN - Slider - for N/A stuff, keep layout but add placeholders -->
-ARUN - If logged in, but not authorized - show contact Admins UI
 <!-- ARUN - Break full name -->
 <!-- ARUN - Disable dragging of nodes -->
 <!-- ARUN - Fix death -->
@@ -42,5 +42,8 @@ JANA - Add firebase integration
 JANA - play around with vis JS clusters
 JANA - Detect pixel density
 JANA - No auth need to view admin profile cards
+JANA - Add remove avatar in Admin UI
+JANA - get node position of logged in user
+JANA - make parents stay separated from children
 
 ARUN- Optimize all images before launch

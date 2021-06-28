@@ -73,9 +73,7 @@
   <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Current/></div>
   <!-- <div><Relations/></div> -->
   <!-- <div><Social/></div> -->
-
 </div>
-<!-- <button id='touch' on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}/> -->
 
 <style lang='scss'>
   div {
@@ -104,14 +102,5 @@
     div:nth-last-child(1) {
       transform: translate(-50%);
     }
-  }
-  button {
-    width: 260px;
-    height: 284px;
-    position: sticky;
-    border-radius: 20px;
-    background: none;
-    border: 0px;
-    transform: translateY(42px);
   }
 </style>
