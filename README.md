@@ -31,7 +31,7 @@ ARUN - Disable dragging of nodes
 ARUN - Fix death
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
 ARUN - HANDLE ALL ERRORS
-ARUN - Add crow for Admins
+<!-- ARUN - Add crow for Admins -->
 JANA/ARUN - investigate mobile zoom lag
 JANA - add hook to detect mobile vs desktop - set in store
 JANA - optimize canvas for mobile

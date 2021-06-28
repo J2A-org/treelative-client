@@ -75,7 +75,8 @@
   onMount(() => {
     // set network in store
     network.update(() => new vis.Network(container, nodesAndEdges, options))
-    $network.on('stabilized', () => {
+    $network.on('stabilized', async () => {
+      await $network.moveTo({ scale: 0.8 })
       stabilized.set(true)
     })
     // set activeNodeID on user node click
