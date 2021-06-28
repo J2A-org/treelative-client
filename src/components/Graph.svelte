@@ -1,7 +1,6 @@
 <script>
   export let nodesAndEdges
 
-  import { fade } from 'svelte/transition'
   import { onMount } from 'svelte'
 
   import { network, activeNodeID, stabilized } from '../stores'
@@ -75,14 +74,20 @@
   onMount(() => {
     // set network in store
     network.update(() => new vis.Network(container, nodesAndEdges, options))
+    // zoom on Graph mount
     $network.on('stabilized', async () => {
-      await $network.moveTo({ scale: 0.8 })
-      stabilized.set(true)
+      await stabilized.set(true)
+      await $network.moveTo({
+        // position: {x:Number, y:Number},
+        scale: 0.8,
+        animation: {
+          duration: 1000,
+          easingFunction: 'easeInCubic'
+        }
+      })
     })
     // diasable node drag
-    const clearSelection = function () {
-      $network.unselectAll()
-    }
+    const clearSelection = function () { $network.unselectAll() }
     $network.on('dragStart', clearSelection)
     // set activeNodeID on user node click
     $network.on('selectNode', ({ nodes }) => {
@@ -112,7 +117,7 @@
   })
 </script>
 
-<div transition:fade='{{ delay: 500, duration: 1000 }}' bind:this={container} />
+<div bind:this={container} />
 
 <style lang='scss'>
   div {
