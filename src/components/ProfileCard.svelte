@@ -45,6 +45,13 @@
 	<Modal on:close={onActiveNodeClose}>
     <div>
       <div transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'>
+        <img
+          id={queryUser.id}
+          src='/images/close.svg'
+          alt='close-button'
+          class='close-btn'
+          on:click={onActiveNodeClose}
+        />
         {#if !$activeNodeID}
           <p>Loading</p>
         {:else}
@@ -55,13 +62,6 @@
             <!-- SHOW ERROR MODAL-->
             <Login onComplete={refresh} />
           {:else}
-            <img
-              id={queryUser.id}
-              src='/images/close.svg'
-              alt='close-button'
-              class='close-btn'
-              on:click={onActiveNodeClose}
-            />
             <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
               <img
                 src={fallbackAvatar || queryUser.data.user.avatar}
