@@ -68,7 +68,7 @@
 </script>
 
 <div bind:this={stack}>
-  {#if user.dateOfDeath} <div><Death/></div> {/if}
+  {#if user.dateOfDeath} <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Death/></div> {/if}
   <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Birth/></div>
   <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Current/></div>
   <!-- <div><Relations/></div> -->

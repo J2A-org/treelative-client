@@ -18,6 +18,10 @@
     <h1 in:fly='{{ ...animation, delay: animation.delay + 200 }}'>Birth Location</h1>
     {#if !user.birthLocation}
       <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>Unavailable</h1>
+      <img
+        src='/images/infoUnavailable.png'
+        alt='info-unavailable'
+      />
     {:else}
       <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{user.birthLocation.terms.slice(-3).map(({ value }) => value).join(', ')}</h1>
       <iframe
@@ -43,6 +47,7 @@
       font-weight: 100;
       font-size: 7px;
       line-height: 8px;
+      user-select: none;
     }
     h1:nth-child(3) { margin-top: 15px; }
     h1:nth-child(2), h1:nth-child(4) {
@@ -52,6 +57,14 @@
       font-size: 18px;
       line-height: 22px;
     }
+    img {
+      width: 225px;
+      height: 135px;
+      margin-top: 15px;
+      border: none;
+      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+      border-radius: 20px;
+    }
     iframe {
       width: 225px;
       height: 135px;
@@ -59,6 +72,7 @@
       border: none;
       box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
       border-radius: 20px;
+      cursor: pointer;
     }
   }
 </style>
