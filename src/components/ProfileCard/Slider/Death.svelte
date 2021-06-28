@@ -25,34 +25,26 @@
 
 <style lang='scss'>
   div {
-    width: 260px;
-    height: 284px;
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    margin-top: 28px;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
-    background: rgba(255, 255, 255, 0.20);
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.20);
-    border-radius: 20px;
-    color: #26114D;
     h1:first-child, h1:nth-child(4) {
       margin-bottom: 0px;
-      opacity: 1;
       font-weight: 100;
       font-size: 7px;
       line-height: 8px;
+      user-select: none;
     }
     h1:nth-child(4) { margin-top: 15px; }
     h1:nth-child(2), h1:nth-child(5) {
       margin: 0px;
+      width: 85%;
+      text-align: center;
       font-size: 18px;
       line-height: 22px;
-      color: #26114D;
     }
     img {
       width: 128px;
