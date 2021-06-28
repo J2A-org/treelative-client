@@ -57,9 +57,10 @@
       },
       couple: {
         shape: 'circularImage',
-        size: 10,
-        image: 'https://freeiconshop.com/wp-content/uploads/edd/heart-flat.png',
+        size: 18,
+        image: 'https://res.cloudinary.com/arun99-dev/image/upload/v1624878835/coupleNode_etlqzn.png',
         color: {
+          background: 'transparent',
           border: 'transparent',
           highlight: {
             border: 'transparent'

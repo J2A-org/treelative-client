@@ -24,7 +24,7 @@ ARUN - global context menu
  - somewhere credits to u and me..
 ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
 <!-- ARUN - use stabilizationProgress event to show a loading GIF -->
-ARUN - style edges differently for child-couple vs couple-partner
+<!-- ARUN - style edges differently for child-couple vs couple-partner -->
 ARUN - Slider - for N/A stuff, keep layout but add placeholders
 ARUN - If logged in, but not authorized - show contact Admins UI
 <!-- ARUN - Break full name -->
