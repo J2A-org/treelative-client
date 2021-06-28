@@ -29,7 +29,7 @@ ARUN - SHOW EVERYTHING INSIDE CONTEXT MENU
 ARUN - If logged in, but not authorized - show contact Admins UI
 <!-- ARUN - Break full name -->
 <!-- ARUN - Disable dragging of nodes -->
-ARUN - Fix death
+<!-- ARUN - Fix death -->
 ARUN - HANDLE ALL ERRORS
 <!-- ARUN - Add crow for Admins -->
 JANA/ARUN - investigate mobile zoom lag

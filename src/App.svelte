@@ -4,6 +4,7 @@
   import { stabilized } from './stores'
   import { GET_NODES_EDGES } from './graphql/queries/nodesAndEdges'
   
+  import Error from './components/Error.svelte'
   import Graph from './components/Graph.svelte'
   import Search from './components/Search.svelte'
   import Loading from './components/Loading.svelte'
@@ -20,7 +21,7 @@
 {#if $queryNodesAndEdges.fetching}
   <Loading />
 {:else if $queryNodesAndEdges.error}
-  <p>Oh no... {$queryNodesAndEdges.error.message}</p>
+  <Error errorMessage={queryNodesAndEdges.error.message} />
 {:else}
   {#if !$stabilized}
     <Loading/>
