@@ -1,14 +1,10 @@
 <script>
-  export let authenticating
-
   import { mutation } from '@urql/svelte'
   import { fly, fade } from 'svelte/transition'
   import { createEventDispatcher } from 'svelte'
-  
-  import { LOGIN } from '../../graphql/mutations/login'
 
-  import Loading from '../Loading.svelte'
-  
+  import { LOGIN } from '../../graphql/mutations/auth'
+
   const animation = { delay: 600, y: 25, duration: 750 }
 
   const login = mutation({ query: LOGIN })
@@ -16,27 +12,29 @@
   const dispatch = createEventDispatcher()
   const onComplete = () => dispatch('complete')
 
-  let isLoading = false
   let errorMessage
-  const handleSignIn = async (e) => {
-    isLoading = await true
-    errorMessage = await null
-    login({ username: e.target[0].value, password: e.target[1].value })
-      .then(async result => {
+  const handleSignIn = (e) => {
+    errorMessage = null
+    const input = {
+      username: e.target.elements.username.value,
+      password: e.target.elements.password.value
+    }
+    login({ input })
+      .then(result => {
         if (result.data.login) {
           window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
           onComplete()
-        } else console.log(result.error.message)
+        } else {
+          errorMessage = result.error.message
+        }
       })
-      .catch(async err => {
-        errorMessage = err
-        isLoading = await false
+      .catch(error => {
+        errorMessage = error.message
       })
   }
 </script>
 
 <div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
-  {#if isLoading || authenticating} <Loading /> {/if}
   <div
     in:fly='{{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
@@ -50,6 +48,7 @@
     <form on:submit|preventDefault={handleSignIn}>
       <input
         required
+        autofocus
         type='username'
         name='username'
         placeholder='Username'

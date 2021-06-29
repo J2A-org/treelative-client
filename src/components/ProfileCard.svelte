@@ -2,9 +2,9 @@
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
 
-  import { operationStore, query } from '@urql/svelte'
-
   import { activeNodeID, network } from '../stores.js'
+
+  import { operationStore, query } from '@urql/svelte'
   import { GET_USER } from '../graphql/queries/user'
 
   import Loading from './Loading.svelte'
@@ -14,28 +14,18 @@
 
   const animation = { delay: 1050, y: -25, duration: 500 }
 
-  const onActiveNodeClose = () => {
-    // reset fallbackAvatar
-    fallbackAvatar = ''
+  const queryUser = operationStore(GET_USER, { id: $activeNodeID })
+  query(queryUser)
+
+  const refresh = () => {
+    queryUser.context = { requestPolicy: 'cache-and-network' }
+  }
+
+  const onClose = () => {
     // clear the activeNodeID in store
     activeNodeID.update(() => null)
     // unselect all nodes
     $network.unselectAll()
-  }
-
-  let queryUser
-  $: {
-    if ($activeNodeID) {
-      queryUser = operationStore(GET_USER, { id: $activeNodeID })
-      query(queryUser)
-    }
-  }
-
-  let isLoading = false
-  const refresh = async () => {
-    isLoading = await true
-    queryUser.context = await { requestPolicy: 'cache-and-network' }
-    isLoading = await false
   }
 
   let fallbackAvatar = ''
@@ -44,52 +34,46 @@
   }
 </script>
 
-{#if $activeNodeID}
-	<Modal on:close={onActiveNodeClose}>
-    <div>
-      <div transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'>
-        <img
-          id={queryUser.id}
-          src='/images/close.svg'
-          alt='close-button'
-          class='close-btn'
-          on:click={onActiveNodeClose}
-        />
-        {#if !$activeNodeID}
-          <Loading />
-        {:else}
-          {#if $queryUser.fetching}
-           <Loading />
-          {:else if $queryUser.error}
-            <Login authenticating={isLoading} on:complete={refresh} />
-          {:else}
-            <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
-              <img
-                src={fallbackAvatar || queryUser.data.user.avatar}
-                alt='avatar'
-                style='border: {queryUser.data.user.role === 'ADMIN' ? '5px solid #FFE503' : '5px solid #FFFFFF'};'
-                in:fly='{animation}'
-                on:error={setFallbackAvatar}
-              />
-              {#if queryUser.data.user.role === 'ADMIN'}
-                <img
-                  src='/images/adminCrown.png'
-                  alt='crown'
-                  class='admin-crown'
-                  in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
-                />
-              {/if}
-              <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
-                {queryUser.data.user.fullName}
-              </h1>
-              <Slider user={queryUser.data.user} />
-            </div>
+<Modal on:close={onClose}>
+  <div>
+    <div transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'>
+      <img
+        src='/images/close.svg'
+        alt='close-button'
+        class='close-btn'
+        on:click={onClose}
+      />
+      {#if $queryUser.fetching}
+        <Loading />
+      {:else if $queryUser.error}
+        <Login on:complete={refresh} />
+      {:else}
+        <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
+          <img
+            src={fallbackAvatar || queryUser.data.user.avatar}
+            alt='avatar'
+            class='avatar'
+            class:admin={queryUser.data.user.role === 'ADMIN'}
+            in:fly='{animation}'
+            on:error={setFallbackAvatar}
+          />
+          {#if queryUser.data.user.role === 'ADMIN'}
+            <img
+              src='/images/adminCrown.png'
+              alt='crown'
+              class='admin-crown'
+              in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
+            />
           {/if}
-        {/if}
-      </div>
+          <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
+            {queryUser.data.user.fullName}
+          </h1>
+          <Slider user={queryUser.data.user} />
+        </div>
+      {/if}
     </div>
-	</Modal>
-{/if}
+  </div>
+</Modal>
 
 <style lang='scss'>
   div {
@@ -126,13 +110,16 @@
         background: rgba(255, 255, 255, 0.6);
         border-radius: 20px;
         overflow: visible;
-        img:first-child {
+        .avatar {
           width: 94px;
           height: 94px;
           margin-top: -56px;
           border-radius: 50%;
           border: 5px solid #FFFFFF;
           filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
+        }
+        .admin {
+          border: 5px solid #FFE503 !important;
         }
         .admin-crown {
           width: 120px;
@@ -151,11 +138,11 @@
       }
     }
   }
-  @media only screen and (max-width: 500px) {
+  /* @media only screen and (max-width: 500px) {
     div {
       div {
         max-width: 500px;
       }
     }
-  }
+  } */
 </style>

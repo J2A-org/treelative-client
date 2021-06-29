@@ -3,7 +3,7 @@
 
   import { onMount } from 'svelte'
 
-  import { network, activeNodeID, stabilized } from '../stores'
+  import { network, activeNodeID } from '../stores'
 
   import * as vis from 'vis-network/standalone/esm/vis-network'
 
@@ -80,8 +80,8 @@
     // const { x: nodeX, y: nodeY } = $network.getPositions(['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f'])['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f']
     // zoom on Graph mount
     $network.on('stabilized', () => {
-      stabilized.set(true)
-      $network.focus('187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f')
+      // stabilized.set(true)
+      // $network.focus('187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f')
       $network.moveTo({
         // position: { x: nodeX, y: nodeY },
         scale: 0.8,

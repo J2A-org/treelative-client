@@ -27,13 +27,14 @@
   }
 
 	const previouslyFocused = typeof document !== 'undefined' && document.activeElement
+
 	if (previouslyFocused) onDestroy(() => previouslyFocused.focus())
 </script>
 
-<svelte:window on:keydown={handleKeydown}/>
+<svelte:window on:keydown={handleKeydown} />
 <div transition:fade='{{ duration: 500 }}' class='modal-overlay' on:click={close}></div>
 <div bind:this={modal}>
-	<slot></slot>
+	<slot />
 </div>
 
 <style lang='scss'>
