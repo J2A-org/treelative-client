@@ -36,7 +36,7 @@
 
 <Modal on:close={onClose}>
   <div>
-    <div transition:scale='{{ duration: animation.duration, opacity: 0.5, start: 0, easing: quintOut }}'>
+    <div transition:scale='{{ opacity: 0.5, start: 0, easing: quintOut, duration: animation.duration }}'>
       <img
         src='/images/close.svg'
         alt='close-button'
@@ -50,14 +50,14 @@
       {:else}
         <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
           <img
-            src={fallbackAvatar || queryUser.data.user.avatar}
+            src={fallbackAvatar || $queryUser.data.user.avatar}
             alt='avatar'
             class='avatar'
-            class:admin={queryUser.data.user.role === 'ADMIN'}
+            class:admin={$queryUser.data.user.role === 'ADMIN'}
             in:fly='{animation}'
             on:error={setFallbackAvatar}
           />
-          {#if queryUser.data.user.role === 'ADMIN'}
+          {#if $queryUser.data.user.role === 'ADMIN'}
             <img
               src='/images/adminCrown.png'
               alt='crown'
@@ -66,9 +66,9 @@
             />
           {/if}
           <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
-            {queryUser.data.user.fullName}
+            {$queryUser.data.user.fullName}
           </h1>
-          <Slider user={queryUser.data.user} />
+          <Slider user={$queryUser.data.user} />
         </div>
       {/if}
     </div>
@@ -93,6 +93,9 @@
       background-size: cover;
       background-position: bottom center;
       background: url('/images/profilecardBg.jpg');
+      @media only screen and (max-width: 500px) {
+        max-width: 500px;
+      }
       .close-btn {
         position: absolute;
         top: 25px;
@@ -138,11 +141,4 @@
       }
     }
   }
-  /* @media only screen and (max-width: 500px) {
-    div {
-      div {
-        max-width: 500px;
-      }
-    }
-  } */
 </style>

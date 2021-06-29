@@ -10,27 +10,63 @@
   setContext('user', user)
 
   let stack
-  onMount(() => [...stack.children].reverse().forEach(i => stack.append(i)))
+  onMount(() => {
+    // reverse the slides
+    // Shallow copy to array: get a `reverse` method.
+    const arr = Array.from(stack.childNodes)
+    // `reverse` works in place but conveniently returns the array for chaining.
+    arr.reverse()
+    // `append` appends all its arguments in the order they are given.
+    // An already existing parent-child relationship (as in this case) is "overwritten",
+    // i.e. the node to append is cut from and re-inserted into the DOM.
+    stack.append(...arr)
+  })
+
+  const slides = [Birth, Current]
+  if (user.dateOfDeath) {
+    slides.unshift(Death)
+  }
+
+  let inProgress = false
   const swap = async (e, direction) => {
-    e.target.disabled = true
-    // get the last card
+    inProgress = true
+    // get the current card
     const card = [...stack.children].pop()
+
+    // perform fancy animation on current card
     if (direction === 'left') {
-      card.style = 'transform: rotate(-10deg) translateX(-420px) translateY(-150px); transition: 0.4s ease-in-out;'
+      card.style = `
+        transform:
+          rotate(-10deg)
+          translateX(-420px)
+          translateY(-150px);
+        transition: 0.4s ease-in-out;
+      `
     } else {
-      card.style = 'transform: rotate(10deg) translateX(160px) translateY(-150px); transition: 0.4s ease-in-out;'
+      card.style = `
+        transform:
+          rotate(10deg)
+          translateX(160px)
+          translateY(-150px);
+        transition: 0.4s ease-in-out;
+      `
     }
     await new Promise(resolve => setTimeout(resolve, 400))
-    card.style = 'transform: translateX(-130px) translateY(0px) scale(0.8); z-index: -1; transition: 0.4s; ease-in-out'
-    setTimeout(() => {
-      card.style = ''
-      stack.prepend(card)
-    }, 200)
+
+    card.style = `
+      transform:
+        translateX(-130px)
+        translateY(0px)
+        scale(0.8);
+      z-index: -1;
+      transition: 0.4s ease-in-out;
+    `
     await new Promise(resolve => setTimeout(resolve, 330))
-    e.target.disabled = false
-    card.setAttribute('ontouchstart', handleTouchStart)
-    card.setAttribute('ontouchmove', handleTouchMove)
-    card.setAttribute('onclick', swap)
+
+    card.style = ''
+    stack.prepend(card)
+
+    inProgress = false
   }
 
   let xDown = null
@@ -68,11 +104,17 @@
 </script>
 
 <div bind:this={stack}>
-  {#if user.dateOfDeath} <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Death/></div> {/if}
-  <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Birth/></div>
-  <div on:touchstart={handleTouchStart} on:touchmove={handleTouchMove} on:click={swap}><Current/></div>
-  <!-- <div><Relations/></div> -->
-  <!-- <div><Social/></div> -->
+  {#each slides as Slide, idx}
+    <!-- only enable click events on the first card and if it is not in motion-->
+		<div
+      on:touchstart={handleTouchStart}
+      on:touchmove={handleTouchMove}
+      on:click={swap}
+      class:inactive={idx !== 0 || inProgress}
+    >
+      <Slide />
+    </div>
+	{/each}
 </div>
 
 <style lang='scss'>
@@ -89,6 +131,9 @@
       background-image: url('/images/sliderBg.jpg');
       border-radius: 20px;
       box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.20);
+    }
+    .inactive {
+      pointer-events: none;
     }
     div:nth-last-child(n + 4) {
       transform: translate(-50%, -15px) scale(0.8);
