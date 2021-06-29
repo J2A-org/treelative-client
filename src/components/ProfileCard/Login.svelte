@@ -5,6 +5,8 @@
 
   import { LOGIN } from '../../graphql/mutations/auth'
 
+  import Loading from '../Loading.svelte'
+
   const animation = { delay: 600, y: 25, duration: 750 }
 
   const login = mutation({ query: LOGIN })
@@ -12,8 +14,10 @@
   const dispatch = createEventDispatcher()
   const onComplete = () => dispatch('complete')
 
+  let isLoading = false
   let errorMessage
   const handleSignIn = (e) => {
+    isLoading = true
     errorMessage = null
     const input = {
       username: e.target.elements.username.value,
@@ -29,12 +33,14 @@
         }
       })
       .catch(error => {
+        isLoading = false
         errorMessage = error.message
       })
   }
 </script>
 
 <div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
+  {#if isLoading} <Loading /> {/if}
   <div
     in:fly='{{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}'
     out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
