@@ -13,24 +13,34 @@
 
 
 <Modal on:close>
-  <div class="header">
-    <h2>{title}</h2>
-    <h3>{subTitle}</h3>
+  <div class="content">
+    <div class="header">
+      <h2>{title}</h2>
+      <h3>{subTitle}</h3>
+    </div>
+    <form id={formID} on:submit|preventDefault>
+      <slot />
+    </form>
+    <div class="footer">
+      {#if error}
+        <ErrorAlert {error} />
+      {/if}
+      <button type='submit' form={formID} disabled={isDisabled} class:loading>
+        {submitLabel}
+      </button>
+    </div>
   </div>
-  <form id={formID} on:submit|preventDefault>
-    <slot />
-  </form>
-  <div class="footer">
-    {#if error}
-      <ErrorAlert {error} />
-    {/if}
-    <button type='submit' form={formID} disabled={isDisabled} class:loading>
-      {submitLabel}
-    </button>
-  </div>
+
 </Modal>
 
 <style lang="scss">
+  .content {
+    background-color: red;
+    /* display: flex;
+    flex-direction: column;
+    z-index: 52;
+    width: 100%; */
+  }
   .header {
     display: flex;
     flex-direction: column;

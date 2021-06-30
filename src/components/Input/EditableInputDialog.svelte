@@ -21,45 +21,62 @@
   }
 
   import { object } from 'yup'
-  import { useForm } from 'svelte-reactive-form'
 
   const schemaValidation = object().shape({
     [name]: validation
   })
 
-  const form$ = useForm({
-    defaultValues: { [name]: value },
-    resolver: {
-      validate (data) {
-        return schemaValidation
-          .validate(data, { abortEarly: false })
-          .catch(({ inner }) => {
-            return Promise.reject(
-              inner.reduce((acc, cur) => {
-                const { path, errors } = cur
-                acc[path] = errors
-                return acc
-              }, {})
-            )
-          })
-      }
+  // const form$ = useForm({
+  //   defaultValues: { [name]: value },
+  //   resolver: {
+  //     validate (data) {
+  //       return schemaValidation
+  //         .validate(data, { abortEarly: false })
+  //         .catch(({ inner }) => {
+  //           return Promise.reject(
+  //             inner.reduce((acc, cur) => {
+  //               const { path, errors } = cur
+  //               acc[path] = errors
+  //               return acc
+  //             }, {})
+  //           )
+  //         })
+  //     }
+  //   }
+  // })
+
+  // const { field, onSubmit, errors } = form$
+
+  // const handleOnSubmit = (form) => {
+  //   const submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
+  //   onFormSubmit(submitData)
+  //     .then(result => {
+  //       if (result.data) {
+  //         onClose()
+  //       }
+  //     })
+  //     .catch(console.log)
+  // }
+
+  const values = {}
+  let errors = {}
+  async function submitHandler () {
+    try {
+      // `abortEarly: false` to get all the errors
+      await schemaValidation.validate(values, { abortEarly: false })
+      alert(JSON.stringify(values, null, 2))
+      errors = {}
+    } catch (err) {
+      errors = extractErrors(err)
     }
-  })
-
-  const { field, onSubmit, errors } = form$
-
-  const handleOnSubmit = (form) => {
-    const submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
-    onFormSubmit(submitData)
-      .then(result => {
-        if (result.data) {
-          onClose()
-        }
-      })
-      .catch(console.log)
+  }
+  function extractErrors(err) {
+    return err.inner.reduce((acc, err) => {
+      return { ...acc, [err.path]: err.message }
+    }, {})
   }
 
-  $: console.log($errors)
+  $: console.log(errors)
 </script>
 
 {#if isOpen}
@@ -68,13 +85,13 @@
     title={title}
     subTitle={subTitle}
     submitLabel='Submit'
-    error={error || $errors[name]}
+    error={error || errors[name]}
     {loading}
     isDisabled
     on:close={onCancel}
-    on:submit={onSubmit(handleOnSubmit)}
+    on:submit={submitHandler}
   >
-    <input type={type} use:field />
+    <input bind:value={values[name]} />
   </FormDialog>
 {:else}
   <p on:click={onOpen}>{value}</p>
