@@ -27,9 +27,9 @@
     slides.unshift(Death)
   }
 
-  let inProgress = false
+  let isCardInMotion = false
   const swap = async (e, direction) => {
-    inProgress = true
+    isCardInMotion = true
     // get the current card
     const card = [...stack.children].pop()
 
@@ -66,7 +66,7 @@
     card.style = ''
     stack.prepend(card)
 
-    inProgress = false
+    isCardInMotion = false
   }
 
   let xDown = null
@@ -83,7 +83,7 @@
 
   function handleTouchMove (e) {
     if (!xDown || !yDown) {
-        return
+      return
     }
     const xUp = e.touches[0].clientX
     const yUp = e.touches[0].clientY
@@ -105,12 +105,12 @@
 
 <div bind:this={stack}>
   {#each slides as Slide, idx}
-    <!-- only enable click events on the first card and if it is not in motion-->
+    <!-- only enable click events on the first card and if any card is not in motion-->
 		<div
       on:touchstart={handleTouchStart}
       on:touchmove={handleTouchMove}
       on:click={swap}
-      class:inactive={idx !== 0 || inProgress}
+      class:inactive={idx !== 0 || isCardInMotion}
     >
       <Slide />
     </div>

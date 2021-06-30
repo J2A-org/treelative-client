@@ -12,6 +12,8 @@
   import Login from './ProfileCard/Login.svelte'
   import Slider from './ProfileCard/Slider.svelte'
 
+  import EditUserFullName from './EditUser/EditUserFullName.svelte'
+
   const animation = { delay: 1050, y: -25, duration: 500 }
 
   const queryUser = operationStore(GET_USER, { id: $activeNodeID })
@@ -65,6 +67,7 @@
               in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
             />
           {/if}
+          <EditUserFullName user={$queryUser.data.user} />
           <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
             {$queryUser.data.user.fullName}
           </h1>
