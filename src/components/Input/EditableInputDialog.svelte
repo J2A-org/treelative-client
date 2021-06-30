@@ -5,7 +5,6 @@
   const onOpen = () => { isOpen = true }
   const onClose = () => { isOpen = false }
 
-  export let type = 'text'
   export let name = 'inputFieldName'
   export let value = ''
   export let title = 'Form Title'
@@ -14,6 +13,9 @@
   export let validation
   export let error
   export let loading
+
+  let localValue = value
+  let localError = {}
 
   const onCancel = () => {
     // TODO: reset form
@@ -48,15 +50,15 @@
 
   const { field, onSubmit, errors } = form$
 
-  const handleOnSubmit = (form) => {
-    const submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
-    onFormSubmit(submitData)
-      .then(result => {
-        if (result.data) {
-          onClose()
-        }
-      })
-      .catch(console.log)
+  const handleOnSubmit = async (form) => {
+    // const submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
+  //   onFormSubmit(submitData)
+  //     .then(result => {
+  //       if (result.data) {
+  //         onClose()
+  //       }
+  //     })
+  //     .catch(console.log)
   }
 
   $: console.log($errors)
@@ -74,7 +76,7 @@
     on:close={onCancel}
     on:submit={onSubmit(handleOnSubmit)}
   >
-    <input type={type} use:field />
+    <input type="text" />
   </FormDialog>
 {:else}
   <p on:click={onOpen}>{value}</p>

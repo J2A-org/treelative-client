@@ -67,7 +67,7 @@
               in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
             />
           {/if}
-          <EditUserFullName user={$queryUser.data.user} />
+          <!-- <EditUserFullName user={$queryUser.data.user} /> -->
           <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
             {$queryUser.data.user.fullName}
           </h1>

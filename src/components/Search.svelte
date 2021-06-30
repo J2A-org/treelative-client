@@ -42,7 +42,6 @@
           on:click={handleClose}
         />
         <input
-          autofocus
           type='text'
           bind:value={searchInput}
           style='width: {$tween}px;'

@@ -20,8 +20,8 @@ jobs:
       - name: Create env file
         run: |
           touch .env
-          echo SNOWPACK_PUBLIC_GRAPHQL_URL=${{ secrets.SNOWPACK_PUBLIC_GRAPHQL_URL }} >> .env
-          echo SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY=${{ secrets.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY }} >> .env
+          echo GRAPHQL_URL=${{ secrets.GRAPHQL_URL }} >> .env
+          echo GOOGLE_LOCATION_API_KEY=${{ secrets.GOOGLE_LOCATION_API_KEY }} >> .env
           cat .env
       - name: Push to Docker Hub
         uses: docker/build-push-action@v2

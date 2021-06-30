@@ -25,7 +25,7 @@
     {:else}
       <h1 in:fly='{{ ...animation, delay: animation.delay + 300 }}'>{user.birthLocation.terms.slice(-3).map(({ value }) => value).join(', ')}</h1>
       <iframe
-        src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
+        src='https://www.google.com/maps/embed/v1/place?key={process.env.GOOGLE_LOCATION_API_KEY}&q=place_id:{user.birthLocation.place_id}&zoom=10'
         loading='lazy'
         title='current-location'
         in:fly='{{ ...animation, delay: animation.delay + 400 }}'

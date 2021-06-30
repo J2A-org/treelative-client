@@ -54,7 +54,6 @@
     <form on:submit|preventDefault={handleSignIn}>
       <input
         required
-        autofocus
         type='username'
         name='username'
         placeholder='Username'

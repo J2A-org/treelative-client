@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte'
-  
+
   import { fly, scale } from 'svelte/transition'
   const animation = { delay: 1600, y: -25, duration: 600 }
 
@@ -18,7 +18,7 @@
   {:else}
     <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.currentLocation.terms.slice(-3).map(val => val.value).join(', ')}</h1>
     <iframe
-      src='https://www.google.com/maps/embed/v1/place?key={import.meta.env.SNOWPACK_PUBLIC_GOOGLE_LOCATION_API_KEY}&q=place_id:{user.currentLocation.place_id}&zoom=10'
+      src='https://www.google.com/maps/embed/v1/place?key={process.env.GOOGLE_LOCATION_API_KEY}&q=place_id:{user.currentLocation.place_id}&zoom=10'
       loading='lazy'
       title='current-location'
       in:fly='{{ ...animation, delay: animation.delay + 200 }}'

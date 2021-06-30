@@ -2,7 +2,7 @@
 
 ## Development
 - Install dependencies by running `npm i`
-- Start the development server by running `npm run start`
+- Start the development server by running `npm run dev`
 - Open up the app from `http://localhost:7000`
 
 ## Production
