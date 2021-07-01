@@ -1,82 +1,52 @@
 <script>
   import FormDialog from '../Layout/FormDialog.svelte'
 
-  let isOpen = false
-  const onOpen = () => { isOpen = true }
-  const onClose = () => { isOpen = false }
+  import { createForm } from 'svelte-forms-lib'
+  import { object } from 'yup'
 
   export let type = 'text'
   export let name = 'inputFieldName'
   export let value = ''
   export let title = 'Form Title'
   export let subTitle = 'Form Subtitle'
-  export let onFormSubmit = console.log
+  export let onSubmit = console.log
   export let validation
   export let error
-  export let loading
+  export let notification = ''
+
+  let isOpen = false
+  let isLoading = false
+
+  const onOpen = () => { isOpen = true }
+  const onClose = () => { isOpen = false }
 
   const onCancel = () => {
     // TODO: reset form
     onClose()
   }
 
-  import { object } from 'yup'
-
-  const schemaValidation = object().shape({
-    [name]: validation
-  })
-
-  // const form$ = useForm({
-  //   defaultValues: { [name]: value },
-  //   resolver: {
-  //     validate (data) {
-  //       return schemaValidation
-  //         .validate(data, { abortEarly: false })
-  //         .catch(({ inner }) => {
-  //           return Promise.reject(
-  //             inner.reduce((acc, cur) => {
-  //               const { path, errors } = cur
-  //               acc[path] = errors
-  //               return acc
-  //             }, {})
-  //           )
-  //         })
-  //     }
-  //   }
-  // })
-
-  // const { field, onSubmit, errors } = form$
-
-  // const handleOnSubmit = (form) => {
-  //   const submitData = type !== 'number' ? form[name].trim() : parseInt(form[name])
-  //   onFormSubmit(submitData)
-  //     .then(result => {
-  //       if (result.data) {
-  //         onClose()
-  //       }
-  //     })
-  //     .catch(console.log)
-  // }
-
-  const values = {}
-  let errors = {}
-  async function submitHandler () {
-    try {
-      // `abortEarly: false` to get all the errors
-      await schemaValidation.validate(values, { abortEarly: false })
-      alert(JSON.stringify(values, null, 2))
-      errors = {}
-    } catch (err) {
-      errors = extractErrors(err)
+  const { form, errors, handleChange, handleSubmit } = createForm({
+    initialValues: {
+      [name]: value
+    },
+    validationSchema: object().shape({
+      [name]: validation
+    }),
+    onSubmit: values => {
+      isLoading = true
+      onSubmit(values[name])
+      .then(result => {
+        if (result.data) {
+         notification && alert('REPLACE WITH TOAST: ' + notification)
+          onClose()
+        }
+      })
+      .catch(console.log)
+      .finally(() => {
+        isLoading = false
+      })
     }
-  }
-  function extractErrors(err) {
-    return err.inner.reduce((acc, err) => {
-      return { ...acc, [err.path]: err.message }
-    }, {})
-  }
-
-  $: console.log(errors)
+  })
 </script>
 
 {#if isOpen}
@@ -85,13 +55,12 @@
     title={title}
     subTitle={subTitle}
     submitLabel='Submit'
-    error={error || errors[name]}
-    {loading}
-    isDisabled
+    error={error || $errors[name]}
+    {isLoading}
     on:close={onCancel}
-    on:submit={submitHandler}
+    on:submit={handleSubmit}
   >
-    <input bind:value={values[name]} />
+    <input {name} type='text' on:change={handleChange} bind:value={$form[name]} />
   </FormDialog>
 {/if}
 <p on:click={onOpen}>{value}</p>

@@ -89,8 +89,9 @@
       /* width: 100vw; */
       height: 600px;
       max-width: 400px;
+      /* margin: auto; */
       background-size: 100% auto;
-      border-radius: 20px;
+      border-radius: 1em;
       position: relative;
       overflow: hidden;
       background-size: cover;

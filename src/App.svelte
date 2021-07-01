@@ -2,7 +2,7 @@
   import { setClient, operationStore, query } from '@urql/svelte'
   import { activeNodeID } from './stores.js'
 
-  import { GET_NETWORK_DATA } from './graphql/queries/nodesAndEdges'
+  import { GET_NETWORK_DATA } from './graphql/queries/networkData'
 
   import Graph from './components/Graph.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
@@ -25,5 +25,5 @@
     <ProfileCard  />
   {/if}
   <Loading />
-  <Graph nodesAndEdges={$queryNetworkData.data.getNetworkData} />
+  <Graph networkData={$queryNetworkData.data.getNetworkData} />
 {/if}

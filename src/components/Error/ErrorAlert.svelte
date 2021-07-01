@@ -5,7 +5,7 @@
 </script>
 
 <div transition:fade='{{ duration: 250 }}'>
-  {error.message}
+  {error?.message || error}
 </div>
 
 <style lang="scss">

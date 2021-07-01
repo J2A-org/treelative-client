@@ -7,20 +7,13 @@
   import { UPDATE_USER_FULL_NAME } from '../../graphql/mutations/users'
 
   export let user
-  let isLoading = false
 
   const updateFullNameStore = operationStore(UPDATE_USER_FULL_NAME)
   const updateFullNameMutation = mutation(updateFullNameStore)
 
   const handleSubmit = fullName => {
-    isLoading = true
-    console.log('SUBMIT', fullName)
     const variables = { userID: user.id, input: { fullName } }
-    console.log(variables)
-    // updateFullNameMutation(variables)
-    //   .then(() => {
-    //     isLoading = false
-    //   })
+    return updateFullNameMutation(variables)
   }
 </script>
 
@@ -31,7 +24,6 @@
   value={user.fullName || ''}
   onSubmit={handleSubmit}
   validation={string().required()}
-  loading={isLoading}
   error={$updateFullNameStore.error}
   notification='Successfully updated the full name'
 />

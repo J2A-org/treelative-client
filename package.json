@@ -12,6 +12,7 @@
     "lint:fix": "eslint . --fix"
   },
   "devDependencies": {
+    "@fortawesome/free-solid-svg-icons": "5.15.3",
     "@snowpack/plugin-dotenv": "2.1.0",
     "@snowpack/plugin-svelte": "3.6.0",
     "@urql/svelte": "1.2.3",
@@ -24,10 +25,11 @@
     "snowpack": "3.7.1",
     "standard": "16.0.3",
     "svelte": "3.38.3",
+    "svelte-fa": "2.2.1",
+    "svelte-forms-lib": "1.10.3",
+    "svelte-icons": "2.1.0",
+    "svelte-portal": "2.1.2",
     "vis-network": "9.0.4",
     "yup": "0.32.9"
-  },
-  "dependencies": {
-    "svelte-portal": "^2.1.2"
   }
 }

@@ -1,11 +1,9 @@
 <script>
-  export let nodesAndEdges
-
   import { onMount } from 'svelte'
-
   import { network, activeNodeID } from '../stores'
-
   import * as vis from 'vis-network/standalone/esm/vis-network'
+
+  export let networkData
 
   const options = {
     // layout: {
@@ -75,7 +73,7 @@
 
   onMount(() => {
     // set network in store
-    network.update(() => new vis.Network(container, nodesAndEdges, options))
+    network.update(() => new vis.Network(container, networkData, options))
     // get the node coordinates
     // const { x: nodeX, y: nodeY } = $network.getPositions(['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f'])['187e3fbf-347e-4e0d-9a82-b0b2cf2bc57f']
     // zoom on Graph mount
@@ -96,7 +94,7 @@
     $network.on('dragStart', clearSelection)
     // set activeNodeID on user node click
     $network.on('selectNode', ({ nodes }) => {
-      const activeNode = nodesAndEdges.nodes.find(node => nodes[0] === node.id)
+      const activeNode = networkData.nodes.find(node => nodes[0] === node.id)
       if (activeNode.group !== 'couple') activeNodeID.update(() => activeNode.id)
     })
     // limit the zoom

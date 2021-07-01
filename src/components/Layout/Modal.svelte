@@ -1,7 +1,7 @@
 <script>
 	import Portal from 'svelte-portal'
 
-	import { fade } from 'svelte/transition'
+	import { scale } from 'svelte/transition'
 
 	import { createEventDispatcher, onDestroy } from 'svelte'
 
@@ -36,8 +36,8 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <Portal target="body">
-	<div transition:fade='{{ duration: 500 }}' class='modal-overlay' on:click={close}></div>
-	<div class="modal" bind:this={modal}>
+	<div class='modal-overlay' on:click={close}></div>
+	<div transition:scale class="modal" bind:this={modal}>
 		<slot />
 	</div>
 </Portal>
@@ -62,7 +62,7 @@
 		overflow: auto;
 		transform: translate(-50%,-50%);
 		padding: 1em;
-		border-radius: 0.2em;
+		border-radius: 1em;
 		background: white;
 	}
 </style>
