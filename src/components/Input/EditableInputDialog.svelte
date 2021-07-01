@@ -93,6 +93,5 @@
   >
     <input bind:value={values[name]} />
   </FormDialog>
-{:else}
-  <p on:click={onOpen}>{value}</p>
 {/if}
+<p on:click={onOpen}>{value}</p>

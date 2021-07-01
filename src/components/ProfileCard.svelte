@@ -80,13 +80,13 @@
 
 <style lang='scss'>
   div {
-    z-index: 51;
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		transform: translate(-50%, -25%);
+    /* z-index: 51; */
+		/* position: absolute; */
+		/* left: 50%; */
+		/* top: 50%; */
+		/* transform: translate(-50%, -25%); */
     div {
-      width: 100vw;
+      /* width: 100vw; */
       height: 600px;
       max-width: 400px;
       background-size: 100% auto;
@@ -111,8 +111,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        position: absolute;
-        transform: translate(-50%, -43%);
+        /* position: absolute; */
+        /* transform: translate(-50%, -43%); */
         background: rgba(255, 255, 255, 0.6);
         border-radius: 20px;
         overflow: visible;
