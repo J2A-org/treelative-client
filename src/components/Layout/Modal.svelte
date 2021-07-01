@@ -45,7 +45,6 @@
 
 <style lang='scss'>
 	.modal-overlay {
-		/* z-index: 51; */
 		position: fixed;
 		top: 0;
 		left: 0;

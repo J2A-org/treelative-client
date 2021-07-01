@@ -68,9 +68,9 @@
             />
           {/if}
           <EditUserFullName user={$queryUser.data.user} />
-          <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
+          <!-- <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
             {$queryUser.data.user.fullName}
-          </h1>
+          </h1> -->
           <Slider user={$queryUser.data.user} />
         </div>
       {/if}
@@ -112,7 +112,7 @@
         flex-direction: column;
         align-items: center;
         /* position: absolute; */
-        /* transform: translate(-50%, -43%); */
+        transform: translate(11%, 23%);
         background: rgba(255, 255, 255, 0.6);
         border-radius: 20px;
         overflow: visible;
