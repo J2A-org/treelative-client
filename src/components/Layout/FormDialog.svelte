@@ -66,9 +66,6 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    h2, h3 {
-      margin: 0;
-    }
   }
   .subTitle {
     font-size: 0.8rem;
