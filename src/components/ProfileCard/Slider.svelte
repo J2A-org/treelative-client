@@ -28,8 +28,10 @@
   }
 
   let isCardInMotion = false
+  let currentCardIdx = 0
   const swap = async (e, direction) => {
     isCardInMotion = true
+    currentCardIdx = (currentCardIdx + 1) % slides.length
     // get the current card
     const card = [...stack.children].pop()
 
@@ -110,7 +112,7 @@
       on:touchstart={handleTouchStart}
       on:touchmove={handleTouchMove}
       on:click={swap}
-      class:inactive={idx !== 0 || isCardInMotion}
+      class:inactive={idx !== currentCardIdx || isCardInMotion}
     >
       <Slide />
     </div>
