@@ -92,14 +92,14 @@
     background-color: transparent;
     border-radius: 0.5em;
     &:hover, :focus {
-      background-color: hsl(0, 0, 95%);
+      background-color: hsla(0, 100%, 70%, 0.1);
     }
     &:active {
-      background-color: hsl(0, 0, 90%);
+      background-color: hsla(0, 100%, 70%, 0.2);
     }
   }
   .close-icon {
     font-size: 1.5em;
-    color: tomato;
+    color: hsl(0, 100%, 70%);
   }
 </style>
