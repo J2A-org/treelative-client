@@ -55,28 +55,44 @@
     title={title}
     subTitle={subTitle}
     submitLabel='Submit'
-    error={error || $errors[name]}
+    error={error}
     {isLoading}
     on:close={onCancel}
     on:submit={handleSubmit}
   >
-    <input autofocus {name} type='text' on:change={handleChange} bind:value={$form[name]} />
+    <div>
+      <input {name} type='text' on:change={handleChange} bind:value={$form[name]} class:invalid={$errors[name]} />
+      {#if $errors[name]}
+        <p class="error">{$errors[name]}</p>
+      {/if}
+    </div>
   </FormDialog>
 {/if}
 <p on:click={onOpen}>{value}</p>
 
 <style lang="scss">
+  div {
+    width: 20rem;
+  }
   input {
+    width: 100%;
     padding: 0.5em;
     box-shadow: 0 0 0 1px hsl(208, 18%, 50%);
     border-radius: 0.5rem;
     outline: 2px solid transparent;
     transition: box-shadow 100ms ease-in;
-    &:hover:not(:focus) {
+    &:hover:not(:focus):not(.invalid) {
       box-shadow: 0 0 0 1px hsl(208, 18%, 20%);
     }
-    &:focus {
+    &:focus:not(.invalid) {
       box-shadow: 0 0 0 2px #2C5282;
     }
+  }
+  .invalid {
+    box-shadow: 0 0 0 1px red;
+  }
+  .error {
+    color: red;
+    margin-top: 0.5rem;
   }
 </style>

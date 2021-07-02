@@ -12,6 +12,8 @@
 
 	import { createEventDispatcher, onDestroy } from 'svelte'
 
+	export let modalOveriteStyle = ''
+
 	const dispatch = createEventDispatcher()
 	const close = () => dispatch('close')
 
@@ -43,7 +45,7 @@
 
 <Portal>
 	<div class='modal-overlay' on:click={close}></div>
-	<div transition:scale class="modal" bind:this={modal}>
+	<div transition:scale class="modal" bind:this={modal} style={modalOveriteStyle}>
 		<button class="close-button" on:click={close}>
     	<div class="close-icon">
       	<Fa icon={faTimes} />
@@ -67,7 +69,7 @@
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		width: calc(100vw - 4em);
+		width: fit-content;
 		max-width: 32em;
 		max-height: calc(100vh - 4em);
 		overflow: auto;

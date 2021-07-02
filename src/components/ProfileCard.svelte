@@ -36,113 +36,86 @@
   }
 </script>
 
-<Modal on:close={onClose}>
-  <div>
-    <div transition:scale='{{ opacity: 0.5, start: 0, easing: quintOut, duration: animation.duration }}'>
-      <img
-        src='/images/close.svg'
-        alt='close-button'
-        class='close-btn'
-        on:click={onClose}
-      />
-      {#if $queryUser.fetching}
-        <Loading />
-      {:else if $queryUser.error}
-        <Login on:complete={refresh} />
-      {:else}
-        <div in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
+<Modal on:close={onClose} modalOveriteStyle="padding: 0; background: transparent;">
+  <div class="outer-container" transition:scale='{{ opacity: 0.5, start: 0, easing: quintOut, duration: animation.duration }}'>
+    {#if $queryUser.fetching}
+      <Loading />
+    {:else if $queryUser.error}
+      <Login on:complete={refresh} />
+    {:else}
+      <div class="inner-container" in:fly='{{ delay: animation.delay - 500, x: 500, opacity: 1, duration: animation.duration }}'>
+        <img
+          src={fallbackAvatar || $queryUser.data.user.avatar}
+          alt='avatar'
+          class='avatar'
+          class:admin={$queryUser.data.user.role === 'ADMIN'}
+          in:fly='{animation}'
+          on:error={setFallbackAvatar}
+        />
+        {#if $queryUser.data.user.role === 'ADMIN'}
           <img
-            src={fallbackAvatar || $queryUser.data.user.avatar}
-            alt='avatar'
-            class='avatar'
-            class:admin={$queryUser.data.user.role === 'ADMIN'}
-            in:fly='{animation}'
-            on:error={setFallbackAvatar}
+            src='/images/adminCrown.png'
+            alt='crown'
+            class='admin-crown'
+            in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
           />
-          {#if $queryUser.data.user.role === 'ADMIN'}
-            <img
-              src='/images/adminCrown.png'
-              alt='crown'
-              class='admin-crown'
-              in:fly='{{ delay: animation.delay + 1500, y: -100, duration: animation.duration }}'
-            />
-          {/if}
-          <EditUserFullName user={$queryUser.data.user} />
-          <!-- <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
-            {$queryUser.data.user.fullName}
-          </h1> -->
+        {/if}
+        <EditUserFullName user={$queryUser.data.user} />
+        <!-- <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>
+          {$queryUser.data.user.fullName}
+        </h1> -->
+        <div class="slides">
           <Slider user={$queryUser.data.user} />
         </div>
-      {/if}
-    </div>
+      </div>
+    {/if}
   </div>
 </Modal>
 
 <style lang='scss'>
-  div {
-    z-index: 51;
-		/* position: absolute; */
-		/* left: 50%; */
-		/* top: 50%; */
-		/* transform: translate(-50%, -25%); */
-    div {
-      /* width: 100vw; */
-      height: 600px;
-      max-width: 400px;
-      /* margin: auto; */
-      background-size: 100% auto;
-      border-radius: 1em;
-      position: relative;
-      overflow: hidden;
-      background-size: cover;
-      background-position: bottom center;
-      background: url('/images/profilecardBg.jpg');
-      @media only screen and (max-width: 500px) {
-        max-width: 500px;
-      }
-      .close-btn {
-        position: absolute;
-        top: 25px;
-        right: 25px;
-        cursor: pointer;
-      }
-      div {
-        width: 330px;
-        height: 450px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        /* position: absolute; */
-        transform: translate(11%, 23%);
-        background: rgba(255, 255, 255, 0.6);
-        border-radius: 20px;
-        overflow: visible;
-        .avatar {
-          width: 94px;
-          height: 94px;
-          margin-top: -56px;
-          border-radius: 50%;
-          border: 5px solid #FFFFFF;
-          filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
-        }
-        .admin {
-          border: 5px solid #FFE503 !important;
-        }
-        .admin-crown {
-          width: 120px;
-          object-fit: contain;
-          position:absolute;
-          top: -103px;
-        }
-        h1 {
-          width: 50%;
-          margin-top: 8px;
-          font-size: 22px;
-          font-weight: 100;
-          color: #26114D;
-          text-align: center;
-        }
-      }
+  .outer-container {
+    height: 600px;
+    width: 400px;
+    background: url('/images/profilecardBg.jpg');
+    background-size: cover;
+    background-position: bottom center;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    @media only screen and (max-width: 400px) {
+      width: 100vw;
     }
+  }
+  .inner-container {
+    margin-top: 56px;
+    width: 330px;
+    height: 450px;
+    background: hsla(0, 0%, 100%, 0.6);
+    border-radius: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .avatar {
+    width: 94px;
+    height: 94px;
+    margin-top: -56px;
+    border-radius: 50%;
+    border: 5px solid #FFFFFF;
+    filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
+  }
+  .admin {
+    border: 5px solid #FFE503 !important;
+  }
+  .admin-crown {
+    width: 120px;
+    object-fit: contain;
+    position:absolute;
+    top: 0;
+  }
+  .slides {
+    transform: translate(0%, 380px);
   }
 </style>

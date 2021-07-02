@@ -66,7 +66,7 @@
   .footer {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 1rem;
   }
   button[type=submit] {
     background-color: hsl(209, 62%, 50%);
