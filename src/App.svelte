@@ -7,7 +7,7 @@
   import Graph from './components/Graph.svelte'
   import ProfileCard from './components/ProfileCard.svelte'
   import Loading from './components/Loading.svelte'
-  import Error from './components/Error.svelte'
+  import ErrorDialog from './components/Error/ErrorDialog.svelte'
 
   import client from './graphql/client'
   setClient(client)
@@ -19,7 +19,7 @@
 {#if $queryNetworkData.fetching}
   <Loading />
 {:else if $queryNetworkData.error}
-  <Error errorMessage={queryNetworkData.error.message} />
+  <ErrorDialog errorMessage={queryNetworkData.error.message} />
 {:else}
   {#if $activeNodeID}
     <ProfileCard  />
