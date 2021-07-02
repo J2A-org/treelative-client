@@ -20,26 +20,25 @@
 
 
 <Modal on:close={onClose}>
-    <div class="header">
-      <h2 class="title">{title}</h2>
-      <h3 class="subTitle">{subTitle}</h3>
-    </div>
-    <div class="content">
-      <form id={formID} on:submit|preventDefault>
-        <slot />
-      </form>
-      <div class="footer">
-        {#if error}
-          <ErrorAlert {error} />
-        {/if}
-        <button type='submit' form={formID} disabled={isDisabled || isLoading}>
-        {#if isLoading}
-          show loading indicator ..
-        {:else}
-          {submitLabel}
-        {/if}
-      </button>
-    </div>
+  <div class="header">
+    <h2 class="title">{title}</h2>
+    <h3 class="subTitle">{subTitle}</h3>
+  </div>
+  <div class="content">
+    <form id={formID} on:submit|preventDefault>
+      <slot />
+    </form>
+    <div class="footer">
+      {#if error}
+        <ErrorAlert {error} />
+      {/if}
+      <button type='submit' form={formID} disabled={isDisabled || isLoading}>
+      {#if isLoading}
+        show loading indicator ..
+      {:else}
+        {submitLabel}
+      {/if}
+    </button>
   </div>
 </Modal>
 
@@ -74,6 +73,7 @@
     padding: 0.5em;
     border-radius: 0.5em;
     color: white;
+    outline: 2px solid transparent;
     &:hover, &:focus {
       background-color: hsl(209, 62%, 45%);
     }

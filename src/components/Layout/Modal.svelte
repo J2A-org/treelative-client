@@ -1,3 +1,7 @@
+<script context="module">
+	let modal
+</script>
+
 <script>
 	import Portal from 'svelte-portal'
 
@@ -11,7 +15,6 @@
 	const dispatch = createEventDispatcher()
 	const close = () => dispatch('close')
 
-	let modal
 	const handleKeydown = e => {
     if (e.key === 'Escape') close()
 
@@ -23,7 +26,7 @@
       let index = tabbable.indexOf(document.activeElement)
       if (index === -1 && e.shiftKey) index = 0
 
-      index += tabbable.length + (e.shiftKey ? -1 : 1)
+      index += tabbable.length - (e.shiftKey ? -1 : 1)
       index %= tabbable.length
 
       tabbable[index].focus()
@@ -87,10 +90,10 @@
     background-color: transparent;
     border-radius: 0.5em;
     &:hover, :focus {
-      background-color: hsl(0, 0, 90%);
+      background-color: hsl(0, 0, 95%);
     }
     &:active {
-      background-color: hsl(0, 0, 85%);
+      background-color: hsl(0, 0, 90%);
     }
   }
   .close-icon {

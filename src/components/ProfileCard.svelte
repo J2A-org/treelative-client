@@ -80,7 +80,7 @@
 
 <style lang='scss'>
   div {
-    /* z-index: 51; */
+    z-index: 51;
 		/* position: absolute; */
 		/* left: 50%; */
 		/* top: 50%; */

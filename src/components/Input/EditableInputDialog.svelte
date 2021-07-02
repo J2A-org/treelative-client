@@ -60,7 +60,7 @@
     on:close={onCancel}
     on:submit={handleSubmit}
   >
-    <input {name} type='text' on:change={handleChange} bind:value={$form[name]} />
+    <input autofocus {name} type='text' on:change={handleChange} bind:value={$form[name]} />
   </FormDialog>
 {/if}
 <p on:click={onOpen}>{value}</p>
