@@ -121,7 +121,7 @@
 
 <style lang='scss'>
   div {
-    color: #26114D;
+    color: hsl(261, 64%, 18%);
     div {
       width: 260px;
       height: 284px;
@@ -132,7 +132,7 @@
       transition: transform 200ms;
       background-image: url('/images/sliderBg.jpg');
       border-radius: 20px;
-      box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.20);
+      box-shadow: 0px -3px 5px hsla(0, 0%, 0%, 0.20);
     }
     .inactive {
       pointer-events: none;

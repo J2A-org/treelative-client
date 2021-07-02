@@ -81,7 +81,7 @@
   div {
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: hsla(0, 0%, 0%, 0.6);
     div {
       width: 330px;
       height: auto;
@@ -92,19 +92,19 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      background: rgba(255, 255, 255, 0.6);
+      background: hsla(0, 0%, 100%, 0.6);
       border-radius: 20px;
       h1 {
         font-size: 30px;
         margin-top: 40px;
         margin-bottom: 20px;
-        color: #26114D;
+        color: hsl(261, 64%, 18%);
       }
       h5, button {
         margin: 0px;
         padding: 15px;
         text-align: center;
-        background: rgba(255, 0, 0, 0.5);
+        background: hsla(0, 100%, 50%, 0.5);
         border-radius: 10px;
         font-size: 16px;
         font-weight: 400;
@@ -132,16 +132,18 @@
           border: none;
           background: none;
           outline: none;
-          border: 1px solid rgba(0, 0, 0, 0.3);
+          border: 1px solid hsla(0, 0%, 0%, 0.3);
           border-radius: 5px;
-          &:hover { border: 1px solid rgba(0, 0, 0, 0.5); }
+          &:hover {
+            border: 1px solid hsla(0, 0%, 0%, 0.5);
+          }
           &:focus {
             border-image-slice: 1;
-            border-image-source: linear-gradient(to left, #3F2349, #F12A2D);
+            border-image-source: linear-gradient(to left, hsl(284, 35%, 21%), hsl(359, 88%, 55%));
           }
         }
         ::placeholder {
-          color: rgba(0, 0, 0, 0.9);
+          color: hsla(0, 0%, 0%, 0.9);
           opacity: 1;
         }
         button {
@@ -153,7 +155,7 @@
           border: 0px;
           cursor: pointer;
           border-radius: 20px;
-          background: linear-gradient(-45deg, #3F2349, #F12A2D);
+          background: linear-gradient(-45deg, hsl(284, 35%, 21%), hsl(359, 88%, 55%));
           background-size: 150% 150%;
           animation: gradient 5s ease infinite;
           margin-bottom: 40px;

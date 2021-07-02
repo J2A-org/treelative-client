@@ -13,7 +13,7 @@
     margin: 0px;
     padding: 15px;
     text-align: center;
-    background: rgba(255, 0, 0, 0.5);
+    background: hsla(0, 100%, 50%, 0.5);
     border-radius: 10px;
     font-size: 16px;
     font-weight: 400;

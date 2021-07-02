@@ -23,21 +23,21 @@
     nodes: {
       borderWidth: 2,
       size: 25,
-      font: { color: '#ffffff' }
+      font: { color: 'hsl(0, 0%, 100%)' }
     },
     edges: {
       hidden: false,
       arrows: { middle: true },
       chosen: false,
-      color: '#12B0CE'
+      color: 'hsl(190, 84%, 44%)'
     },
     groups: {
       individual: {
         shape: 'circularImage',
         color: {
-          border: '#12B0CE',
+          border: 'hsl(190, 84%, 44%)',
           highlight: {
-            border: '#12B0CE'
+            border: 'hsl(190, 84%, 44%)'
           }
         }
       },

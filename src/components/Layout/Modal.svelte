@@ -63,7 +63,7 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0,0,0,0.8);
+		background: hsla(0, 0%, 0%, 0.8);
 	}
 	.modal {
 		position: absolute;

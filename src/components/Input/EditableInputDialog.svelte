@@ -85,7 +85,7 @@
       box-shadow: 0 0 0 1px hsl(208, 18%, 20%);
     }
     &:focus:not(.invalid) {
-      box-shadow: 0 0 0 2px #2C5282;
+      box-shadow: 0 0 0 2px hsl(213, 49%, 34%);
     }
   }
   .invalid {

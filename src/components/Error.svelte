@@ -38,7 +38,7 @@
       overflow: hidden;
       border: #fff solid 2px;
       padding: 50px 20px;
-      background: rgb(7, 9, 15);
+      background: hsl(225, 36%, 4%);
       color: white;
       img {
         width: 100px;
@@ -56,9 +56,9 @@
         height: 50px;
         border: none;
         margin-top: 30px;
-        background: linear-gradient(rgb(253, 59, 132), rgb(255, 164, 141) 100%);
+        background: linear-gradient(hsl(337, 98%, 61%), hsl(16, 58%, 72%) 100%);
         border-radius: 20px;
-        color: rgb(255, 239, 242);
+        color: hsl(349, 100%, 97%);
         font-size: 20px;
       }
     }

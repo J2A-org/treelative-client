@@ -104,7 +104,8 @@
     margin-top: -56px;
     border-radius: 50%;
     border: 5px solid #FFFFFF;
-    filter: drop-shadow(0px 6px 8px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 6px 8px hsla(0, 0%, 0%, 0.25));
+
   }
   .admin {
     border: 5px solid #FFE503;

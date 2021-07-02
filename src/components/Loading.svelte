@@ -20,7 +20,7 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: hsla(0, 0%, 0%, 0.6);
     display: none;
     align-items: center;
     justify-content: center;

@@ -63,17 +63,17 @@
       align-items: center;
       width: 280px;
       padding: 10px 15px;
-      background: #FFFFFF;
-      color: #062C4F;
+      background: hsl(0, 0%, 100%);
+      color: hsl(209, 86%, 17%);
       opacity: 0.9;
-      box-shadow: inset 0px 2px 10px rgba(0, 0, 0, 0.25);
+      box-shadow: inset 0px 2px 10px hsla(0, 0%, 0%, 0.25);
       border-radius: 20px;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
       border: none;
       font: inherit;
       &:hover {
-        background: rgb(230, 230, 230);
+        background: hsl(0, 0%, 90%);
       }
       img {
         width: 36px;

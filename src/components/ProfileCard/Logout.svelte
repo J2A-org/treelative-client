@@ -23,7 +23,7 @@
     cursor: pointer;
     position: absolute;
     border-radius: 20px;
-    background: linear-gradient(-45deg, #3F2349, #F12A2D);
+    background: linear-gradient(-45deg, hsl(284, 35%, 21%), hsl(359, 88%, 55%));
     background-size: 150% 150%;
     animation: gradient 2s ease infinite;
   }

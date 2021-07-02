@@ -1,6 +1,6 @@
 <script>
   import { getContext } from 'svelte'
-  
+
   import { fly, scale } from 'svelte/transition'
   const animation = { delay: 1600, y: -25, duration: 600 }
 
@@ -53,7 +53,7 @@
       height: 135px;
       margin-top: 15px;
       border: none;
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+      box-shadow: 0px 3px 5px hsla(0, 0%, 0%, 0.25);
       border-radius: 20px;
     }
     iframe {
@@ -61,7 +61,7 @@
       height: 135px;
       margin-top: 15px;
       border: none;
-      box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.25);
+      box-shadow: 0px 3px 5px hsla(0, 0%, 0%, 0.25);
       border-radius: 20px;
       cursor: pointer;
     }
