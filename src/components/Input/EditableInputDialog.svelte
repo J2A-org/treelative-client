@@ -64,3 +64,19 @@
   </FormDialog>
 {/if}
 <p on:click={onOpen}>{value}</p>
+
+<style lang="scss">
+  input {
+    padding: 0.5em;
+    box-shadow: 0 0 0 1px hsl(208, 18%, 50%);
+    border-radius: 0.5rem;
+    outline: 2px solid transparent;
+    transition: box-shadow 100ms ease-in;
+    &:hover:not(:focus) {
+      box-shadow: 0 0 0 1px hsl(208, 18%, 20%);
+    }
+    &:focus {
+      box-shadow: 0 0 0 2px #2C5282;
+    }
+  }
+</style>

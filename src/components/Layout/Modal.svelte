@@ -3,6 +3,9 @@
 
 	import { scale } from 'svelte/transition'
 
+	import Fa from 'svelte-fa'
+  import { faTimes } from '@fortawesome/free-solid-svg-icons'
+
 	import { createEventDispatcher, onDestroy } from 'svelte'
 
 	const dispatch = createEventDispatcher()
@@ -35,9 +38,14 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<Portal target="body">
+<Portal>
 	<div class='modal-overlay' on:click={close}></div>
 	<div transition:scale class="modal" bind:this={modal}>
+		<button class="close-button" on:click={close}>
+    	<div class="close-icon">
+      	<Fa icon={faTimes} />
+			</div>
+		</button>
 		<slot />
 	</div>
 </Portal>
@@ -61,8 +69,32 @@
 		max-height: calc(100vh - 4em);
 		overflow: auto;
 		transform: translate(-50%,-50%);
-		padding: 1em;
+		padding: 0.5em 1em;
 		border-radius: 1em;
 		background: white;
 	}
+	.close-button {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    right: 0.5rem;
+    top: 0.5rem;
+    padding: 0.5em;
+    width: 2.2rem;
+    height: 2.2rem;
+    cursor: pointer;
+    background-color: transparent;
+    border-radius: 0.5em;
+    &:hover, :focus {
+      background-color: hsl(0, 0, 90%);
+    }
+    &:active {
+      background-color: hsl(0, 0, 85%);
+    }
+  }
+  .close-icon {
+    font-size: 1.5em;
+    color: tomato;
+  }
 </style>
