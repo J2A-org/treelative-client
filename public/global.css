@@ -27,7 +27,7 @@ main {
 }
 
 hr {
-  border-top-width: 1px;
+  border-top-width: 1em;
   box-sizing: content-box;
   height: 0;
   overflow: visible;
@@ -150,7 +150,7 @@ input[type="number"] {
 
 [type="search"] {
   -webkit-appearance: textfield;
-  outline-offset: -2px;
+  outline-offset: -1em;
 }
 
 [type="search"]::-webkit-search-decoration {
