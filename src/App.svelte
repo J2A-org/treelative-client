@@ -1,6 +1,6 @@
 <script>
   import { setClient, operationStore, query } from '@urql/svelte'
-  import { activeNodeID } from './stores.js'
+  import { activeNodeID, showContactDialog } from './stores.js'
 
   import { GET_NETWORK_DATA } from './graphql/queries/networkData'
 
@@ -8,6 +8,7 @@
   import ProfileCard from './components/ProfileCard.svelte'
   import Loading from './components/Loading.svelte'
   import ErrorDialog from './components/Error/ErrorDialog.svelte'
+  import ContactDialog from './components/ContactDialog.svelte'
 
   import client from './graphql/client'
   setClient(client)
@@ -22,7 +23,10 @@
   <ErrorDialog errorMessage={queryNetworkData.error.message} />
 {:else}
   {#if $activeNodeID}
-    <ProfileCard  />
+    <ProfileCard />
+  {/if}
+  {#if $showContactDialog}
+    <ContactDialog />
   {/if}
   <Loading />
   <Graph networkData={$queryNetworkData.data.getNetworkData} />

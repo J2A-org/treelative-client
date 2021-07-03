@@ -3,11 +3,13 @@
   import { fly, fade } from 'svelte/transition'
   import { createEventDispatcher } from 'svelte'
 
+  import { showContactDialog } from '../../stores.js'
+
+  import { createForm } from 'svelte-forms-lib'
+
   import { LOGIN } from '../../graphql/mutations/auth'
 
   import Loading from '../Loading.svelte'
-
-  const animation = { delay: 600, y: 25, duration: 750 }
 
   const login = mutation({ query: LOGIN })
 
@@ -16,14 +18,12 @@
 
   let isLoading = false
   let errorMessage
-  const handleSignIn = (e) => {
-    isLoading = true
-    errorMessage = null
-    const input = {
-      username: e.target.elements.username.value,
-      password: e.target.elements.password.value
-    }
-    login({ input })
+
+  const { form, handleSubmit } = createForm({
+    onSubmit: input => {
+      isLoading = true
+      errorMessage = null
+      login({ input })
       .then(result => {
         if (result.data.login) {
           window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
@@ -36,40 +36,47 @@
         isLoading = false
         errorMessage = error.message
       })
-  }
+    }
+  })
+
+  const animation = { delay: 600, y: 25, duration: 750 }
 </script>
 
-<div transition:fade='{{ delay: animation.delay - 100, duration: animation.duration - 250 }}'>
+<div class="outer-container" in:fade={{ delay: animation.delay - 100, duration: animation.duration - 250 }}>
   {#if isLoading} <Loading /> {/if}
   <div
-    in:fly='{{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}'
-    out:fly='{{ x: -500, opacity: 1, duration: 500 }}'
+    class="inner-container"
+    in:fly={{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}
+    out:fly={{ x: -500, opacity: 1, duration: 500 }}
   >
-    <h1 in:fly='{animation}'>Login</h1>
-    {#if errorMessage}
-      <h5 transition:fade='{{ duration: animation.duration - 250 }}'>
-        Sorry, the username and password you entered did not match our records. <br> Please try again or <button>contact us</button>.
-      </h5>
-    {/if}
-    <form on:submit|preventDefault={handleSignIn}>
+    <h1 class="title" in:fly={animation}>Login</h1>
+    <form class="login-form" on:submit={handleSubmit}>
       <input
         required
-        autofocus
         type='username'
         name='username'
         placeholder='Username'
-        in:fly='{{ ...animation, delay: animation.delay + 50 }}'
+        bind:value={$form.username}
+        in:fly={{ ...animation, delay: animation.delay + 50 }}
       />
       <input
         required
         type='password'
         name='password'
         placeholder='Password'
-        in:fly='{{ ...animation, delay: animation.delay + 100 }}'
+        bind:value={$form.password}
+        in:fly={{ ...animation, delay: animation.delay + 100 }}
       />
+      {#if errorMessage}
+        <p class="error-message" transition:fade='{{ duration: animation.duration - 250 }}'>
+          Sorry, the username and password you entered did not match our records. <br>
+          Please try again or <button class="contact-button" on:click={() => showContactDialog.update(() => true)}>contact us</button>.
+        </p>
+      {/if}
       <button
+        class="submit-button"
         type='submit'
-        in:fly='{{ ...animation, delay: animation.delay + 150 }}'
+        in:fly={{ ...animation, delay: animation.delay + 150 }}
       >
         Sign In
       </button>
@@ -78,94 +85,82 @@
 </div>
 
 <style lang='scss'>
-  div {
+  .outer-container {
     width: 100%;
     height: 100%;
     background-color: hsla(0, 0%, 0%, 0.6);
-    div {
-      width: 330px;
-      height: auto;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%,-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: hsla(0, 0%, 100%, 0.6);
-      border-radius: 20px;
-      h1 {
-        font-size: 30px;
-        margin-top: 40px;
-        margin-bottom: 20px;
-        color: hsl(261, 64%, 18%);
-      }
-      h5, button {
-        margin: 0px;
-        padding: 15px;
-        text-align: center;
-        background: hsla(0, 100%, 50%, 0.5);
-        border-radius: 10px;
-        font-size: 16px;
-        font-weight: 400;
-        button {
-          border: none;
-          background: none;
-          padding: 0;
-          text-decoration: underline;
-          cursor: pointer;
-          &:hover {
-            text-decoration: none;
-          }
-        }
-      }
-      form {
-        text-align: center;
-        input:first-child {
-          margin-top: 20px;
-        }
-        input {
-          width: 60%;
-          height: 40px;
-          margin-bottom: 20px;
-          padding: 0px 15px;
-          border: none;
-          background: none;
-          outline: none;
-          border: 1px solid hsla(0, 0%, 0%, 0.3);
-          border-radius: 5px;
-          &:hover {
-            border: 1px solid hsla(0, 0%, 0%, 0.5);
-          }
-          &:focus {
-            border-image-slice: 1;
-            border-image-source: linear-gradient(to left, hsl(284, 35%, 21%), hsl(359, 88%, 55%));
-          }
-        }
-        ::placeholder {
-          color: hsla(0, 0%, 0%, 0.9);
-          opacity: 1;
-        }
-        button {
-          width: 70%;
-          font-size: 16px;
-          color: white;
-          padding: 15px 0px;
-          margin-top: 20px;
-          border: 0px;
-          cursor: pointer;
-          border-radius: 20px;
-          background: linear-gradient(-45deg, hsl(284, 35%, 21%), hsl(359, 88%, 55%));
-          background-size: 150% 150%;
-          animation: gradient 5s ease infinite;
-          margin-bottom: 40px;
-        }
-      }
+    display: grid;
+    place-items: center;
+  }
+  .inner-container {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: hsla(0, 0%, 100%, 0.6);
+    border-radius: 1em;
+    gap: 1em;
+    text-align: center;
+  }
+  .title {
+    font-size: 2rem;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+    color: hsl(261, 64%, 18%);
+  }
+  .error-message{
+    padding: 1em;
+    background: hsla(0, 100%, 50%, 0.5);
+    border-radius: 0.5em;
+  }
+  .contact-button {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
     }
-    @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+  }
+  input {
+    width: 12em;
+    height: 2.5em;
+    margin-bottom: 1em;
+    padding: 0 1em;
+    background: transparent;
+    outline: none;
+    box-shadow: 0 0 0 1px hsla(261, 64%, 18%, 0.3);
+    border-radius: 0.5em;
+    transition: box-shadow 100ms ease-in;
+    &:hover:not(:focus) {
+      box-shadow: 0 0 0 0.1em hsla(261, 64%, 18%, 0.3);
     }
+    &:focus {
+      box-shadow: 0 0 0 0.1em hsla(261, 64%, 18%, 0.4);
+    }
+    &::placeholder {
+      color: hsla(261, 64%, 18%, 0.7);
+    }
+  }
+  .submit-button {
+    font-size: 1.2rem;
+    width: 8em;
+    color: white;
+    padding: 0.6em 0;
+    margin-top: 1.5em;
+    border-radius: 1em;
+    outline: none;
+    background: linear-gradient(-45deg, hsl(284, 35%, 20%), hsl(359, 88%, 55%));
+    background-size: 150% 150%;
+    animation: gradient 5s ease infinite;
+    margin-bottom: 2em;
+    &:hover, &:focus {
+      background: linear-gradient(-45deg, hsl(284, 35%, 18%), hsl(359, 88%, 52%));
+    }
+    &:active {
+      background: linear-gradient(-45deg, hsl(284, 35%, 15%), hsl(359, 88%, 50%));
+    }
+  }
+  @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 </style>
