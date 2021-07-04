@@ -3,6 +3,9 @@ export default {
     public: { url: '/', static: true },
     src: { url: '/dist' }
   },
+  alias: {
+    '@app': './src'
+  },
   plugins: [
     '@snowpack/plugin-svelte',
     '@snowpack/plugin-dotenv'
