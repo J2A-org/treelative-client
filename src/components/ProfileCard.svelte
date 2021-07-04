@@ -2,7 +2,7 @@
   import { quintOut } from 'svelte/easing'
   import { scale, fly } from 'svelte/transition'
 
-  import { activeNodeID, network } from '../stores.js'
+  import { activeNodeID, network } from '@app/utils/stores'
 
   import { operationStore, query } from '@urql/svelte'
   import { GET_USER } from '../graphql/queries/user'

@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte'
-  import { network, activeNodeID } from '../stores'
+  import { network, activeNodeID } from '@app/utils/stores'
   import * as vis from 'vis-network/standalone/esm/vis-network'
 
   export let networkData

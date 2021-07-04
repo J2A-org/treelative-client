@@ -1,6 +1,6 @@
 <script>
   import { fade } from 'svelte/transition'
-  import { network } from '../stores.js'
+  import { network } from '@app/utils/stores'
 
   let active = true
 

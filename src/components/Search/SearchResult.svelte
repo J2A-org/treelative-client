@@ -6,7 +6,7 @@
 
   import { createEventDispatcher } from 'svelte'
 
-  import { activeNodeID } from '../../stores'
+  import { activeNodeID } from '@app/utils/stores'
 
   const dispatch = createEventDispatcher()
   const close = async (id) => {

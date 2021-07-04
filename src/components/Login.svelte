@@ -5,7 +5,7 @@
 
   import { Diamonds } from 'svelte-loading-spinners'
 
-  import { showContactDialog } from '@app/stores.js'
+  import { showContactDialog } from '@app/utils/stores'
 
   import { createForm } from 'svelte-forms-lib'
 

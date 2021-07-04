@@ -1,6 +1,6 @@
 <script>
   import { setClient, operationStore, query } from '@urql/svelte'
-  import { activeNodeID, showContactDialog } from './stores.js'
+  import { activeNodeID, showContactDialog } from '@app/utils/stores'
 
   import { GET_NETWORK_DATA } from './graphql/queries/networkData'
 

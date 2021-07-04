@@ -1,5 +1,5 @@
 <script>
-  import { showContactDialog } from '../stores.js'
+  import { showContactDialog } from '@app/utils/stores'
 
   import { scale } from 'svelte/transition'
 
