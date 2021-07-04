@@ -62,7 +62,7 @@
         {/if}
         <EditUserFullName user={$queryUser.data.user}>
           <p slot="trigger">
-            {$queryUser.data.user.fullName} ✏️
+            {$queryUser.data.user.fullName} 🖍
           </p>
         </EditUserFullName>
         <!-- <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>

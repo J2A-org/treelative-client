@@ -13,8 +13,6 @@
     const variables = { userID: user.id, input: { dateOfBirth } }
     return updateDateOfBirthMutation(variables)
   }
-
-  console.log("ADA", user.dateOfBirth)
 </script>
 
 <EditableDateDialog

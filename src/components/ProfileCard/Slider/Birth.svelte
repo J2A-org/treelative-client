@@ -16,7 +16,7 @@
     {:else}
       <EditUserDateOfBirth {user}>
         <p slot="trigger">
-          {user.dateOfBirth.slice(0, 10).replaceAll('-', '/')} ✏️
+          {user.dateOfBirth.slice(0, 10).replaceAll('-', '/')} 🖍
         </p>
       </EditUserDateOfBirth>
       <!-- <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}</h1> -->
