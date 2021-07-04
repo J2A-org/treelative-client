@@ -8,8 +8,9 @@
   "scripts": {
     "start": "snowpack dev",
     "build": "snowpack build",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "eslint": "npx eslint .",
+    "check": "npx svelte-check",
+    "lint": "npm run eslint && npm run check"
   },
   "devDependencies": {
     "@fortawesome/free-solid-svg-icons": "5.15.3",
@@ -22,6 +23,7 @@
     "graphql": "15.5.1",
     "node-sass": "6.0.1",
     "postcss": "8.3.5",
+    "simple-svelte-autocomplete": "1.3.2",
     "snowpack": "3.7.1",
     "standard": "16.0.3",
     "svelte": "3.38.3",
