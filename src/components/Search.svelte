@@ -4,10 +4,10 @@
   const tween = tweened(0, { duration: 100 })
 
   import { operationStore, query } from '@urql/svelte'
-  import { SEARCH_USERS } from '../graphql/queries/user'
+  import { SEARCH_USERS } from '@app/graphql/queries/users'
 
-  import Modal from './Layout/Modal.svelte'
-  import SearchResult from './Search/SearchResult.svelte'
+  import Modal from '@app/components/Layout/Modal.svelte'
+  import SearchResult from '@app/components/Search/SearchResult.svelte'
 
   let searchInput
   let querySearchUsers

@@ -1,10 +1,10 @@
 <script>
-  import EditableInputDialog from '../Input/EditableInputDialog.svelte'
+  import EditableInputDialog from '@app/components/Input/EditableInputDialog.svelte'
 
   import { string } from 'yup'
 
   import { operationStore, mutation } from '@urql/svelte'
-  import { UPDATE_USER_FULL_NAME } from '../../graphql/mutations/users'
+  import { UPDATE_USER_FULL_NAME } from '@app/graphql/mutations/users'
 
   export let user
 

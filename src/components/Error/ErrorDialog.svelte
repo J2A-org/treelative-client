@@ -1,7 +1,7 @@
 <script>
   import { scale } from 'svelte/transition'
 
-  import Modal from '../Layout/Modal.svelte'
+  import Modal from '@app/components/Layout/Modal.svelte'
 
   import Fa from 'svelte-fa'
   import { faExclamation } from '@fortawesome/free-solid-svg-icons'

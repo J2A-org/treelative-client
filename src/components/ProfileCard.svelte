@@ -5,14 +5,14 @@
   import { activeNodeID, network } from '@app/utils/stores'
 
   import { operationStore, query } from '@urql/svelte'
-  import { GET_USER } from '../graphql/queries/user'
+  import { GET_USER } from '@app/graphql/queries/users'
 
-  import Loading from './Loading.svelte'
-  import Modal from './Layout/Modal.svelte'
+  import Loading from '@app/components/Loading.svelte'
+  import Modal from '@app/components/Layout/Modal.svelte'
   import Login from '@app/components/Login.svelte'
-  import Slider from './ProfileCard/Slider.svelte'
+  import Slider from '@app/components/ProfileCard/Slider.svelte'
 
-  import EditUserFullName from './EditUser/EditUserFullName.svelte'
+  import EditUserFullName from '@app/components/EditUser/EditUserFullName.svelte'
 
   const animation = { delay: 1050, y: -25, duration: 500 }
 

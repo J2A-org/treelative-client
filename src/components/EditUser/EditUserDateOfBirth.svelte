@@ -1,5 +1,5 @@
 <script>
-  import EditableDateDialog from '../Input/EditableDateDialog.svelte'
+  import EditableDateDialog from '@app/components/Input/EditableDateDialog.svelte'
 
   import { operationStore, mutation } from '@urql/svelte'
   import { UPDATE_USER_DATE_OF_BIRTH } from '@app/graphql/mutations/users'

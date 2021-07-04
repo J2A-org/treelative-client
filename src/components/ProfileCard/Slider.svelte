@@ -3,9 +3,9 @@
 
   import { onMount } from 'svelte'
 
-  import Death from './Slider/Death.svelte'
-  import Birth from './Slider/Birth.svelte'
-  import Current from './Slider/Current.svelte'
+  import Death from '@app/components/ProfileCard/Slider/Death.svelte'
+  import Birth from '@app/components/ProfileCard/Slider/Birth.svelte'
+  import Current from '@app/components/ProfileCard/Slider/Current.svelte'
 
   let stack
   onMount(() => {

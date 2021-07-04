@@ -1,6 +1,6 @@
 <script>
-  import Modal from './Modal.svelte'
-  import ErrorAlert from '../Error/ErrorAlert.svelte'
+  import Modal from '@app/components/Layout/Modal.svelte'
+  import ErrorAlert from '@app/components/Error/ErrorAlert.svelte'
   import { Diamonds } from 'svelte-loading-spinners'
 
   import { createEventDispatcher } from 'svelte'
