@@ -20,6 +20,7 @@
     "autoprefixer": "10.2.6",
     "eslint-config-standard": "16.0.3",
     "eslint-plugin-svelte3": "3.2.0",
+    "firebase": "8.7.0",
     "graphql": "15.5.1",
     "node-sass": "6.0.1",
     "postcss": "8.3.5",
@@ -30,6 +31,7 @@
     "svelte-fa": "2.2.1",
     "svelte-forms-lib": "1.10.3",
     "svelte-icons": "2.1.0",
+    "svelte-loading-spinners": "0.1.5",
     "svelte-portal": "2.1.2",
     "vis-network": "9.0.4",
     "yup": "0.32.9"

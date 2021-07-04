@@ -9,7 +9,7 @@
 
   import Loading from './Loading.svelte'
   import Modal from './Layout/Modal.svelte'
-  import Login from './ProfileCard/Login.svelte'
+  import Login from '@app/components/Login.svelte'
   import Slider from './ProfileCard/Slider.svelte'
 
   import EditUserFullName from './EditUser/EditUserFullName.svelte'

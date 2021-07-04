@@ -13,7 +13,7 @@
   export let notification = ''
 
   // date options
-  const days = Array.from({ length: 30 }, (_, i) => i + 1)
+  const days = Array.from({ length: 31 }, (_, i) => i + 1)
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((name, id) => ({ id, name }))
   const years = Array.from({ length: 121 }, (_, i) => i + 1900)
 
@@ -77,9 +77,30 @@
     on:submit={handleSubmit}
   >
     <div class='container'>
-      <AutoComplete items={days} bind:selectedItem={$form.day} className="control" dropdownClassName="dropdown" inputClassName='numeric' />
-      <AutoComplete items={months} bind:selectedItem={$form.month} className="control" dropdownClassName="dropdown" labelFieldName="name"/>
-      <AutoComplete items={years} bind:selectedItem={$form.year} className="control" dropdownClassName="dropdown" inputClassName='numeric' />
+      <AutoComplete
+        items={days}
+        bind:selectedItem={$form.day}
+        className="control"
+        dropdownClassName="dropdown"
+        inputClassName='numeric'
+        disabled={$isSubmitting}
+      />
+      <AutoComplete
+        items={months}
+        bind:selectedItem={$form.month}
+        className="control"
+        dropdownClassName="dropdown"
+        labelFieldName="name"
+        disabled={$isSubmitting}
+      />
+      <AutoComplete
+        items={years}
+        bind:selectedItem={$form.year}
+        className="control"
+        dropdownClassName="dropdown"
+        inputClassName='numeric'
+        disabled={$isSubmitting}
+      />
     </div>
   </FormDialog>
 {/if}

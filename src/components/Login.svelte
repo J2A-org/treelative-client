@@ -3,15 +3,26 @@
   import { fly, fade } from 'svelte/transition'
   import { createEventDispatcher } from 'svelte'
 
-  import { showContactDialog } from '../../stores.js'
+  import { Diamonds } from 'svelte-loading-spinners'
+
+  import { showContactDialog } from '@app/stores.js'
 
   import { createForm } from 'svelte-forms-lib'
 
-  import { LOGIN } from '../../graphql/mutations/auth'
+  import { LOGIN, LOGIN_WITH_PROVIDER } from '@app/graphql/mutations/auth'
 
-  import Loading from '../Loading.svelte'
+  import LoginWithProvider from '@app/components/Login/LoginWithProvider.svelte'
+  import { google, twitter, facebook } from '@app/utils/firebase'
+  import { faHippo, faCat, faCrow } from '@fortawesome/free-solid-svg-icons'
 
-  const login = mutation({ query: LOGIN })
+  const loginProviders = [
+    { label: 'Login with Google', icon: faHippo, provider: google },
+    { label: 'Login with Facebook', icon: faCat, provider: facebook },
+    { label: 'Login with Twitter', icon: faCrow, provider: twitter }
+  ]
+
+  const loginWithPassword = mutation({ query: LOGIN })
+  const loginWithProvider = mutation({ query: LOGIN_WITH_PROVIDER })
 
   const dispatch = createEventDispatcher()
   const onComplete = () => dispatch('complete')
@@ -19,19 +30,21 @@
   let isLoading = false
   let errorMessage
 
+  const onLoginSuccess = (result) => {
+    if (result.data) {
+      window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
+      onComplete()
+    } else {
+      errorMessage = result.error.message
+    }
+  }
+
   const { form, handleSubmit } = createForm({
     onSubmit: input => {
       isLoading = true
       errorMessage = null
-      login({ input })
-      .then(result => {
-        if (result.data.login) {
-          window.localStorage.setItem('AUTH_SESSION_ID', result.data.login)
-          onComplete()
-        } else {
-          errorMessage = result.error.message
-        }
-      })
+      loginWithPassword({ input })
+      .then(onLoginSuccess)
       .catch(error => {
         isLoading = false
         errorMessage = error.message
@@ -39,11 +52,19 @@
     }
   })
 
+  const onLoginWithProvider = (token, { email }) => {
+    loginWithProvider({ email, token })
+      .then(onLoginSuccess)
+      .catch(error => {
+        isLoading = false
+        errorMessage = error.message
+      })
+  }
+
   const animation = { delay: 600, y: 25, duration: 750 }
 </script>
 
 <div class="outer-container" in:fade={{ delay: animation.delay - 100, duration: animation.duration - 250 }}>
-  {#if isLoading} <Loading /> {/if}
   <div
     class="inner-container"
     in:fly={{ delay: animation.delay - 250, y: animation.y + 125, duration: animation.duration + 250 }}
@@ -67,19 +88,38 @@
         bind:value={$form.password}
         in:fly={{ ...animation, delay: animation.delay + 100 }}
       />
-      {#if errorMessage}
-        <p class="error-message" transition:fade='{{ duration: animation.duration - 250 }}'>
-          Sorry, the username and password you entered did not match our records. <br>
-          Please try again or <button class="contact-button" on:click={() => showContactDialog.update(() => true)}>contact us</button>.
-        </p>
-      {/if}
       <button
         class="submit-button"
         type='submit'
         in:fly={{ ...animation, delay: animation.delay + 150 }}
       >
-        Sign In
+        {#if isLoading}
+          <Diamonds size="60" color="hsl(359, 88%, 55%)" unit="px" duration="4s" />
+        {:else}
+          Sign In
+        {/if}
       </button>
+      <div class="social-login">
+        {#each loginProviders as loginProvider}
+          <LoginWithProvider
+            {...loginProvider}
+            onSuccess={onLoginWithProvider}
+          />
+        {/each}
+      </div>
+      {#if errorMessage}
+        {#if errorMessage.includes('account associated')}
+          <p class="error-message" transition:fade='{{ duration: animation.duration - 250 }}'>
+            {errorMessage.slice(10, -1)} <br>
+            Please try again or <button class="contact-button" on:click={() => showContactDialog.update(() => true)}>contact us</button>.
+          </p>
+        {:else}
+          <p class="error-message" transition:fade='{{ duration: animation.duration - 250 }}'>
+            Sorry, the username and password you entered did not match our records. <br>
+            Please try again or <button class="contact-button" on:click={() => showContactDialog.update(() => true)}>contact us</button>.
+          </p>
+        {/if}
+      {/if}
     </form>
   </div>
 </div>
@@ -111,13 +151,18 @@
   .error-message{
     padding: 1em;
     background: hsla(0, 100%, 50%, 0.5);
-    border-radius: 0.5em;
+    border-radius: 0.8em;
   }
   .contact-button {
     text-decoration: underline;
     &:hover {
       text-decoration: none;
     }
+  }
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   input {
     width: 12em;
@@ -140,7 +185,11 @@
     }
   }
   .submit-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1.2rem;
+    height: 2.5em;
     width: 8em;
     color: white;
     padding: 0.6em 0;
@@ -150,13 +199,17 @@
     background: linear-gradient(-45deg, hsl(284, 35%, 20%), hsl(359, 88%, 55%));
     background-size: 150% 150%;
     animation: gradient 5s ease infinite;
-    margin-bottom: 2em;
     &:hover, &:focus {
       background: linear-gradient(-45deg, hsl(284, 35%, 18%), hsl(359, 88%, 52%));
     }
     &:active {
       background: linear-gradient(-45deg, hsl(284, 35%, 15%), hsl(359, 88%, 50%));
     }
+  }
+  .social-login {
+    display: flex;
+    margin-top: 1em;
+    margin-bottom: 2em;
   }
   @keyframes gradient {
     0% { background-position: 0% 50%; }

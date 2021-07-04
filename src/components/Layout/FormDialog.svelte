@@ -1,6 +1,7 @@
 <script>
   import Modal from './Modal.svelte'
   import ErrorAlert from '../Error/ErrorAlert.svelte'
+  import { Diamonds } from 'svelte-loading-spinners'
 
   import { createEventDispatcher } from 'svelte'
 
@@ -34,7 +35,7 @@
       {/if}
       <button type='submit' form={formID} disabled={isDisabled || isLoading}>
       {#if isLoading}
-        show loading indicator ..
+        <Diamonds size="60" color="hsl(209, 62%, 65%)" unit="px" duration="4s" />
       {:else}
         {submitLabel}
       {/if}
@@ -70,6 +71,10 @@
     gap: 1rem;
   }
   button[type=submit] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 2.5rem;
     background-color: hsl(209, 62%, 50%);
     padding: 0.5em;
     border-radius: 0.5em;

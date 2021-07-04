@@ -66,11 +66,11 @@
   >
     <div class='container'>
       {#if type === 'textarea'}
-        <input type='textarea' {name} bind:value={$form[name]} class:invalid={$errors[name]} />
+        <input type='textarea' {name} bind:value={$form[name]} class:invalid={$errors[name]} disabled={$isSubmitting} />
       {:else if type === 'number'}
-        <input type='number' {name} bind:value={$form[name]} class:invalid={$errors[name]} />
+        <input type='number' {name} bind:value={$form[name]} class:invalid={$errors[name]} disabled={$isSubmitting} />
       {:else}
-        <input type='text' {name} bind:value={$form[name]} class:invalid={$errors[name]} />
+        <input type='text' {name} bind:value={$form[name]} class:invalid={$errors[name]} disabled={$isSubmitting} />
       {/if}
       {#if $errors[name]}
         <p class="error">{$errors[name]}</p>
