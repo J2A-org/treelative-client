@@ -25,24 +25,33 @@
       return onSubmit(values[name])
       .then(result => {
         if (result.data) {
+          // onSuccess, notify if applicable and close the dialog
           notification && alert('REPLACE WITH TOAST: ' + notification)
-          onClose()
+          handleClose()
         }
       })
       .catch(console.log)
     }
   })
 
+  // handle dialog's open-close state
   let isOpen = false
   const onOpen = () => { isOpen = true }
   const onClose = () => { isOpen = false }
 
   const handleClose = () => {
-    error = null
-    handleReset()
+    error = null // reset any server errors
+    handleReset() // reset the form's local state
     onClose()
   }
 </script>
+
+<!-- Trigger to open the edit dialog -->
+<div on:click={onOpen}>
+  <slot name="trigger">
+    <p>{value}</p>
+  </slot>
+</div>
 
 {#if isOpen}
   <FormDialog
@@ -69,9 +78,6 @@
     </div>
   </FormDialog>
 {/if}
-
-<!-- Trigger to open the edit dialog -->
-<p on:click={onOpen}>{value}</p>
 
 <style lang="scss">
   .container {

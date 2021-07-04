@@ -26,4 +26,6 @@
   validation={string().required()}
   error={$updateFullNameStore.error}
   notification='Successfully updated the full name'
-/>
+>
+  <slot slot="trigger" name="trigger" />
+</EditableInputDialog>
