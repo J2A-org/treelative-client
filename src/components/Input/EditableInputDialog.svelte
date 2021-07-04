@@ -14,10 +14,7 @@
   export let error
   export let notification = ''
 
-  let isOpen = false
-
-  let isLoading = false
-  const { form, errors, handleSubmit, handleReset } = createForm({
+  const { form, errors, isSubmitting, handleSubmit, handleReset } = createForm({
     initialValues: {
       [name]: value
     },
@@ -25,8 +22,7 @@
       [name]: validation
     }),
     onSubmit: values => {
-      isLoading = true
-      onSubmit(values[name])
+      return onSubmit(values[name])
       .then(result => {
         if (result.data) {
           notification && alert('REPLACE WITH TOAST: ' + notification)
@@ -34,18 +30,17 @@
         }
       })
       .catch(console.log)
-      .finally(() => {
-        isLoading = false
-      })
     }
   })
 
+  let isOpen = false
   const onOpen = () => { isOpen = true }
   const onClose = () => { isOpen = false }
 
   const handleClose = () => {
-    onClose()
+    error = null
     handleReset()
+    onClose()
   }
 </script>
 
@@ -56,7 +51,7 @@
     subTitle={subTitle}
     submitLabel='Submit'
     error={error}
-    {isLoading}
+    isLoading={$isSubmitting}
     on:close={handleClose}
     on:submit={handleSubmit}
   >
@@ -74,6 +69,7 @@
     </div>
   </FormDialog>
 {/if}
+
 <!-- Trigger to open the edit dialog -->
 <p on:click={onOpen}>{value}</p>
 
