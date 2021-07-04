@@ -1,13 +1,11 @@
 <script>
   export let user
 
-  import { setContext, onMount } from 'svelte'
+  import { onMount } from 'svelte'
 
   import Death from './Slider/Death.svelte'
   import Birth from './Slider/Birth.svelte'
   import Current from './Slider/Current.svelte'
-
-  setContext('user', user)
 
   let stack
   onMount(() => {
@@ -114,7 +112,7 @@
       on:click={swap}
       class:inactive={idx !== currentCardIdx || isCardInMotion}
     >
-      <Slide />
+      <Slide {user} />
     </div>
 	{/each}
 </div>

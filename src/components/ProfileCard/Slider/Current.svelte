@@ -1,10 +1,8 @@
 <script>
-  import { getContext } from 'svelte'
-
   import { fly, scale } from 'svelte/transition'
   const animation = { delay: 1600, y: -25, duration: 600 }
 
-  const user = getContext('user')
+  export let user
 </script>
 
 <div in:scale='{{ delay: animation.delay - 300, duration: animation.duration - 100, opacity: 0.5, start: 0 }}'>

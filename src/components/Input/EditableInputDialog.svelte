@@ -27,7 +27,7 @@
         if (result.data) {
           // onSuccess, notify if applicable and close the dialog
           notification && alert('REPLACE WITH TOAST: ' + notification)
-          handleClose()
+          onClose()
         }
       })
       .catch(console.log)

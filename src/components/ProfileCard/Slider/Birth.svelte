@@ -1,10 +1,11 @@
 <script>
-  import { getContext } from 'svelte'
   import { fly, scale } from 'svelte/transition'
+
+  import EditUserDateOfBirth from '@app/components/EditUser/EditUserDateOfBirth.svelte'
 
   const animation = { delay: 1600, y: -25, duration: 600 }
 
-  const user = getContext('user')
+  export let user
 </script>
 
 
@@ -13,7 +14,12 @@
     {#if !user.dateOfBirth}
       <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>Unavailable</h1>
     {:else}
-      <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}</h1>
+      <EditUserDateOfBirth {user}>
+        <p slot="trigger">
+          {user.dateOfBirth.slice(0, 10).replaceAll('-', '/')} ✏️
+        </p>
+      </EditUserDateOfBirth>
+      <!-- <h1 in:fly='{{ ...animation, delay: animation.delay + 100 }}'>{user.dateOfBirth.slice(0, 10).replaceAll('-', '/')}</h1> -->
     {/if}
     <h1 in:fly='{{ ...animation, delay: animation.delay + 200 }}'>Birth Location</h1>
     {#if !user.birthLocation}

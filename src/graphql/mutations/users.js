@@ -8,3 +8,11 @@ export const UPDATE_USER_FULL_NAME = gql`
     }
   }
 `
+export const UPDATE_USER_DATE_OF_BIRTH = gql`
+  mutation UPDATE_USER_DATE_OF_BIRTH ($userID: String! $input: UpdateUserInput!) {
+    updateUser(userID: $userID input: $input) {
+      id
+      dateOfBirth
+    }
+  }
+`
