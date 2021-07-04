@@ -1,12 +1,12 @@
 <script>
-  import FormDialog from '../Layout/FormDialog.svelte'
+  import FormDialog from '@app/components/Layout/FormDialog.svelte'
 
   import { createForm } from 'svelte-forms-lib'
   import { object } from 'yup'
 
   export let type = 'text'
   export let name = 'inputFieldName'
-  export let value = ''
+  export let value
   export let title = 'Form Title'
   export let subTitle = 'Form Subtitle'
   export let onSubmit = console.log
@@ -15,17 +15,9 @@
   export let notification = ''
 
   let isOpen = false
+
   let isLoading = false
-
-  const onOpen = () => { isOpen = true }
-  const onClose = () => { isOpen = false }
-
-  const onCancel = () => {
-    // TODO: reset form
-    onClose()
-  }
-
-  const { form, errors, handleChange, handleSubmit } = createForm({
+  const { form, errors, handleSubmit, handleReset } = createForm({
     initialValues: {
       [name]: value
     },
@@ -37,7 +29,7 @@
       onSubmit(values[name])
       .then(result => {
         if (result.data) {
-         notification && alert('REPLACE WITH TOAST: ' + notification)
+          notification && alert('REPLACE WITH TOAST: ' + notification)
           onClose()
         }
       })
@@ -47,6 +39,14 @@
       })
     }
   })
+
+  const onOpen = () => { isOpen = true }
+  const onClose = () => { isOpen = false }
+
+  const handleClose = () => {
+    onClose()
+    handleReset()
+  }
 </script>
 
 {#if isOpen}
@@ -57,21 +57,28 @@
     submitLabel='Submit'
     error={error}
     {isLoading}
-    on:close={onCancel}
+    on:close={handleClose}
     on:submit={handleSubmit}
   >
-    <div>
-      <input {name} type='text' on:change={handleChange} bind:value={$form[name]} class:invalid={$errors[name]} />
+    <div class='container'>
+      {#if type === 'textarea'}
+        <input type='textarea' {name} bind:value={$form[name]} class:invalid={$errors[name]} />
+      {:else if type === 'number'}
+        <input type='number' {name} bind:value={$form[name]} class:invalid={$errors[name]} />
+      {:else}
+        <input type='text' {name} bind:value={$form[name]} class:invalid={$errors[name]} />
+      {/if}
       {#if $errors[name]}
         <p class="error">{$errors[name]}</p>
       {/if}
     </div>
   </FormDialog>
 {/if}
+<!-- Trigger to open the edit dialog -->
 <p on:click={onOpen}>{value}</p>
 
 <style lang="scss">
-  div {
+  .container {
     width: 20rem;
   }
   input {
@@ -87,9 +94,9 @@
     &:focus:not(.invalid) {
       box-shadow: 0 0 0 2px hsl(213, 49%, 34%);
     }
-  }
-  .invalid {
-    box-shadow: 0 0 0 1px red;
+    &.invalid {
+      box-shadow: 0 0 0 2px red;
+    }
   }
   .error {
     color: red;
